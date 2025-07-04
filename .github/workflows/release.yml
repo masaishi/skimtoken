@@ -24,7 +24,15 @@ jobs:
           sed -i "s/^version = \".*\"/version = \"$VERSION\"/" pyproject.toml
 
           # Update Cargo.toml package version only
-          sed -i "0,/^\[package\]/,/^\[/{s/^version = \".*\"/version = \"$VERSION\"/}" Cargo.toml
+          awk -v ver="$VERSION" '
+            /^\[package\]/ { in_package = 1 }
+            in_package && /^version = / && !done { 
+              sub(/version = ".*"/, "version = \"" ver "\""); 
+              done = 1 
+            }
+            /^\[/ && !/^\[package\]/ { in_package = 0 }
+            { print }
+          ' Cargo.toml > Cargo.toml.tmp && mv Cargo.toml.tmp Cargo.toml
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
