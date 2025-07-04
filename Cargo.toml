@@ -1,0 +1,34 @@
+[package]
+name = "skimtoken"
+version = "0.1.0"
+edition = "2021"
+authors = ["masaishi <mwishiha@ucsc.edu>"]
+license = "MIT"
+
+[lib]
+name = "skimtoken"
+crate-type = ["cdylib", "rlib"]
+
+[[bin]]
+name = "skimtoken"
+path = "src/main.rs"
+
+[dependencies]
+whatlang = "0.16"
+atty = "0.2"
+lazy_static = "1.4"
+regex = "1.10"
+
+[dependencies.pyo3]
+version = "0.25.0"
+features = ["extension-module", "abi3-py39"]
+optional = true
+
+[features]
+default = []
+python = ["pyo3"]
+
+[profile.release]
+lto = true
+opt-level = 3
+codegen-units = 1
