@@ -4,6 +4,11 @@ version = "0.1.0"
 edition = "2021"
 authors = ["masaishi <mwishiha@ucsc.edu>"]
 license = "MIT"
+description = "Fast token count estimation library"
+homepage = "https://github.com/masaishi/skimtoken"
+repository = "https://github.com/masaishi/skimtoken"
+documentation = "https://github.com/masaishi/skimtoken"
+readme = "README.md"
 
 [lib]
 name = "skimtoken"
