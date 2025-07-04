@@ -22,6 +22,7 @@ dev = [
     "rich>=13.0.0",
     "pyright>=1.1.402",
     "psutil>=5.9.0",
+    "datasets>=3.6.0",
 ]
 
 [build-system]
