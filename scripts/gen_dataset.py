@@ -108,7 +108,7 @@ def split_dataset_custom(input_path: Path, output_dir: Path, console: Console) -
                 ordered_entry = {
                     "category": entry.get("lang", "unknown"),
                     "token_len": entry.get("token_len", 0),
-                    "text": text
+                    "text": text,
                 }
                 f.write(json.dumps(ordered_entry, ensure_ascii=False) + "\n")
                 valid_count += 1

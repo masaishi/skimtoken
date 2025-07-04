@@ -46,11 +46,11 @@ def split_dataset(
     n = len(data)
     train_size = int(n * train_ratio)
     val_size = int(n * val_ratio)
-    
+
     # Randomly sample indices for each split
     train_indices = set(indices[:train_size])
-    val_indices = set(indices[train_size:train_size + val_size])
-    test_indices = set(indices[train_size + val_size:])
+    val_indices = set(indices[train_size : train_size + val_size])
+    test_indices = set(indices[train_size + val_size :])
 
     # Create splits by randomly selecting data points
     train_data = [data[i] for i in sorted(train_indices)]

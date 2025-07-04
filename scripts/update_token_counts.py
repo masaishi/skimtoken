@@ -6,7 +6,9 @@ from typing import Any, Dict, List
 import tiktoken
 
 
-def update_token_counts(encode_model: str = "o200k_base", dataset_path: Path | str | None = None) -> None:
+def update_token_counts(
+    encode_model: str = "o200k_base", dataset_path: Path | str | None = None
+) -> None:
     """Update token_len field in existing JSONL dataset."""
     if dataset_path is None:
         dataset_path = Path(__file__).parent.parent / "data" / "test_dataset.jsonl"
@@ -62,14 +64,14 @@ if __name__ == "__main__":
         "--encode-model",
         type=str,
         default="o200k_base",
-        help="Tiktoken encoding model (default: o200k_base)"
+        help="Tiktoken encoding model (default: o200k_base)",
     )
     parser.add_argument(
         "--dataset-path",
         type=str,
         default=None,
-        help="Path to JSONL dataset (default: data/test_dataset.jsonl)"
+        help="Path to JSONL dataset (default: data/test_dataset.jsonl)",
     )
     args = parser.parse_args()
-    
+
     update_token_counts(encode_model=args.encode_model, dataset_path=args.dataset_path)
