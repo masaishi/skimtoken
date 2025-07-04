@@ -127,7 +127,7 @@ def main() -> None:
     console = Console()
 
     # Load dataset
-    dataset_path = Path(__file__).parent.parent / "data" / "test_dataset.jsonl"
+    dataset_path = Path(__file__).parent.parent / "data" / "cc100_samples" / "test.jsonl"
     console.print(f"[cyan]Loading dataset from {dataset_path}...[/cyan]")
     dataset = load_dataset(dataset_path)
 
