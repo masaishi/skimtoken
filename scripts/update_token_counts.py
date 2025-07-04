@@ -1,3 +1,4 @@
+import argparse
 import json
 from pathlib import Path
 from typing import Any, Dict, List
@@ -5,9 +6,12 @@ from typing import Any, Dict, List
 import tiktoken
 
 
-def update_token_counts() -> None:
+def update_token_counts(encode_model: str = "o200k_base", dataset_path: Path | str | None = None) -> None:
     """Update token_len field in existing JSONL dataset."""
-    dataset_path = Path(__file__).parent.parent / "data" / "test_dataset.jsonl"
+    if dataset_path is None:
+        dataset_path = Path(__file__).parent.parent / "data" / "test_dataset.jsonl"
+    elif isinstance(dataset_path, str):
+        dataset_path = Path(dataset_path)
 
     if not dataset_path.exists():
         print(f"Dataset not found at {dataset_path}")
@@ -17,8 +21,8 @@ def update_token_counts() -> None:
     with open(dataset_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
 
-    # Load gpt-4o and gpt-4o-mini encoder
-    encoder = tiktoken.get_encoding("o200k_base")
+    # Load encoder
+    encoder = tiktoken.get_encoding(encode_model)
 
     updated_data: List[Dict[str, Any]] = []
     updated_count = 0
@@ -33,7 +37,7 @@ def update_token_counts() -> None:
         new_token_len = len(encoder.encode(text)) if text else 0
 
         updated_entry = {
-            "category": entry.get("category", "unknown"),
+            "category": entry.get("category", entry.get("lang", "unknown")),
             "token_len": new_token_len,
             "text": entry["text"],
         }
@@ -53,4 +57,19 @@ def update_token_counts() -> None:
 
 
 if __name__ == "__main__":
-    update_token_counts()
+    parser = argparse.ArgumentParser(description="Update token counts in JSONL dataset")
+    parser.add_argument(
+        "--encode-model",
+        type=str,
+        default="o200k_base",
+        help="Tiktoken encoding model (default: o200k_base)"
+    )
+    parser.add_argument(
+        "--dataset-path",
+        type=str,
+        default=None,
+        help="Path to JSONL dataset (default: data/test_dataset.jsonl)"
+    )
+    args = parser.parse_args()
+    
+    update_token_counts(encode_model=args.encode_model, dataset_path=args.dataset_path)
