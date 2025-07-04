@@ -15,6 +15,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Update versions from tag
+        run: |
+          VERSION=${GITHUB_REF#refs/tags/v}
+          echo "Updating to version: $VERSION"
+
+          # Update pyproject.toml
+          sed -i "s/^version = \".*\"/version = \"$VERSION\"/" pyproject.toml
+
+          # Update Cargo.toml package version only
+          sed -i "0,/^\[package\]/,/^\[/{s/^version = \".*\"/version = \"$VERSION\"/}" Cargo.toml
+
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
