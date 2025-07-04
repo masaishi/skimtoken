@@ -34,4 +34,6 @@ Thumbs.db
 # Project specific
 *.dylib
 *.pyd
-skimtoken_exp/
+
+# Data files
+data/cc100_samples/
