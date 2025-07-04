@@ -15,40 +15,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Update versions from tag
-        run: |
-          VERSION=${GITHUB_REF#refs/tags/v}
-          echo "Updating to version: $VERSION"
-
-          # Update pyproject.toml
-          sed -i "s/^version = \".*\"/version = \"$VERSION\"/" pyproject.toml
-
-          # Update Cargo.toml package version only
-          python3 -c "
-          import re
-          with open('Cargo.toml', 'r') as f:
-              content = f.read()
-          content = re.sub(
-              r'(\[package\][^\[]*version = \")[^\"]+', 
-              r'\g<1>${VERSION}',
-              content,
-              count=1
-          )
-          with open('Cargo.toml', 'w') as f:
-              f.write(content)
-          "
-
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
 
       - name: Build Python wheels
         uses: PyO3/maturin-action@v1
         with:
-          target: x86_64
           command: build
-          args: --release
-          sccache: "true"
+          args: --release --sdist
           manylinux: auto
+
+      - name: Upload to PyPI
+        uses: PyO3/maturin-action@v1
+        with:
+          command: upload
+          args: --non-interactive
+        env:
+          MATURIN_PYPI_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
 
       - name: Publish to crates.io
         run: cargo publish
@@ -59,3 +42,6 @@ jobs:
         uses: softprops/action-gh-release@v2
         with:
           generate_release_notes: true
+          files: |
+            target/wheels/*.whl
+            target/wheels/*.tar.gz
