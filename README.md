@@ -137,6 +137,13 @@ Mean Error Rate: 15.11%
 └──────────────┴────────────┴────────────┴────────┘
 ```
 
+### Automated Benchmarks
+
+For up-to-date performance comparisons and detailed accuracy metrics across all methods, visit the [skimtoken_benchmark](https://github.com/masaishi/skimtoken_benchmark) repository. This automated benchmark suite:
+
+- Uses the CC-100 multilingual dataset (100k+ samples)
+- Provides language-specific accuracy breakdowns
+
 ## Available Methods
 
 | Method | Import | Memory | Error | Best For |
