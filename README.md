@@ -12,7 +12,7 @@ A lightweight, fast token count estimation library written in Rust with Python b
 
 **This library is currently in early beta and has significant accuracy issues:**
 
-- **Multilingual method**: Takes 48.60x longer than tiktoken due to inefficient implementation
+- **Multilingual method**: Takes 1.13x longer than tiktoken due to inefficient implementation
 - **Overall accuracy**: 15.11% error rate, which is too high for most use cases
 
 
@@ -24,7 +24,7 @@ A lightweight, fast token count estimation library written in Rust with Python b
 
 - ✅ **64x less memory** (0.92MB vs 60MB)
 - ✅ **128x faster startup** (4ms vs 485ms) 
-- ❌ **48.60x slower execution** (0.93s vs 4.59s) for multilingual method
+- ❌ **1.13x slower execution** (5.51s vs 4.59s) for multilingual method
 - ❌ Trade-off: ~15.11% error rate vs exact counts
 
 ## Installation
@@ -120,21 +120,21 @@ Total Characters: 13,062,391
 Mean RMSE: 21.3034 tokens
 Mean Error Rate: 15.11%
 
-┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┓
-┃ Metric       ┃   tiktoken ┃    skimtoken ┃   Ratio ┃
-┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━┩
-│ Init Time    │ 0.471222 s │   0.006207 s │  0.013x │
-├──────────────┼────────────┼──────────────┼─────────┤
-│ Init Memory  │ 42.2385 MB │    0.0283 MB │  0.001x │
-├──────────────┼────────────┼──────────────┼─────────┤
-│ Exec Time    │ 4.594160 s │ 246.164618 s │ 53.582x │
-├──────────────┼────────────┼──────────────┼─────────┤
-│ Exec Memory  │ 17.3251 MB │    0.8950 MB │  0.052x │
-├──────────────┼────────────┼──────────────┼─────────┤
-│ Total Time   │ 5.065382 s │ 246.170825 s │ 48.599x │
-├──────────────┼────────────┼──────────────┼─────────┤
-│ Total Memory │ 59.5636 MB │    0.9233 MB │  0.016x │
-└──────────────┴────────────┴──────────────┴─────────┘
+┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┓
+┃ Metric       ┃   tiktoken ┃  skimtoken ┃  Ratio ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━┩
+│ Init Time    │ 0.815441 s │ 0.138714 s │ 0.170x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Init Memory  │ 42.4791 MB │  0.1613 MB │ 0.004x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Exec Time    │ 4.041857 s │ 5.380782 s │ 1.331x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Exec Memory  │ 17.3227 MB │  0.8950 MB │ 0.052x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Total Time   │ 4.857297 s │ 5.519496 s │ 1.136x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Total Memory │ 59.8018 MB │  1.0563 MB │ 0.018x │
+└──────────────┴────────────┴────────────┴────────┘
 ```
 
 ## Available Methods
