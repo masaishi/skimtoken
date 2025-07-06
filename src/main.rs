@@ -1,57 +1,43 @@
-use std::env;
+use clap::Parser;
+use skimtoken::estimate_tokens;
+use std::fs;
 use std::io::{self, Read};
-use std::process;
 
-use skimtoken::estimate_tokens_internal;
+#[derive(Parser)]
+#[command(version, about = "Estimate token count for text")]
+struct Args {
+    /// Text to estimate tokens for
+    text: Option<String>,
+
+    /// Read text from file
+    #[arg(short, long)]
+    file: Option<String>,
+}
 
 fn main() {
-    let args: Vec<String> = env::args().collect();
+    let args = Args::parse();
 
-    // Help message
-    if args.len() > 1 && (args[1] == "-h" || args[1] == "--help") {
-        print_help();
-        process::exit(0);
-    }
-
-    // Get text from args or stdin
-    let text = if args.len() > 1 {
-        // Join all arguments as the text
-        args[1..].join(" ")
+    let text = if let Some(file) = args.file {
+        fs::read_to_string(file).unwrap_or_else(|e| {
+            eprintln!("Error reading file: {e}");
+            std::process::exit(1);
+        })
+    } else if let Some(text) = args.text {
+        text
     } else if atty::is(atty::Stream::Stdin) {
-        // No args and no piped input
-        eprintln!("Error: No text provided");
-        eprintln!();
-        print_help();
-        process::exit(1);
+        eprintln!("No text provided");
+        std::process::exit(1);
     } else {
-        // Read from stdin
-        let mut buffer = String::new();
-        match io::stdin().read_to_string(&mut buffer) {
-            Ok(_) => buffer.trim().to_string(),
-            Err(e) => {
-                eprintln!("Error reading from stdin: {e}");
-                process::exit(1);
-            }
-        }
+        let mut buf = String::new();
+        io::stdin().read_to_string(&mut buf).unwrap();
+        buf
     };
 
     if text.is_empty() {
-        eprintln!("Error: No text provided");
-        process::exit(1);
+        eprintln!("No text provided");
+        std::process::exit(1);
     }
 
-    // Estimate tokens and print result
-    let token_count = estimate_tokens_internal(&text);
-    println!("{token_count}");
-}
-
-fn print_help() {
-    println!("Usage: skimtoken <text>");
-    println!("       skimtoken --help");
-    println!();
-    println!("Calculate estimated token count for the given text.");
-    println!();
-    println!("Example:");
-    println!("  skimtoken 'Hello, world!'");
-    println!("  echo 'Some text' | skimtoken");
+    let tokens = estimate_tokens(&text);
+    println!("{tokens}");
 }

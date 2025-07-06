@@ -15,6 +15,12 @@ env/
 coverage.*
 wheels/
 
+# Cache
+.hypothesis/
+.pytest_cache/
+.ruff_cache/
+
+
 # Rust
 /target/
 Cargo.lock
@@ -34,4 +40,6 @@ Thumbs.db
 # Project specific
 *.dylib
 *.pyd
-skimtoken_exp/
+
+# Data files
+data/cc100_samples/

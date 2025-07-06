@@ -1,6 +1,6 @@
 [project]
 name = "skimtoken"
-version = "0.1.0"
+version = "0.2.0"
 description = "Fast token count estimation library"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -11,7 +11,7 @@ authors = [
 dependencies = []
 
 [project.scripts]
-skimtoken = "skimtoken.cli:main"
+skimtoken = "skimtoken:main"
 
 [dependency-groups]
 dev = [
@@ -22,6 +22,13 @@ dev = [
     "rich>=13.0.0",
     "pyright>=1.1.402",
     "psutil>=5.9.0",
+    "datasets>=3.6.0",
+    "optuna>=4.2.0",
+    "scikit-learn>=1.6.1",
+    "toml>=0.10.2",
+    "scipy>=1.13.1",
+    "numpy>=2.0.2",
+    "hypothesis>=6.135.26",
 ]
 
 [build-system]
@@ -31,7 +38,7 @@ build-backend = "maturin"
 [tool.maturin]
 features = ["python"]
 module-name = "skimtoken._skimtoken_core"
-python-source = "src"
+python-source = "."
 
 [tool.ruff]
 line-length = 100

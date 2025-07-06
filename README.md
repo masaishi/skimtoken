@@ -1,51 +1,31 @@
-# skimtoken (Beta)
+# skimtoken (Early Beta)
 
-A lightweight, fast token count estimation library written in Rust with Python bindings. Built for applications where approximate token counts work fine and memory/startup time efficiency matters.
+**⚠️ WARNING: This is an early beta version. The current implementation is not production-ready.**
 
-# Why skimtoken?
+A lightweight, fast token count estimation library written in Rust with Python bindings.
 
-[tiktoken](https://github.com/openai/tiktoken) is great for precise tokenization, but comes with serious overhead for simple token counting - especially **memory usage and initialization time**:
+[![PyPI](https://img.shields.io/pypi/v/skimtoken)](https://pypi.org/project/skimtoken/)
+[![Crates.io](https://img.shields.io/crates/v/skimtoken)](https://crates.io/crates/skimtoken)
+[![License](https://img.shields.io/github/license/masaishi/skimtoken)](https://github.com/masaishi/skimtoken/blob/main/LICENSE)
 
-```bash
-./scripts/run_benchmark_multiple.sh
-```
+## ⚠️ Current Limitations
 
-```
-╭────────────────── Mean Results After 100 Runs ─────────────────╮
-│ Mean RMSE: 12.5526 tokens                                      │
-├─────────────────┬──────────────┬──────────────┬────────────────┤
-│ Metric          │   tiktoken   │  skimtoken   │     Ratio      │
-├─────────────────┼──────────────┼──────────────┼────────────────┤
-│ Init Time       │   0.135954 s │   0.001022 s │         0.007x │
-│ Init Memory     │    84.5169 MB│     0.4292 MB│         0.005x │
-│ Exec Time       │   0.002947 s │   0.113127 s │        38.387x │
-│ Exec Memory     │     0.6602 MB│     0.0485 MB│         0.073x │
-├─────────────────┼──────────────┼──────────────┼────────────────┤
-│ TOTAL Time      │   0.138901 s │   0.114149 s │         0.821x │
-│ TOTAL Memory    │    85.1770 MB│     0.4777 MB│         0.005x │
-╰─────────────────┴──────────────┴──────────────┴────────────────╯
-```
+**This library is currently in early beta and has significant accuracy issues:**
 
-## Memory Advantages
+- **Multilingual method**: Takes 48.60x longer than tiktoken due to inefficient implementation
+- **Overall accuracy**: 15.11% error rate, which is too high for most use cases
 
-**skimtoken uses >99% less memory** than tiktoken:
-- **tiktoken**: ~85MB for initialization (loading vocabulary and encoder files)
-- **skimtoken**: ~0.43MB for initialization, ~0.48MB total peak usage
-- **178x less memory usage** - perfect for memory-constrained environments
 
-**Memory-Efficient Design**: 
-- No large vocabulary files to load into memory
-- Minimal runtime memory footprint
-- Predictable memory usage patterns
+## Why skimtoken?
 
-**Performance Trade-offs**: skimtoken targets **memory-constrained scenarios** and **cold-start environments** where initialization time directly impacts user experience. While tiktoken is faster for individual operations (~38x) and more accurate, skimtoken's minimal initialization overhead (133x faster startup, 178x less memory) makes it **1.22x faster overall** when you need to load fresh each time.
+**The Problem**: [tiktoken](https://github.com/openai/tiktoken) is great for precise tokenization, but requires ~60MB of memory just to count tokens - problematic for memory-constrained environments.
 
-This makes skimtoken valuable in:
-- **Serverless functions** with strict memory limits (128MB-512MB)
-- **Edge computing** environments with limited RAM
-- **Mobile applications** where memory matters
-- **Containerized microservices** with tight memory constraints
-- **Shared hosting environments** where memory usage affects cost
+**The Solution**: skimtoken estimates token counts using statistical patterns instead of loading entire vocabularies, achieving:
+
+- ✅ **64x less memory** (0.92MB vs 60MB)
+- ✅ **128x faster startup** (4ms vs 485ms) 
+- ❌ **48.60x slower execution** (0.93s vs 4.59s) for multilingual method
+- ❌ Trade-off: ~15.11% error rate vs exact counts
 
 ## Installation
 
@@ -53,8 +33,11 @@ This makes skimtoken valuable in:
 pip install skimtoken
 ```
 
-## Usage
+Requirements: Python 3.9+
 
+## Quick Start
+
+Simple method (Just char length x coefficient):
 ```python
 from skimtoken import estimate_tokens
 
@@ -62,109 +45,223 @@ from skimtoken import estimate_tokens
 text = "Hello, world! How are you today?"
 token_count = estimate_tokens(text)
 print(f"Estimated tokens: {token_count}")
-
-# Works with any text
-code = """
-def hello_world():
-    print("Hello, world!")
-    return True
-"""
-tokens = estimate_tokens(code)
-print(f"Code tokens: {tokens}")
 ```
 
-## Language Support
+Multilingual simple method:
+```python
+from skimtoken.multilingual_single import estimate_tokens
 
-skimtoken uses **language-specific parameters** tailored for different language families to improve estimation accuracy. Each language family has its own optimized coefficients based on tokenization patterns.
+multilingual_text = """
+For non-space separated languages, the number of tokens is difficult to predict.
+スペースで区切られていない言語の場合トークン数を予測するのは難しいです。
+स्पेसद्वारावियोजितनहींभाषाओंकेलिएटोकनकीसंख्याकाअनुमानलगानाकठिनहै।
+بالنسبةللغاتالتيلاتفصلبمسافاتفإنالتنبؤبعددالرموزصعب
+"""
+token_count = estimate_tokens(multilingual_text)
+print(f"Estimated tokens (multilingual): {token_count}")
+```
 
-**Supported languages**: English, French, Spanish, German, Russian, Hindi, Arabic, Chinese, Japanese, Korean, etc.
+## When to Use skimtoken
 
-**Current Accuracy**: RMSE of 12.55 across 146 samples (11,745 characters) with testing across multiple language families and text types
+### ✅ Perfect for:
 
-## When to Use skimtoken vs tiktoken
+| Use Case | Why It Works | Example |
+|----------|--------------|---------|
+| **Rate Limiting** | Overestimating is safe | Prevent API quota exceeded |
+| **Cost Estimation** | Users prefer conservative estimates | "$0.13" (actual: $0.10) |
+| **Progress Bars** | Approximate progress is fine | Processing documents |
+| **Serverless/Edge** | Memory constraints (128MB limits) | Cloudflare Workers |
+| **Quick Filtering** | Remove obviously too-long content | Pre-screening |
+| **Model Switching** | Switch to smart model when context long | Auto-escalation |
 
-**Use skimtoken when:**
-- Working in **serverless/edge environments** (Cloudflare Workers, AWS Lambda, Vercel Functions) where cold start time and memory usage matter
-- You need **quick token estimates** for API planning and cost estimation
-- **Initialization overhead** is a concern (e.g., short-lived processes that can't amortize tiktoken's startup cost)
-- Approximate counts work for your use case
-- Memory constraints are tight
+### ❌ Not suitable for:
 
-**Use Tiktoken when:**
-- You need **exact token counts** for specific models and tokenization-dependent features
-- **Processing large batches** of text where you can load the encoder once and reuse it
-- Building applications that require **precise tokenization** (not just counting)
-- You have **persistent memory** and can afford tiktoken's initialization cost
-- **Accuracy is more important** than speed/memory efficiency
+| Use Case | Why It Fails | Use Instead |
+|----------|--------------|-------------|
+| **Context Limits** | Underestimating causes failures | tiktoken |
+| **Exact Billing** | 15% error = unhappy customers | tiktoken |
+| **Token Splitting** | Chunks might exceed limits | tiktoken |
+| **Embeddings** | Need exact token boundaries | tiktoken |
 
-**Key Trade-off**: While tiktoken is faster for individual tokenization operations and more accurate, skimtoken excels in environments where you **can't afford to keep encoders loaded in memory** or where **cold start performance matters more than raw throughput**.
+## Performance Comparison
 
-## Roadmap
+### Large-Scale Benchmark (100k samples)
 
-**Automated Parameter Optimization**: Plans to implement hyperparameter tuning using large-scale datasets like CC100 samples to minimize RMSE scores across language families.
+Simple method (Just char length x coefficient):
+```
+Results:
+Total Samples: 100,726
+Total Characters: 13,062,391
+Mean RMSE: 38.4863 tokens
+Mean Error Rate: 21.63%
 
-The goal is to achieve sub-10 RMSE for major language families while preserving skimtoken's core advantages of minimal initialization overhead and memory usage.
+┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┓
+┃ Metric       ┃   tiktoken ┃  skimtoken ┃  Ratio ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━┩
+│ Init Time    │ 0.481672 s │ 0.182308 s │ 0.378x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Init Memory  │ 42.2386 MB │  0.0291 MB │ 0.001x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Exec Time    │ 4.710224 s │ 0.805272 s │ 0.171x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Exec Memory  │ 17.3251 MB │  0.8849 MB │ 0.051x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Total Time   │ 5.191896 s │ 0.928758 s │ 0.190x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Total Memory │ 59.5637 MB │  0.9214 MB │ 0.015x │
+└──────────────┴────────────┴────────────┴────────┘
+```
 
-## Testing & Development
+Multilingual simple method:
+```
+Results:
+Total Samples: 100,726
+Total Characters: 13,062,391
+Mean RMSE: 21.3034 tokens
+Mean Error Rate: 15.11%
+
+┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┓
+┃ Metric       ┃   tiktoken ┃    skimtoken ┃   Ratio ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━┩
+│ Init Time    │ 0.471222 s │   0.006207 s │  0.013x │
+├──────────────┼────────────┼──────────────┼─────────┤
+│ Init Memory  │ 42.2385 MB │    0.0283 MB │  0.001x │
+├──────────────┼────────────┼──────────────┼─────────┤
+│ Exec Time    │ 4.594160 s │ 246.164618 s │ 53.582x │
+├──────────────┼────────────┼──────────────┼─────────┤
+│ Exec Memory  │ 17.3251 MB │    0.8950 MB │  0.052x │
+├──────────────┼────────────┼──────────────┼─────────┤
+│ Total Time   │ 5.065382 s │ 246.170825 s │ 48.599x │
+├──────────────┼────────────┼──────────────┼─────────┤
+│ Total Memory │ 59.5636 MB │    0.9233 MB │  0.016x │
+└──────────────┴────────────┴──────────────┴─────────┘
+```
+
+## Available Methods
+
+| Method | Import | Memory | Error | Best For |
+|--------|---------|--------|-------|----------|
+| **Simple** | `from skimtoken.simple import estimate_tokens` | 0.8MB | ~21% | English text, minimum memory |
+| **Basic** | `from skimtoken.basic import estimate_tokens` | 0.8MB | ~27% | General use |
+| **Multilingual** | `from skimtoken.multilingual import estimate_tokens` | 0.9MB | ~15% | Non-English, mixed languages |
+
+```python
+# Example: Choose method based on your needs
+if memory_critical:
+    from skimtoken.simple import estimate_tokens
+elif mixed_languages:
+    from skimtoken.multilingual import estimate_tokens
+else:
+    from skimtoken import estimate_tokens  # Default: simple
+```
+
+## CLI Usage
 
 ```bash
-# Install dependencies
+# From command line
+echo "Hello, world!" | skimtoken
+# Output: 5
+
+# From file
+skimtoken -f document.txt
+# Output: 236
+
+# Multiple files
+cat *.md | skimtoken
+# Output: 4846
+```
+
+## How It Works
+
+Unlike tiktoken's vocabulary-based approach, skimtoken uses statistical patterns:
+
+**tiktoken**:
+```
+Text → Tokenizer → ["Hello", ",", " world"] → Vocabulary Lookup → [1234, 11, 4567] → Count: 3
+                                                      ↑
+                                              Requires 60MB dictionary
+```
+
+**skimtoken**:
+```
+Text → Feature Extraction → {chars: 13, words: 2, lang: "en"} → Statistical Model → ~3 tokens
+                                                                         ↑
+                                                                  Only 0.92MB of parameters
+```
+
+## Advanced Usage
+
+### Optimize for Your Domain
+
+Improve accuracy on domain-specific content:
+
+```bash
+# 1. Prepare labeled data
+# Format: {"text": "your content", "actual_tokens": 123}
+uv run scripts/prepare_dataset.py --input your_texts.txt
+
+# 2. Optimize parameters
+uv run scripts/optimize_all.py --dataset your_data.jsonl
+
+# 3. Rebuild with custom parameters
+uv run maturin build --release
+```
+
+
+## Architecture
+
+```
+skimtoken/
+├── src/
+│   ├── lib.rs                        # Core Rust library with PyO3 bindings
+│   └── methods/
+│       ├── method_simple.rs          # Character-based estimation
+│       ├── method_basic.rs           # Multi-feature regression  
+│       └── method_multilingual.rs    # Language-aware estimation
+├── skimtoken/                        # Python package
+│   ├── __init__.py                   # Main API
+│   └── {method}.py                   # Method-specific imports
+├── params/                           # Learned parameters (TOML)
+└── scripts/
+    ├── benchmark.py                  # Performance testing
+    └── optimize/                     # Parameter training
+```
+
+## Development
+
+```bash
+# Setup
+git clone https://github.com/masaishi/skimtoken
+cd skimtoken
 uv sync
 
-# Build for development
+# Development build
 uv run maturin dev --features python
 
 # Run tests
 cargo test
 uv run pytest
 
-# Run specific test with verbose output
-uv run pytest tests/test_skimtoken_simple.py -s
-
-# Run performance benchmarks
+# Benchmark
 uv run scripts/benchmark.py
 ```
 
-### Test Results
+## FAQ
 
-Run accuracy testing:
-```bash
-uv run pytest tests/test_skimtoken_simple.py -s
-```
+**Q: Can I improve accuracy?**  
+A: Yes! You can adjust the parameters using your own data to improve accuracy. See [Advanced Usage](#advanced-usage) for details.
 
-```
-RMSE by Category:
-╭───────────────────────┬───────┬─────────┬────────╮
-│ Category              │  RMSE │ Samples │ Status │
-├───────────────────────┼───────┼─────────┼────────┤
-│ ambiguous_punctuation │  2.88 │       7 │ ✓ PASS │
-│ code                  │ 10.15 │      14 │ ✓ PASS │
-│ edge                  │  0.00 │       2 │ ✓ PASS │
-│ json                  │  8.54 │       3 │ ✓ PASS │
-│ jsonl                 │ 15.51 │       2 │ ✓ PASS │
-│ mixed                 │  4.12 │       3 │ ✓ PASS │
-│ noisy_text            │  4.04 │       7 │ ✓ PASS │
-│ repetitive            │  7.25 │       4 │ ✓ PASS │
-│ rtl                   │  3.71 │       4 │ ✓ PASS │
-│ special               │  4.69 │       3 │ ✓ PASS │
-│ special_encoding      │ 10.65 │       8 │ ✓ PASS │
-│ structured_format     │  3.82 │       8 │ ✓ PASS │
-│ unknown               │ 15.43 │      81 │ ✓ PASS │
-╰───────────────────────┴───────┴─────────┴────────╯
+**Q: Is the API stable?**  
+A: Beta = breaking changes possible.
 
-Summary Statistics:
-Overall RMSE: 12.55 tokens
-Total samples processed: 146
-Total characters: 12,377
-Execution time: 0.121 seconds
-Processing speed: 1204 samples/second
-Character throughput: 102,110 chars/second
-Average per character: 9.793μs
-```
+## Future Plans
 
-## Contributing
+We are actively working to improve skimtoken's accuracy and performance:
 
-Contributions are welcome! Feel free to submit issues or pull requests.
+1. **Better estimation algorithms**: Moving beyond simple character multiplication to more sophisticated statistical models
+2. **Performance optimization**: Fixing the 60x slowdown in multilingual method
+3. **Improved language support**: Better handling of non-English languages
+4. **Higher accuracy**: Targeting <10% error rate while maintaining low memory footprint
 
 ## License
 
