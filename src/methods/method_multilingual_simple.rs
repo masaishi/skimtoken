@@ -32,553 +32,553 @@ impl Default for MultilingualSimpleMethodParameters {
     fn default() -> Self {
         let mut language_params = HashMap::new();
 
-        // Ara
+        // ara
         language_params.insert(
-            "Ara".to_string(),
+            "ara".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3478260881025884,
             },
         );
 
-        // Ita
+        // ita
         language_params.insert(
-            "Ita".to_string(),
+            "ita".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.2921348311548165,
             },
         );
 
-        // Fin
+        // fin
         language_params.insert(
-            "Fin".to_string(),
+            "fin".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.31578947671545804,
             },
         );
 
-        // Nep
+        // nep
         language_params.insert(
-            "Nep".to_string(),
+            "nep".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.35356200463057796,
             },
         );
 
-        // Ind
+        // ind
         language_params.insert(
-            "Ind".to_string(),
+            "ind".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.2794117669100515,
             },
         );
 
-        // Fra
+        // fra
         language_params.insert(
-            "Fra".to_string(),
+            "fra".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.29933110199265395,
             },
         );
 
-        // Nld
+        // nld
         language_params.insert(
-            "Nld".to_string(),
+            "nld".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.2585365870617235,
             },
         );
 
-        // Eng
+        // eng
         language_params.insert(
-            "Eng".to_string(),
+            "eng".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.2542372931307417,
             },
         );
 
-        // Tgl
+        // tgl
         language_params.insert(
-            "Tgl".to_string(),
+            "tgl".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3103448252138147,
             },
         );
 
-        // Ben
+        // ben
         language_params.insert(
-            "Ben".to_string(),
+            "ben".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.399999998688826,
             },
         );
 
-        // Sin
+        // sin
         language_params.insert(
-            "Sin".to_string(),
+            "sin".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.5435435362784797,
             },
         );
 
-        // Sna
+        // sna
         language_params.insert(
-            "Sna".to_string(),
+            "sna".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3181818165263794,
             },
         );
 
-        // Jav
+        // jav
         language_params.insert(
-            "Jav".to_string(),
+            "jav".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.31249999555432356,
             },
         );
 
-        // Est
+        // est
         language_params.insert(
-            "Est".to_string(),
+            "est".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.32000000028635944,
             },
         );
 
-        // Guj
+        // guj
         language_params.insert(
-            "Guj".to_string(),
+            "guj".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3951612821613528,
             },
         );
 
-        // Por
+        // por
         language_params.insert(
-            "Por".to_string(),
+            "por".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.26666666434813796,
             },
         );
 
-        // Lat
+        // lat
         language_params.insert(
-            "Lat".to_string(),
+            "lat".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.30569947664440206,
             },
         );
 
-        // Lit
+        // lit
         language_params.insert(
-            "Lit".to_string(),
+            "lit".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.35416667555738257,
             },
         );
 
-        // Tha
+        // tha
         language_params.insert(
-            "Tha".to_string(),
+            "tha".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.41935484064361017,
             },
         );
 
-        // Vie
+        // vie
         language_params.insert(
-            "Vie".to_string(),
+            "vie".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.33333333346997535,
             },
         );
 
-        // Hin
+        // hin
         language_params.insert(
-            "Hin".to_string(),
+            "hin".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.342281884428011,
             },
         );
 
-        // Tam
+        // tam
         language_params.insert(
-            "Tam".to_string(),
+            "tam".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.37096773906181607,
             },
         );
 
-        // Slk
+        // slk
         language_params.insert(
-            "Slk".to_string(),
+            "slk".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3523809598212874,
             },
         );
 
-        // Rus
+        // rus
         language_params.insert(
-            "Rus".to_string(),
+            "rus".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.31722054375687125,
             },
         );
 
-        // Mal
+        // mal
         language_params.insert(
-            "Mal".to_string(),
+            "mal".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.36764704995286007,
             },
         );
 
-        // Khm
+        // khm
         language_params.insert(
-            "Khm".to_string(),
+            "khm".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.5609756177225682,
             },
         );
 
-        // Mkd
+        // mkd
         language_params.insert(
-            "Mkd".to_string(),
+            "mkd".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.34883720970986887,
             },
         );
 
-        // Jpn
+        // jpn
         language_params.insert(
-            "Jpn".to_string(),
+            "jpn".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.7446808590747476,
             },
         );
 
-        // Dan
+        // dan
         language_params.insert(
-            "Dan".to_string(),
+            "dan".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.2861356945460705,
             },
         );
 
-        // Yid
+        // yid
         language_params.insert(
-            "Yid".to_string(),
+            "yid".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3793103456013193,
             },
         );
 
-        // Afr
+        // afr
         language_params.insert(
-            "Afr".to_string(),
+            "afr".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3549783589889431,
             },
         );
 
-        // Epo
+        // epo
         language_params.insert(
-            "Epo".to_string(),
+            "epo".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.32075472552246104,
             },
         );
 
-        // Cat
+        // cat
         language_params.insert(
-            "Cat".to_string(),
+            "cat".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.2901234580742282,
             },
         );
 
-        // Slv
+        // slv
         language_params.insert(
-            "Slv".to_string(),
+            "slv".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.32258064644706685,
             },
         );
 
-        // Ron
+        // ron
         language_params.insert(
-            "Ron".to_string(),
+            "ron".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3115577912011593,
             },
         );
 
-        // Spa
+        // spa
         language_params.insert(
-            "Spa".to_string(),
+            "spa".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.25619834560831817,
             },
         );
 
-        // Kan
+        // kan
         language_params.insert(
-            "Kan".to_string(),
+            "kan".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.39169138704673045,
             },
         );
 
-        // Bel
+        // bel
         language_params.insert(
-            "Bel".to_string(),
+            "bel".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.35714286438515264,
             },
         );
 
-        // Kat
+        // kat
         language_params.insert(
-            "Kat".to_string(),
+            "kat".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.35353534973491235,
             },
         );
 
-        // Heb
+        // heb
         language_params.insert(
-            "Heb".to_string(),
+            "heb".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.39170506353200235,
             },
         );
 
-        // Hrv
+        // hrv
         language_params.insert(
-            "Hrv".to_string(),
+            "hrv".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3169014105934709,
             },
         );
 
-        // Mya
+        // mya
         language_params.insert(
-            "Mya".to_string(),
+            "mya".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.545454547771305,
             },
         );
 
-        // Tur
+        // tur
         language_params.insert(
-            "Tur".to_string(),
+            "tur".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.30833333166331983,
             },
         );
 
-        // Cmn
+        // cmn
         language_params.insert(
-            "Cmn".to_string(),
+            "cmn".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.8271604929439658,
             },
         );
 
-        // Amh
+        // amh
         language_params.insert(
-            "Amh".to_string(),
+            "amh".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 1.7637362770584277,
             },
         );
 
-        // Srp
+        // srp
         language_params.insert(
-            "Srp".to_string(),
+            "srp".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.37267080602549646,
             },
         );
 
-        // Ces
+        // ces
         language_params.insert(
-            "Ces".to_string(),
+            "ces".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.350253812410004,
             },
         );
 
-        // Nob
+        // nob
         language_params.insert(
-            "Nob".to_string(),
+            "nob".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.2888888903351371,
             },
         );
 
-        // Pol
+        // pol
         language_params.insert(
-            "Pol".to_string(),
+            "pol".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.32061068757150607,
             },
         );
 
-        // Pan
+        // pan
         language_params.insert(
-            "Pan".to_string(),
+            "pan".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.5500000010516604,
             },
         );
 
-        // Mar
+        // mar
         language_params.insert(
-            "Mar".to_string(),
+            "mar".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.39405204923261894,
             },
         );
 
-        // Deu
+        // deu
         language_params.insert(
-            "Deu".to_string(),
+            "deu".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.2374245520996768,
             },
         );
 
-        // Tuk
+        // tuk
         language_params.insert(
-            "Tuk".to_string(),
+            "tuk".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.34751773050525164,
             },
         );
 
-        // Pes
+        // pes
         language_params.insert(
-            "Pes".to_string(),
+            "pes".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.35999999440904334,
             },
         );
 
-        // Tel
+        // tel
         language_params.insert(
-            "Tel".to_string(),
+            "tel".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.416666662013471,
             },
         );
 
-        // Uzb
+        // uzb
         language_params.insert(
-            "Uzb".to_string(),
+            "uzb".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3366336601517637,
             },
         );
 
-        // Zul
+        // zul
         language_params.insert(
-            "Zul".to_string(),
+            "zul".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.32240437273228195,
             },
         );
 
-        // Ukr
+        // ukr
         language_params.insert(
-            "Ukr".to_string(),
+            "ukr".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3453125011371133,
             },
         );
 
-        // Kor
+        // kor
         language_params.insert(
-            "Kor".to_string(),
+            "kor".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.6181818176863859,
             },
         );
 
-        // Bul
+        // bul
         language_params.insert(
-            "Bul".to_string(),
+            "bul".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3461538407603729,
             },
         );
 
-        // Aka
+        // aka
         language_params.insert(
-            "Aka".to_string(),
+            "aka".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3599999951229915,
             },
         );
 
-        // Hun
+        // hun
         language_params.insert(
-            "Hun".to_string(),
+            "hun".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.35897435616504425,
             },
         );
 
-        // Lav
+        // lav
         language_params.insert(
-            "Lav".to_string(),
+            "lav".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3673469372197678,
             },
         );
 
-        // Swe
+        // swe
         language_params.insert(
-            "Swe".to_string(),
+            "swe".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.2981366410041522,
             },
         );
 
-        // Ori
+        // ori
         language_params.insert(
-            "Ori".to_string(),
+            "ori".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.9924999872204857,
             },
         );
 
-        // Urd
+        // urd
         language_params.insert(
-            "Urd".to_string(),
+            "urd".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3475935855530559,
             },
         );
 
-        // Ell
+        // ell
         language_params.insert(
-            "Ell".to_string(),
+            "ell".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3793103496681776,
             },
         );
 
-        // Hye
+        // hye
         language_params.insert(
-            "Hye".to_string(),
+            "hye".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.3333333323585104,
             },
         );
 
-        // Aze
+        // aze
         language_params.insert(
-            "Aze".to_string(),
+            "aze".to_string(),
             MultilingualSimpleParameters {
                 coefficient: 0.32450331123755793,
             },
@@ -630,6 +630,11 @@ impl EstimationMethod for MultilingualSimpleMethod {
 
     fn estimate(&self, text: &str) -> usize {
         let features = self.count(text);
+
+        // Handle empty text
+        if features.char_count == 0 {
+            return 0;
+        }
 
         // Select parameters based on language
         let params = self

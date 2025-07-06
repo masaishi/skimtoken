@@ -1,10 +1,20 @@
-# skimtoken (Beta)
+# skimtoken (Early Beta)
 
-A lightweight, fast token count estimation library written in Rust with Python bindings. Get token estimates with **65x less memory** than tiktoken.
+**⚠️ WARNING: This is an early beta version. The current implementation is not production-ready.**
+
+A lightweight, fast token count estimation library written in Rust with Python bindings.
 
 [![PyPI](https://img.shields.io/pypi/v/skimtoken)](https://pypi.org/project/skimtoken/)
 [![Crates.io](https://img.shields.io/crates/v/skimtoken)](https://crates.io/crates/skimtoken)
 [![License](https://img.shields.io/github/license/masaishi/skimtoken)](https://github.com/masaishi/skimtoken/blob/main/LICENSE)
+
+## ⚠️ Current Limitations
+
+**This library is currently in early beta and has significant accuracy issues:**
+
+- **Multilingual method**: Takes 48.60x longer than tiktoken due to inefficient implementation
+- **Overall accuracy**: 15.11% error rate, which is too high for most use cases
+
 
 ## Why skimtoken?
 
@@ -12,9 +22,10 @@ A lightweight, fast token count estimation library written in Rust with Python b
 
 **The Solution**: skimtoken estimates token counts using statistical patterns instead of loading entire vocabularies, achieving:
 
-- ✅ **65x less memory** (0.9MB vs 60MB)
-- ✅ **128x faster startup** (4ms vs 525ms) 
-- ❌ Trade-off: ~27% error rate vs exact counts
+- ✅ **64x less memory** (0.92MB vs 60MB)
+- ✅ **128x faster startup** (4ms vs 485ms) 
+- ❌ **48.60x slower execution** (0.93s vs 4.59s) for multilingual method
+- ❌ Trade-off: ~15.11% error rate vs exact counts
 
 ## Installation
 
@@ -26,17 +37,19 @@ Requirements: Python 3.9+
 
 ## Quick Start
 
+Simple method (Just char length x coefficient):
 ```python
 from skimtoken import estimate_tokens
 
 # Basic usage
 text = "Hello, world! How are you today?"
 token_count = estimate_tokens(text)
-print(f"Estimated tokens: {token_count}")  # ~7 tokens
+print(f"Estimated tokens: {token_count}")
+```
 
-
-# For better accuracy with non-English text
-from skimtoken.multilingual import estimate_tokens as ml_estimate
+Multilingual simple method:
+```python
+from skimtoken.multilingual_single import estimate_tokens
 
 multilingual_text = """
 For non-space separated languages, the number of tokens is difficult to predict.
@@ -44,8 +57,8 @@ For non-space separated languages, the number of tokens is difficult to predict.
 स्पेसद्वारावियोजितनहींभाषाओंकेलिएटोकनकीसंख्याकाअनुमानलगानाकठिनहै।
 بالنسبةللغاتالتيلاتفصلبمسافاتفإنالتنبؤبعددالرموزصعب
 """
-tokens = ml_estimate(multilingual_text)
-print(f"Estimated tokens (multilingual): {tokens}")
+token_count = estimate_tokens(multilingual_text)
+print(f"Estimated tokens (multilingual): {token_count}")
 ```
 
 ## When to Use skimtoken
@@ -59,13 +72,14 @@ print(f"Estimated tokens (multilingual): {tokens}")
 | **Progress Bars** | Approximate progress is fine | Processing documents |
 | **Serverless/Edge** | Memory constraints (128MB limits) | Cloudflare Workers |
 | **Quick Filtering** | Remove obviously too-long content | Pre-screening |
+| **Model Switching** | Switch to smart model when context long | Auto-escalation |
 
 ### ❌ Not suitable for:
 
 | Use Case | Why It Fails | Use Instead |
 |----------|--------------|-------------|
 | **Context Limits** | Underestimating causes failures | tiktoken |
-| **Exact Billing** | 27% error = unhappy customers | tiktoken |
+| **Exact Billing** | 15% error = unhappy customers | tiktoken |
 | **Token Splitting** | Chunks might exceed limits | tiktoken |
 | **Embeddings** | Need exact token boundaries | tiktoken |
 
@@ -73,41 +87,63 @@ print(f"Estimated tokens (multilingual): {tokens}")
 
 ### Large-Scale Benchmark (100k samples)
 
+Simple method (Just char length x coefficient):
 ```
-Results on CC100 multilingual dataset:
+Results:
 Total Samples: 100,726
-Mean Error Rate: 27.05%
+Total Characters: 13,062,391
+Mean RMSE: 38.4863 tokens
+Mean Error Rate: 21.63%
 
 ┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┓
 ┃ Metric       ┃   tiktoken ┃  skimtoken ┃  Ratio ┃
 ┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━┩
-│ Init Time    │ 0.525221 s │ 0.004084 s │ 0.008x │
-│ Init Memory  │ 42.2386 MB │  0.0290 MB │ 0.001x │
-│ Exec Time    │ 4.012049 s │ 7.635931 s │ 1.903x │
-│ Exec Memory  │ 17.3251 MB │  0.8822 MB │ 0.051x │
-│ Total Memory │ 59.5637 MB │  0.9111 MB │ 0.015x │
+│ Init Time    │ 0.481672 s │ 0.182308 s │ 0.378x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Init Memory  │ 42.2386 MB │  0.0291 MB │ 0.001x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Exec Time    │ 4.710224 s │ 0.805272 s │ 0.171x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Exec Memory  │ 17.3251 MB │  0.8849 MB │ 0.051x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Total Time   │ 5.191896 s │ 0.928758 s │ 0.190x │
+├──────────────┼────────────┼────────────┼────────┤
+│ Total Memory │ 59.5637 MB │  0.9214 MB │ 0.015x │
 └──────────────┴────────────┴────────────┴────────┘
 ```
 
-### Real-World Latency (Single Request)
+Multilingual simple method:
+```
+Results:
+Total Samples: 100,726
+Total Characters: 13,062,391
+Mean RMSE: 21.3034 tokens
+Mean Error Rate: 15.11%
 
-```python
-# Cold start (first request)
-tiktoken:  525ms startup + 0.04ms/text = 525.04ms
-skimtoken:   4ms startup + 0.08ms/text =   4.08ms  ← 128x faster
-
-# Warm start (subsequent requests)  
-tiktoken:  0.04ms/text
-skimtoken: 0.08ms/text  ← 2x slower per text
+┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━━━┳━━━━━━━━━┓
+┃ Metric       ┃   tiktoken ┃    skimtoken ┃   Ratio ┃
+┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━━━╇━━━━━━━━━┩
+│ Init Time    │ 0.471222 s │   0.006207 s │  0.013x │
+├──────────────┼────────────┼──────────────┼─────────┤
+│ Init Memory  │ 42.2385 MB │    0.0283 MB │  0.001x │
+├──────────────┼────────────┼──────────────┼─────────┤
+│ Exec Time    │ 4.594160 s │ 246.164618 s │ 53.582x │
+├──────────────┼────────────┼──────────────┼─────────┤
+│ Exec Memory  │ 17.3251 MB │    0.8950 MB │  0.052x │
+├──────────────┼────────────┼──────────────┼─────────┤
+│ Total Time   │ 5.065382 s │ 246.170825 s │ 48.599x │
+├──────────────┼────────────┼──────────────┼─────────┤
+│ Total Memory │ 59.5636 MB │    0.9233 MB │  0.016x │
+└──────────────┴────────────┴──────────────┴─────────┘
 ```
 
 ## Available Methods
 
 | Method | Import | Memory | Error | Best For |
 |--------|---------|--------|-------|----------|
-| **Simple** | `from skimtoken.simple import estimate_tokens` | 0.5MB | ~30% | English text, minimum memory |
-| **Basic** | `from skimtoken.basic import estimate_tokens` | 0.7MB | ~28% | General use |
-| **Multilingual** | `from skimtoken.multilingual import estimate_tokens` | 0.9MB | ~25% | Non-English, mixed languages |
+| **Simple** | `from skimtoken.simple import estimate_tokens` | 0.8MB | ~21% | English text, minimum memory |
+| **Basic** | `from skimtoken.basic import estimate_tokens` | 0.8MB | ~27% | General use |
+| **Multilingual** | `from skimtoken.multilingual import estimate_tokens` | 0.9MB | ~15% | Non-English, mixed languages |
 
 ```python
 # Example: Choose method based on your needs
@@ -124,15 +160,15 @@ else:
 ```bash
 # From command line
 echo "Hello, world!" | skimtoken
-# Output: 3
+# Output: 5
 
 # From file
 skimtoken -f document.txt
-# Output: 1,523 tokens
+# Output: 236
 
 # Multiple files
 cat *.md | skimtoken
-# Output: 48,291 tokens
+# Output: 4846
 ```
 
 ## How It Works
@@ -150,23 +186,8 @@ Text → Tokenizer → ["Hello", ",", " world"] → Vocabulary Lookup → [1234,
 ```
 Text → Feature Extraction → {chars: 13, words: 2, lang: "en"} → Statistical Model → ~3 tokens
                                                                          ↑
-                                                                  Only 0.9MB of parameters
+                                                                  Only 0.92MB of parameters
 ```
-
-## Accuracy Characteristics
-
-Current performance: **RMSE of 37.74 tokens (27.05% error rate)** on multilingual dataset
-
-### By Text Type:
-- **English**: ~20% error (optimized)
-- **Code**: ~25% error  
-- **Chinese/Japanese**: ~30% error
-- **Mixed languages**: ~35% error
-
-### By Text Length:
-- **Short (<100 tokens)**: ±40% error
-- **Medium (100-1000)**: ±25% error  
-- **Long (>1000)**: ±20% error
 
 ## Advanced Usage
 
@@ -186,49 +207,6 @@ uv run scripts/optimize_all.py --dataset your_data.jsonl
 uv run maturin build --release
 ```
 
-### Memory-Constrained Deployment
-
-```python
-# Cloudflare Worker example (128MB limit)
-from skimtoken.simple import estimate_tokens  # Smallest footprint
-
-export default {
-  async fetch(request) {
-    const text = await request.text();
-    
-    // Quick estimation for rate limiting
-    const estimated = estimate_tokens(text);
-    if (estimated > DAILY_LIMIT) {
-      return new Response("Rate limit exceeded", { status: 429 });
-    }
-    
-    // Process request...
-  }
-}
-```
-
-### Batch Processing
-
-```python
-from skimtoken import estimate_tokens
-
-def process_documents(documents, token_budget=100000):
-    """Process documents within token budget."""
-    processed = []
-    total_estimate = 0
-    
-    for doc in documents:
-        doc_estimate = estimate_tokens(doc)
-        
-        # Conservative check (accounts for ~30% overestimation)
-        if total_estimate + doc_estimate > token_budget * 0.7:
-            break
-            
-        processed.append(doc)
-        total_estimate += doc_estimate
-    
-    return processed
-```
 
 ## Architecture
 
@@ -276,16 +254,14 @@ A: Yes! You can adjust the parameters using your own data to improve accuracy. S
 **Q: Is the API stable?**  
 A: Beta = breaking changes possible.
 
-## Contributing
+## Future Plans
 
-We welcome contributions! Priority areas:
+We are actively working to improve skimtoken's accuracy and performance:
 
-1. **Accuracy improvements** - Better statistical models
-2. **Language support** - More language-specific parameters
-3. **Benchmarks** - Real-world performance data
-4. **Use cases** - Examples and best practices
-
-See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+1. **Better estimation algorithms**: Moving beyond simple character multiplication to more sophisticated statistical models
+2. **Performance optimization**: Fixing the 60x slowdown in multilingual method
+3. **Improved language support**: Better handling of non-English languages
+4. **Higher accuracy**: Targeting <10% error rate while maintaining low memory footprint
 
 ## License
 

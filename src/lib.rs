@@ -33,9 +33,8 @@ pub enum Method {
 
 // Main estimation function - uses basic method by default
 pub fn estimate_tokens(text: &str) -> usize {
-    let mut estimator = BasicMethod::new();
-    // Try to load parameters from file, fallback to default if failed
-    let _ = estimator.load_parameters(Path::new("params/basic.toml"));
+    let mut estimator = MultilingualSimpleMethod::new();
+    let _ = estimator.load_parameters(Path::new("params/multilingual_simple.toml"));
     estimator.estimate(text)
 }
 
@@ -46,59 +45,102 @@ fn _skimtoken_core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     // Main estimation function
     #[pyfn(m)]
     #[pyo3(name = "estimate_tokens")]
-    fn estimate_tokens_py(text: &str) -> PyResult<usize> {
-        Ok(estimate_tokens(text))
+    fn estimate_tokens_py(text: &Bound<'_, PyAny>) -> PyResult<usize> {
+        // Handle Python strings that may contain invalid UTF-8 sequences
+        let text_str = if let Ok(s) = text.extract::<String>() {
+            s
+        } else {
+            // If extraction fails, try to get string representation
+            match text.str() {
+                Ok(py_str) => {
+                    // PyString in PyO3 always returns valid UTF-8 or converts lossy
+                    py_str.to_string()
+                }
+                Err(_) => String::new(),
+            }
+        };
+        Ok(estimate_tokens(&text_str))
     }
 
     // Simple method estimation
     #[pyfn(m)]
     #[pyo3(name = "estimate_tokens_simple")]
-    fn estimate_tokens_simple_py(text: &str) -> PyResult<usize> {
+    fn estimate_tokens_simple_py(text: &Bound<'_, PyAny>) -> PyResult<usize> {
+        let text_str = if let Ok(s) = text.extract::<String>() {
+            s
+        } else {
+            String::new()
+        };
         let mut estimator = SimpleMethod::new();
         let _ = estimator.load_parameters(Path::new("params/simple.toml"));
-        Ok(estimator.estimate(text))
+        Ok(estimator.estimate(&text_str))
     }
 
     // Basic method estimation
     #[pyfn(m)]
     #[pyo3(name = "estimate_tokens_basic")]
-    fn estimate_tokens_basic_py(text: &str) -> PyResult<usize> {
+    fn estimate_tokens_basic_py(text: &Bound<'_, PyAny>) -> PyResult<usize> {
+        let text_str = if let Ok(s) = text.extract::<String>() {
+            s
+        } else {
+            String::new()
+        };
         let mut estimator = BasicMethod::new();
         let _ = estimator.load_parameters(Path::new("params/basic.toml"));
-        Ok(estimator.estimate(text))
+        Ok(estimator.estimate(&text_str))
     }
 
     // Multilingual method estimation
     #[pyfn(m)]
     #[pyo3(name = "estimate_tokens_multilingual")]
-    fn estimate_tokens_multilingual_py(text: &str) -> PyResult<usize> {
+    fn estimate_tokens_multilingual_py(text: &Bound<'_, PyAny>) -> PyResult<usize> {
+        let text_str = if let Ok(s) = text.extract::<String>() {
+            s
+        } else {
+            String::new()
+        };
         let mut estimator = MultilingualMethod::new();
         let _ = estimator.load_parameters(Path::new("params/multilingual.toml"));
-        Ok(estimator.estimate(text))
+        Ok(estimator.estimate(&text_str))
     }
 
     // Multilingual simple method estimation
     #[pyfn(m)]
     #[pyo3(name = "estimate_tokens_multilingual_simple")]
-    fn estimate_tokens_multilingual_simple_py(text: &str) -> PyResult<usize> {
+    fn estimate_tokens_multilingual_simple_py(text: &Bound<'_, PyAny>) -> PyResult<usize> {
+        let text_str = if let Ok(s) = text.extract::<String>() {
+            s
+        } else {
+            String::new()
+        };
         let mut estimator = MultilingualSimpleMethod::new();
         let _ = estimator.load_parameters(Path::new("params/multilingual_simple.toml"));
-        Ok(estimator.estimate(text))
+        Ok(estimator.estimate(&text_str))
     }
 
     // Feature extraction functions for optimization
     #[pyfn(m)]
     #[pyo3(name = "count_simple")]
-    fn count_simple_py(text: &str) -> PyResult<usize> {
+    fn count_simple_py(text: &Bound<'_, PyAny>) -> PyResult<usize> {
+        let text_str = if let Ok(s) = text.extract::<String>() {
+            s
+        } else {
+            String::new()
+        };
         let estimator = SimpleMethod::new();
-        Ok(estimator.count(text))
+        Ok(estimator.count(&text_str))
     }
 
     #[pyfn(m)]
     #[pyo3(name = "count_basic")]
-    fn count_basic_py(text: &str) -> PyResult<(usize, usize, f64, usize)> {
+    fn count_basic_py(text: &Bound<'_, PyAny>) -> PyResult<(usize, usize, f64, usize)> {
+        let text_str = if let Ok(s) = text.extract::<String>() {
+            s
+        } else {
+            String::new()
+        };
         let estimator = BasicMethod::new();
-        let features = estimator.count(text);
+        let features = estimator.count(&text_str);
         Ok((
             features.char_count,
             features.word_count,
@@ -109,9 +151,16 @@ fn _skimtoken_core(m: &Bound<'_, PyModule>) -> PyResult<()> {
 
     #[pyfn(m)]
     #[pyo3(name = "count_multilingual")]
-    fn count_multilingual_py(text: &str) -> PyResult<(usize, usize, f64, usize, String)> {
+    fn count_multilingual_py(
+        text: &Bound<'_, PyAny>,
+    ) -> PyResult<(usize, usize, f64, usize, String)> {
+        let text_str = if let Ok(s) = text.extract::<String>() {
+            s
+        } else {
+            String::new()
+        };
         let estimator = MultilingualMethod::new();
-        let features = estimator.count(text);
+        let features = estimator.count(&text_str);
         Ok((
             features.basic_features.char_count,
             features.basic_features.word_count,
@@ -123,18 +172,28 @@ fn _skimtoken_core(m: &Bound<'_, PyModule>) -> PyResult<()> {
 
     #[pyfn(m)]
     #[pyo3(name = "count_multilingual_simple")]
-    fn count_multilingual_simple_py(text: &str) -> PyResult<(usize, String)> {
+    fn count_multilingual_simple_py(text: &Bound<'_, PyAny>) -> PyResult<(usize, String)> {
+        let text_str = if let Ok(s) = text.extract::<String>() {
+            s
+        } else {
+            String::new()
+        };
         let estimator = MultilingualSimpleMethod::new();
-        let features = estimator.count(text);
+        let features = estimator.count(&text_str);
         Ok((features.char_count, features.language))
     }
 
     // Language detection function
     #[pyfn(m)]
     #[pyo3(name = "detect_language")]
-    fn detect_language_py(text: &str) -> PyResult<String> {
+    fn detect_language_py(text: &Bound<'_, PyAny>) -> PyResult<String> {
+        let text_str = if let Ok(s) = text.extract::<String>() {
+            s
+        } else {
+            String::new()
+        };
         use whatlang::detect;
-        let language = detect(text)
+        let language = detect(&text_str)
             .map(|info| info.lang().code())
             .unwrap_or("unknown")
             .to_string();

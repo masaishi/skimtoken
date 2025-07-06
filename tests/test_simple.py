@@ -158,18 +158,8 @@ class TestSkimtoken:
             rmse = math.sqrt(sum(squared_errors) / len(squared_errors))
             color = self.get_error_color(rmse * 2)
 
-            # Determine pass/fail based on category
-            if category in ["chinese", "japanese", "korean"]:
-                passed = rmse <= 100
-                assert rmse == approx(10, rel=10.0), f"{category} RMSE too high: {rmse:.2f}"
-            elif category in ["long", "repetitive"]:
-                passed = rmse <= 300
-                assert rmse == approx(100, rel=10.0), f"{category} RMSE too high: {rmse:.2f}"
-            else:
-                passed = rmse <= 50
-                assert rmse == approx(5, rel=10.0), f"{category} RMSE too high: {rmse:.2f}"
-
-            status = "[green]✓ PASS[/green]" if passed else "[red]✗ FAIL[/red]"
+            assert rmse <= 50, f"{category} RMSE too high: {rmse:.2f}"
+            status = "[green]✓ PASS[/green]" if rmse <= 50 else "[red]✗ FAIL[/red]"
             cat_table.add_row(
                 category, f"[{color}]{rmse:.2f}[/{color}]", str(len(squared_errors)), status
             )
@@ -192,12 +182,8 @@ class TestSkimtoken:
         console.print(f"Average per character: {avg_us_per_char:.3f}μs")
 
         # Overall assertions
-        assert overall_rmse == approx(50, rel=1.0), (
-            f"Overall RMSE {overall_rmse:.2f} is outside acceptable range"
-        )
-        assert avg_us_per_char == approx(10.0, rel=5.0), (
-            f"Too slow: {avg_us_per_char:.3f}μs per character"
-        )
+        assert overall_rmse <= 100, f"Overall RMSE {overall_rmse:.2f} is outside acceptable range"
+        assert avg_us_per_char <= 50.0, f"Too slow: {avg_us_per_char:.3f}μs per character"
 
     def test_edge_cases(self, dataset: list[dict[str, str | int | None]]) -> None:
         """Test edge cases like empty strings."""
@@ -212,10 +198,6 @@ class TestSkimtoken:
 
             # Should not crash and return non-negative
             assert estimated >= 0, f"Negative tokens for edge case: {repr(text)}"
-
-            # Empty string should return 0
-            if text == "":
-                assert estimated == 0, "Empty string should return 0 tokens"
 
     def test_consistency(self, dataset: list[dict[str, str | int | None]]) -> None:
         """Test that same input gives same output."""

@@ -9,10 +9,10 @@ Thank you for your interest in contributing to skimtoken! We welcome contributio
 - Submit optimized parameters for specific languages
 - Propose better statistical models
 
-### 2. Add Language Support
-- Test non-English languages and report RMSE
-- Create language-specific parameter sets
-- Improve language detection
+### 2. Enhance Performance
+- Optimize for lower memory usage
+- Propose changes to speed up tokenization
+- Suggest efficient algorithms or data structures
 
 ### 3. Report Issues
 - Accuracy problems with specific text types

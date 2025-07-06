@@ -116,10 +116,7 @@ def optimize_parameters(
         print(f"  Error rate (full): {lang_metrics['error_rate']:.1f}%")
         print(f"  Error rate (>5%): {lang_metrics['error_rate_5pct']:.1f}%")
 
-        # Store parameters for this detected language (using 3-letter codes)
-        # Convert full language names to 3-letter codes
-        lang_code = detected_lang.lower()[:3].title()  # Simple conversion
-        language_params[lang_code] = {
+        language_params[detected_lang] = {
             "coefficient": float(optimized_coef),
         }
 

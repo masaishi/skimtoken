@@ -39,7 +39,7 @@ def parse_args() -> argparse.Namespace:
         "--method",
         type=str,
         choices=["simple", "basic", "multilingual", "multilingual_simple"],
-        default="basic",
+        default="multilingual_simple",
         help="Type of skimtoken import to use",
     )
     return parser.parse_args()
@@ -104,7 +104,7 @@ def benchmark_tiktoken_init() -> dict[str, Any]:
     }
 
 
-def benchmark_skimtoken_init(method: str = "basic") -> dict[str, Any]:
+def benchmark_skimtoken_init(method: str) -> dict[str, Any]:
     """Benchmark skimtoken import."""
     tracemalloc.start()
     start_time = time.perf_counter()

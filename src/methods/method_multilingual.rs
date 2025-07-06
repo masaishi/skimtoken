@@ -28,11 +28,11 @@ pub struct MultilingualMethodParameters {
 impl Default for MultilingualParameters {
     fn default() -> Self {
         Self {
-            char_coef: 0.32177453541634105,
-            word_coef: 0.07022836962899155,
-            avg_word_length_coef: 0.5090982385406467,
-            space_coef: -0.15831046972709562,
-            intercept: 1.591021522171296,
+            char_coef: 0.3217745347518016,
+            word_coef: 0.07022881669049061,
+            avg_word_length_coef: 0.5090982427870748,
+            space_coef: -0.15831091236345404,
+            intercept: 1.591021053665763,
         }
     }
 }
@@ -45,11 +45,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "ara".to_string(),
             MultilingualParameters {
-                char_coef: 0.4488587936443334,
-                word_coef: -11.128746221512401,
-                avg_word_length_coef: 1.7969351965530163,
-                space_coef: 10.63237039204418,
-                intercept: 3.110992999426415,
+                char_coef: 0.44880237128449296,
+                word_coef: -18.384453011345162,
+                avg_word_length_coef: 1.797303678979317,
+                space_coef: 17.888359561907425,
+                intercept: 10.365538235307312,
             },
         );
 
@@ -57,11 +57,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "ita".to_string(),
             MultilingualParameters {
-                char_coef: 0.12687531071112212,
-                word_coef: 0.7920024614656423,
-                avg_word_length_coef: 0.9794664784298375,
-                space_coef: 0.18309917224492475,
-                intercept: -2.9934338436426486,
+                char_coef: 0.12687422590146652,
+                word_coef: 0.7920414147285285,
+                avg_word_length_coef: 0.9794865394934512,
+                space_coef: 0.1830670312650753,
+                intercept: -2.9935769389240576,
             },
         );
 
@@ -69,11 +69,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "fin".to_string(),
             MultilingualParameters {
-                char_coef: 0.29760321223261826,
-                word_coef: 0.11043313476583758,
-                avg_word_length_coef: 0.1615598849465239,
-                space_coef: -0.14304826426291262,
-                intercept: 1.4656358349658731,
+                char_coef: 0.2976030333785077,
+                word_coef: 0.11046050899116736,
+                avg_word_length_coef: 0.1615615124455201,
+                space_coef: -0.14307417347906234,
+                intercept: 1.4655983525939504,
             },
         );
 
@@ -81,11 +81,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "nep".to_string(),
             MultilingualParameters {
-                char_coef: 0.3420206361747524,
-                word_coef: -5.265968510739185,
-                avg_word_length_coef: 0.4030225718351054,
-                space_coef: 5.121999216610801,
-                intercept: 7.197349734901991,
+                char_coef: 0.3420300608969203,
+                word_coef: -5.6022718514836605,
+                avg_word_length_coef: 0.4029322858107202,
+                space_coef: 5.45826703315094,
+                intercept: 7.532691006165287,
             },
         );
 
@@ -93,11 +93,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "ind".to_string(),
             MultilingualParameters {
-                char_coef: 0.2669793844265559,
-                word_coef: -0.00900735652655739,
-                avg_word_length_coef: 0.15546132020234502,
-                space_coef: -0.07456672578707284,
-                intercept: 2.074461420751895,
+                char_coef: 0.26697935184155763,
+                word_coef: -0.008999044392109063,
+                avg_word_length_coef: 0.1554626105076859,
+                space_coef: -0.07457480587983964,
+                intercept: 2.074445468986177,
             },
         );
 
@@ -105,11 +105,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "fra".to_string(),
             MultilingualParameters {
-                char_coef: 0.1818146809793093,
-                word_coef: 0.5482884403297904,
-                avg_word_length_coef: 0.6200135506074049,
-                space_coef: 0.08407146741755407,
-                intercept: -1.556032821151824,
+                char_coef: 0.1818140837075344,
+                word_coef: 0.5483596027473266,
+                avg_word_length_coef: 0.6200219566930033,
+                space_coef: 0.08400384426485952,
+                intercept: -1.556144635894185,
             },
         );
 
@@ -117,11 +117,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "nld".to_string(),
             MultilingualParameters {
-                char_coef: 0.13053506409396853,
-                word_coef: 0.39206592052465855,
-                avg_word_length_coef: 1.231959234970758,
-                space_coef: 0.42572100696865317,
-                intercept: -4.518586934148914,
+                char_coef: 0.1305321845126117,
+                word_coef: 0.39207089340818363,
+                avg_word_length_coef: 1.2320205026890658,
+                space_coef: 0.4257337692381579,
+                intercept: -4.518895273599938,
             },
         );
 
@@ -129,11 +129,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "eng".to_string(),
             MultilingualParameters {
-                char_coef: 0.3479306852654666,
-                word_coef: -0.5504839958241448,
-                avg_word_length_coef: 0.07929143363027032,
-                space_coef: -0.04355860594387149,
-                intercept: 2.8538649706092016,
+                char_coef: 0.34793126289383297,
+                word_coef: -0.5505503531869712,
+                avg_word_length_coef: 0.0792898331331382,
+                space_coef: -0.043495655665475384,
+                intercept: 2.8539356429595415,
             },
         );
 
@@ -141,11 +141,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "tgl".to_string(),
             MultilingualParameters {
-                char_coef: 0.3681513662406056,
-                word_coef: -0.5009701675718307,
-                avg_word_length_coef: 0.11735088811721912,
-                space_coef: 0.007571498864309207,
-                intercept: 1.7558498325058522,
+                char_coef: 0.36815153196988515,
+                word_coef: -0.500993625679746,
+                avg_word_length_coef: 0.11735070684592895,
+                space_coef: 0.007593871122873626,
+                intercept: 1.7558730942283134,
             },
         );
 
@@ -153,11 +153,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "ben".to_string(),
             MultilingualParameters {
-                char_coef: 0.38105769897606,
-                word_coef: 0.015434349916307466,
-                avg_word_length_coef: 0.07576940776902599,
-                space_coef: 0.0154343499162484,
-                intercept: 1.0002972203074343,
+                char_coef: 0.38105771791667237,
+                word_coef: 0.015434324737238074,
+                avg_word_length_coef: 0.07577055426942005,
+                space_coef: 0.0154343247367192,
+                intercept: 1.0002898459945868,
             },
         );
 
@@ -165,11 +165,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "sin".to_string(),
             MultilingualParameters {
-                char_coef: 0.5210555744898475,
-                word_coef: 0.47656734304085224,
-                avg_word_length_coef: 0.24788485686328654,
-                space_coef: -0.37994045281486233,
-                intercept: -1.030494114080767,
+                char_coef: 0.521049480687048,
+                word_coef: 0.6908051414157408,
+                avg_word_length_coef: 0.2480144037015131,
+                space_coef: -0.5941421810210131,
+                intercept: -1.2452866118864279,
             },
         );
 
@@ -177,11 +177,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "sna".to_string(),
             MultilingualParameters {
-                char_coef: 0.3091882692097963,
-                word_coef: -0.037245447390079234,
-                avg_word_length_coef: 0.2685244004350339,
-                space_coef: -0.13033269524869473,
-                intercept: 1.7349042175265588,
+                char_coef: 0.3091881913264699,
+                word_coef: -0.03723315055709972,
+                avg_word_length_coef: 0.26852864099965157,
+                space_coef: -0.13034440813126616,
+                intercept: 1.7348661745204517,
             },
         );
 
@@ -189,11 +189,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "jav".to_string(),
             MultilingualParameters {
-                char_coef: 0.26558447055639667,
-                word_coef: 0.2124916726017557,
-                avg_word_length_coef: 0.6666178155888702,
-                space_coef: -0.008382928327216349,
-                intercept: -1.71967398827573,
+                char_coef: 0.26558419532760946,
+                word_coef: 0.21250230145944726,
+                avg_word_length_coef: 0.6666246189082862,
+                space_coef: -0.008391728193954296,
+                intercept: -1.7197225022731217,
             },
         );
 
@@ -201,11 +201,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "est".to_string(),
             MultilingualParameters {
-                char_coef: 0.28697234077283884,
-                word_coef: 0.21741201248410108,
-                avg_word_length_coef: 0.3075018493009933,
-                space_coef: -0.11496296437984535,
-                intercept: 0.54128936730514,
+                char_coef: 0.2869719682181067,
+                word_coef: 0.21743164979545343,
+                avg_word_length_coef: 0.30750721110969176,
+                space_coef: -0.11497966436688181,
+                intercept: 0.5412360708713067,
             },
         );
 
@@ -213,11 +213,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "guj".to_string(),
             MultilingualParameters {
-                char_coef: 0.4030512468418479,
-                word_coef: -1.6616870436732392,
-                avg_word_length_coef: 0.03961922560301181,
-                space_coef: 1.4838871239911475,
-                intercept: 3.2959094705945837,
+                char_coef: 0.40305798810057036,
+                word_coef: -1.8194864686059908,
+                avg_word_length_coef: 0.039552805346301234,
+                space_coef: 1.6416614067725386,
+                intercept: 3.4533945030777495,
             },
         );
 
@@ -225,11 +225,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "por".to_string(),
             MultilingualParameters {
-                char_coef: 0.39399542919575165,
-                word_coef: -0.5704369307743838,
-                avg_word_length_coef: 0.02772049108409235,
-                space_coef: -0.20235504830988313,
-                intercept: 2.0296305539804678,
+                char_coef: 0.3939957969751756,
+                word_coef: -0.5704479087396972,
+                avg_word_length_coef: 0.02772005926440291,
+                space_coef: -0.2023463587349651,
+                intercept: 2.0296418903088878,
             },
         );
 
@@ -237,11 +237,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "lat".to_string(),
             MultilingualParameters {
-                char_coef: 0.2848763185506887,
-                word_coef: -0.05989422396931303,
-                avg_word_length_coef: 0.6439055258460389,
-                space_coef: -0.1237302445075798,
-                intercept: 1.1303318507468845,
+                char_coef: 0.28487551186394927,
+                word_coef: -0.059871626232479415,
+                avg_word_length_coef: 0.6439203262044544,
+                space_coef: -0.12374721098037814,
+                intercept: 1.1302209532585152,
             },
         );
 
@@ -249,11 +249,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "lit".to_string(),
             MultilingualParameters {
-                char_coef: 0.2900156022857179,
-                word_coef: 0.4617689372730568,
-                avg_word_length_coef: 0.5245359876039349,
-                space_coef: -0.10145378441405833,
-                intercept: -1.1202316941508172,
+                char_coef: 0.2900133213115315,
+                word_coef: 0.46179303436512226,
+                avg_word_length_coef: 0.5245590300232841,
+                space_coef: -0.10146045920399609,
+                intercept: -1.1204007147205743,
             },
         );
 
@@ -261,11 +261,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "tha".to_string(),
             MultilingualParameters {
-                char_coef: 0.40115905914079836,
-                word_coef: 0.03345797911109814,
-                avg_word_length_coef: 0.013625128265443966,
-                space_coef: 0.2361000905860627,
-                intercept: 1.0227969116144564,
+                char_coef: 0.40115934250902296,
+                word_coef: 0.01894784720365421,
+                avg_word_length_coef: 0.013625314223821018,
+                space_coef: 0.2506058487202946,
+                intercept: 1.0372770251835846,
             },
         );
 
@@ -273,11 +273,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "vie".to_string(),
             MultilingualParameters {
-                char_coef: 0.44733817655438773,
-                word_coef: -0.4827999776329544,
-                avg_word_length_coef: -0.17509120711115594,
-                space_coef: -0.15478921492511197,
-                intercept: 4.175004053364127,
+                char_coef: 0.447339411730737,
+                word_coef: -0.4836162243503682,
+                avg_word_length_coef: -0.17509980690390164,
+                space_coef: -0.15397868223774477,
+                intercept: 4.175848171991298,
             },
         );
 
@@ -285,11 +285,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "hin".to_string(),
             MultilingualParameters {
-                char_coef: 0.5058701647607271,
-                word_coef: -2.239956487354784,
-                avg_word_length_coef: 0.06599412162328347,
-                space_coef: 1.2735003068053388,
-                intercept: 3.6651478106776167,
+                char_coef: 0.505873006674809,
+                word_coef: -2.281346443483259,
+                avg_word_length_coef: 0.06595392061707568,
+                space_coef: 1.314878214631834,
+                intercept: 3.7065777622957654,
             },
         );
 
@@ -297,11 +297,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "tam".to_string(),
             MultilingualParameters {
-                char_coef: 0.29254786483909,
-                word_coef: 0.19298284845071445,
-                avg_word_length_coef: 0.16942112741820717,
-                space_coef: 0.19298284843277144,
-                intercept: 1.3796926185568985,
+                char_coef: 0.2925448667586105,
+                word_coef: 0.19299615216604143,
+                avg_word_length_coef: 0.1694386249151814,
+                space_coef: 0.19299615213383473,
+                intercept: 1.3795601376398636,
             },
         );
 
@@ -309,11 +309,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "slk".to_string(),
             MultilingualParameters {
-                char_coef: 0.2941463815879767,
-                word_coef: 0.18527221441477607,
-                avg_word_length_coef: 0.6546485383154237,
-                space_coef: 0.10942051159601164,
-                intercept: -1.9751201400845204,
+                char_coef: 0.2941447441098809,
+                word_coef: 0.18530255162490036,
+                avg_word_length_coef: 0.6546792002540466,
+                space_coef: 0.10940097884291243,
+                intercept: -1.9753198122471574,
             },
         );
 
@@ -321,11 +321,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "rus".to_string(),
             MultilingualParameters {
-                char_coef: 0.20948808274038122,
-                word_coef: 0.6864281164414845,
-                avg_word_length_coef: 0.40437535073771846,
-                space_coef: -0.11317451892548515,
-                intercept: 2.1692115106599346,
+                char_coef: 0.20948745008532185,
+                word_coef: 0.6864855781170451,
+                avg_word_length_coef: 0.4043882187670413,
+                space_coef: -0.11322740917043185,
+                intercept: 2.1690779215289098,
             },
         );
 
@@ -333,11 +333,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "mal".to_string(),
             MultilingualParameters {
-                char_coef: 0.2789605167974779,
-                word_coef: 0.5159309741225317,
-                avg_word_length_coef: 0.22768676564613982,
-                space_coef: 0.13311359768676181,
-                intercept: 0.3711041895854237,
+                char_coef: 0.27895845310167455,
+                word_coef: 0.6116966122570419,
+                avg_word_length_coef: 0.22768589015702162,
+                space_coef: 0.03736789659060143,
+                intercept: 0.27539435822306046,
             },
         );
 
@@ -345,11 +345,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "khm".to_string(),
             MultilingualParameters {
-                char_coef: 0.5670629578757737,
-                word_coef: 1.5150161597897804,
-                avg_word_length_coef: -0.00644442135876182,
-                space_coef: -1.9001342265934293,
-                intercept: 0.006301914420312471,
+                char_coef: 0.5670499879446613,
+                word_coef: 1.8270677561932331,
+                avg_word_length_coef: -0.00642541139331866,
+                space_coef: -2.2119058617396052,
+                intercept: -0.3057600855326825,
             },
         );
 
@@ -357,11 +357,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "mkd".to_string(),
             MultilingualParameters {
-                char_coef: 0.26682431944743695,
-                word_coef: 0.8876732906024092,
-                avg_word_length_coef: 0.3151174178315572,
-                space_coef: -0.461011859193001,
-                intercept: 0.05005352515232886,
+                char_coef: 0.26682005050682067,
+                word_coef: 1.0226444981752838,
+                avg_word_length_coef: 0.3151533873493775,
+                space_coef: -0.5959585220198479,
+                intercept: -0.08492662593265976,
             },
         );
 
@@ -369,11 +369,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "jpn".to_string(),
             MultilingualParameters {
-                char_coef: 0.7312918795661565,
-                word_coef: -0.3260831211813962,
-                avg_word_length_coef: 0.03244492289219215,
-                space_coef: 0.6745737363782689,
-                intercept: -0.14650433098280757,
+                char_coef: 0.7312743066330536,
+                word_coef: -0.3534746595456092,
+                avg_word_length_coef: 0.03246171890684391,
+                space_coef: 0.7021075662754234,
+                intercept: -0.11914804948225566,
             },
         );
 
@@ -381,11 +381,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "dan".to_string(),
             MultilingualParameters {
-                char_coef: 0.2643901613105418,
-                word_coef: 0.026693059706355663,
-                avg_word_length_coef: 0.37878955736654607,
-                space_coef: 0.029458361600404888,
-                intercept: 0.07351183277064877,
+                char_coef: 0.26438981337460793,
+                word_coef: 0.02669460507817261,
+                avg_word_length_coef: 0.3787935341487197,
+                space_coef: 0.029458995066212943,
+                intercept: 0.07348829239715471,
             },
         );
 
@@ -393,11 +393,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "yid".to_string(),
             MultilingualParameters {
-                char_coef: 0.4110855962747689,
-                word_coef: -1.1811235779407048,
-                avg_word_length_coef: 0.061714329093150944,
-                space_coef: 0.8784942210567511,
-                intercept: 2.5396025725862756,
+                char_coef: 0.41109121251495623,
+                word_coef: -1.4754686225077989,
+                avg_word_length_coef: 0.061718833128964326,
+                space_coef: 1.1728084058656487,
+                intercept: 2.8337340433802893,
             },
         );
 
@@ -405,11 +405,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "afr".to_string(),
             MultilingualParameters {
-                char_coef: 0.298431423018136,
-                word_coef: 0.3468816406077974,
-                avg_word_length_coef: 0.46335046011864506,
-                space_coef: -0.043205195690729975,
-                intercept: -0.7952794171745126,
+                char_coef: 0.29843067011865443,
+                word_coef: 0.34693341723309157,
+                avg_word_length_coef: 0.46335921154043186,
+                space_coef: -0.043252502229717285,
+                intercept: -0.7953726175688445,
             },
         );
 
@@ -417,11 +417,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "epo".to_string(),
             MultilingualParameters {
-                char_coef: 0.29487105765273364,
-                word_coef: 0.10935683476979403,
-                avg_word_length_coef: 0.6577627357324314,
-                space_coef: -0.019205725932512012,
-                intercept: -1.6615397881415959,
+                char_coef: 0.2948693287112015,
+                word_coef: 0.10938014897914664,
+                avg_word_length_coef: 0.6577970638967615,
+                space_coef: -0.019217966294145714,
+                intercept: -1.661744583613057,
             },
         );
 
@@ -429,11 +429,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "cat".to_string(),
             MultilingualParameters {
-                char_coef: 0.2314619500979602,
-                word_coef: 0.364757491942888,
-                avg_word_length_coef: 0.5575986936174028,
-                space_coef: -0.09839149897737445,
-                intercept: -0.27066160548931606,
+                char_coef: 0.23146113408331725,
+                word_coef: 0.364809074790078,
+                avg_word_length_coef: 0.5576083944924493,
+                space_coef: -0.09843805761578754,
+                intercept: -0.2707634413331661,
             },
         );
 
@@ -441,11 +441,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "slv".to_string(),
             MultilingualParameters {
-                char_coef: 0.259538262262407,
-                word_coef: 0.12439061700839696,
-                avg_word_length_coef: 0.27313249996326533,
-                space_coef: 0.18642950798309424,
-                intercept: 0.14818910966108945,
+                char_coef: 0.259537639920391,
+                word_coef: 0.1240605166086754,
+                avg_word_length_coef: 0.2731433199812429,
+                space_coef: 0.18676375105578397,
+                intercept: 0.14845683784159291,
             },
         );
 
@@ -453,11 +453,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "ron".to_string(),
             MultilingualParameters {
-                char_coef: 0.18552449493635878,
-                word_coef: 0.5372822721570621,
-                avg_word_length_coef: 0.7333091212232731,
-                space_coef: 0.08377928516245481,
-                intercept: -1.0935356188665821,
+                char_coef: 0.18552306511177946,
+                word_coef: 0.5373100780374281,
+                avg_word_length_coef: 0.7333267314511911,
+                space_coef: 0.08376060437747279,
+                intercept: -1.093652342393753,
             },
         );
 
@@ -465,11 +465,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "spa".to_string(),
             MultilingualParameters {
-                char_coef: 0.27815566182613666,
-                word_coef: -0.12155608230954557,
-                avg_word_length_coef: 0.991267009399482,
-                space_coef: -0.003840385947973741,
-                intercept: -3.071574232499124,
+                char_coef: 0.2781551249803241,
+                word_coef: -0.1215628532417047,
+                avg_word_length_coef: 0.9912805613921394,
+                space_coef: -0.003830158436815649,
+                intercept: -3.0716427251193323,
             },
         );
 
@@ -477,11 +477,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "kan".to_string(),
             MultilingualParameters {
-                char_coef: 0.26512396461516424,
-                word_coef: 0.43182204242051153,
-                avg_word_length_coef: 0.4018814634491915,
-                space_coef: 0.43182204244306704,
-                intercept: -0.5503201974008647,
+                char_coef: 0.26512096863405055,
+                word_coef: 0.43183416237836353,
+                avg_word_length_coef: 0.40191100549635217,
+                space_coef: 0.43183416240596684,
+                intercept: -0.550522493216647,
             },
         );
 
@@ -489,11 +489,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "bel".to_string(),
             MultilingualParameters {
-                char_coef: 0.1689766355881563,
-                word_coef: 1.2312124737996586,
-                avg_word_length_coef: 0.6119074163450874,
-                space_coef: 0.008711515807648245,
-                intercept: -1.8739252733745602,
+                char_coef: 0.16897318484860901,
+                word_coef: 1.232351800470483,
+                avg_word_length_coef: 0.6119560807292734,
+                space_coef: 0.007597886407324173,
+                intercept: -1.8753592228737546,
             },
         );
 
@@ -501,11 +501,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "kat".to_string(),
             MultilingualParameters {
-                char_coef: 0.2196724681412917,
-                word_coef: -3.4055358253273877,
-                avg_word_length_coef: 0.4176040747621137,
-                space_coef: 4.229165735323491,
-                intercept: 4.2663134317092,
+                char_coef: 0.21968416224127973,
+                word_coef: -3.830660989581501,
+                avg_word_length_coef: 0.4175531139680374,
+                space_coef: 4.654203496988453,
+                intercept: 4.690636719048079,
             },
         );
 
@@ -513,11 +513,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "heb".to_string(),
             MultilingualParameters {
-                char_coef: 0.4481860140099636,
-                word_coef: -0.7248619988417391,
-                avg_word_length_coef: -0.0835295746967152,
-                space_coef: 0.33857763847199795,
-                intercept: 2.0532791093536105,
+                char_coef: 0.44822042483777935,
+                word_coef: -0.8592121723042215,
+                avg_word_length_coef: -0.08373929050385838,
+                space_coef: 0.47271513192496273,
+                intercept: 2.1886263366789933,
             },
         );
 
@@ -525,11 +525,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "hrv".to_string(),
             MultilingualParameters {
-                char_coef: 0.2266750460687974,
-                word_coef: 0.5585752643849258,
-                avg_word_length_coef: 0.23060827018398214,
-                space_coef: -0.06417137728399833,
-                intercept: 0.652169440791873,
+                char_coef: 0.22667417121583597,
+                word_coef: 0.5586130041984836,
+                avg_word_length_coef: 0.23061300827316947,
+                space_coef: -0.06420336660159277,
+                intercept: 0.6521099977338878,
             },
         );
 
@@ -537,11 +537,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "mya".to_string(),
             MultilingualParameters {
-                char_coef: 0.5504528579411492,
-                word_coef: -4.362024125497104,
-                avg_word_length_coef: -0.012908283431363018,
-                space_coef: 3.867799397392941,
-                intercept: 6.865765198898913,
+                char_coef: 0.5504708473963755,
+                word_coef: -4.568539999054742,
+                avg_word_length_coef: -0.012926095483269572,
+                space_coef: 4.074088068863251,
+                intercept: 7.072039132261878,
             },
         );
 
@@ -549,11 +549,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "tur".to_string(),
             MultilingualParameters {
-                char_coef: 0.13133513336644795,
-                word_coef: 1.0924177083446005,
-                avg_word_length_coef: 1.0427673914499125,
-                space_coef: 0.03161929924568073,
-                intercept: -3.330747646084731,
+                char_coef: 0.13133127958755836,
+                word_coef: 1.092516596716582,
+                avg_word_length_coef: 1.0428118275412976,
+                space_coef: 0.03154963396942866,
+                intercept: -3.3311178401423405,
             },
         );
 
@@ -561,11 +561,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "cmn".to_string(),
             MultilingualParameters {
-                char_coef: 0.7791383800715864,
-                word_coef: 1.785025983882802,
-                avg_word_length_coef: 0.015222139800415434,
-                space_coef: -2.6438100859617677,
-                intercept: 2.3631111392667776,
+                char_coef: 0.779135001698647,
+                word_coef: 1.932795715534019,
+                avg_word_length_coef: 0.015223590611201137,
+                space_coef: -2.791548297576439,
+                intercept: 2.2156504738134686,
             },
         );
 
@@ -573,11 +573,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "amh".to_string(),
             MultilingualParameters {
-                char_coef: 1.6585699891453178,
-                word_coef: 0.28469555138578945,
-                avg_word_length_coef: 0.46053526966382397,
-                space_coef: 0.28469555142391084,
-                intercept: -5.909449211416444,
+                char_coef: 1.6585672177924242,
+                word_coef: 0.28470277426767054,
+                avg_word_length_coef: 0.4606117587101958,
+                space_coef: 0.28470277439688263,
+                intercept: -5.909762506566722,
             },
         );
 
@@ -585,11 +585,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "srp".to_string(),
             MultilingualParameters {
-                char_coef: 0.3320619551913391,
-                word_coef: -3.1783631530731107,
-                avg_word_length_coef: 0.18947509104653407,
-                space_coef: 3.37201054663827,
-                intercept: 4.5173059038245285,
+                char_coef: 0.33206535331060216,
+                word_coef: -3.506539577364872,
+                avg_word_length_coef: 0.18946732497918378,
+                space_coef: 3.7001815919455714,
+                intercept: 4.844430834582951,
             },
         );
 
@@ -597,11 +597,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "ces".to_string(),
             MultilingualParameters {
-                char_coef: 0.26477443892413105,
-                word_coef: 0.5119634232452072,
-                avg_word_length_coef: 0.5780949241454006,
-                space_coef: -0.06940188573322713,
-                intercept: -1.2767324022383661,
+                char_coef: 0.2647719635781719,
+                word_coef: 0.5121418954770693,
+                avg_word_length_coef: 0.5781314454329717,
+                space_coef: -0.06956459847424289,
+                intercept: -1.277096949134247,
             },
         );
 
@@ -609,11 +609,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "nob".to_string(),
             MultilingualParameters {
-                char_coef: 0.2636123673955089,
-                word_coef: 0.027838992821428613,
-                avg_word_length_coef: 0.38551800793598945,
-                space_coef: 0.04886253007332106,
-                intercept: 0.18213411087106124,
+                char_coef: 0.26361204603818883,
+                word_coef: 0.027829305702773734,
+                avg_word_length_coef: 0.3855253485339995,
+                space_coef: 0.048874200778599594,
+                intercept: 0.18210533525532213,
             },
         );
 
@@ -621,11 +621,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "pol".to_string(),
             MultilingualParameters {
-                char_coef: 0.23547672296316677,
-                word_coef: 0.5525262802926011,
-                avg_word_length_coef: 0.7436627057565299,
-                space_coef: -0.08380633472707769,
-                intercept: -1.3899684962542338,
+                char_coef: 0.23547508240710424,
+                word_coef: 0.552569596879804,
+                avg_word_length_coef: 0.7436836480046146,
+                space_coef: -0.08383848984047836,
+                intercept: -1.390127615026465,
             },
         );
 
@@ -633,11 +633,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "pan".to_string(),
             MultilingualParameters {
-                char_coef: 0.720789380582767,
-                word_coef: -0.4953254914887084,
-                avg_word_length_coef: 0.020408280723599403,
-                space_coef: -0.49532549147411525,
-                intercept: 1.1836230712234794,
+                char_coef: 0.7207940197614274,
+                word_coef: -0.4953372252610426,
+                avg_word_length_coef: 0.020399824305131504,
+                space_coef: -0.4953372252976133,
+                intercept: 1.18364572663274,
             },
         );
 
@@ -645,11 +645,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "mar".to_string(),
             MultilingualParameters {
-                char_coef: 0.33563090002157436,
-                word_coef: -3.799242981883867,
-                avg_word_length_coef: 0.3945447447780706,
-                space_coef: 3.9635806391588724,
-                intercept: 4.880068482467905,
+                char_coef: 0.3356322556815121,
+                word_coef: -4.067699296123827,
+                avg_word_length_coef: 0.394379569694404,
+                space_coef: 4.232047770284952,
+                intercept: 5.148526184518431,
             },
         );
 
@@ -657,11 +657,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "deu".to_string(),
             MultilingualParameters {
-                char_coef: 0.05285209788837475,
-                word_coef: 1.0291432515094272,
-                avg_word_length_coef: 1.7250939850873723,
-                space_coef: 0.13332003015376834,
-                intercept: -6.397015123445179,
+                char_coef: 0.05284810432351846,
+                word_coef: 1.0295701332097542,
+                avg_word_length_coef: 1.7251745782227788,
+                space_coef: 0.1329204901978866,
+                intercept: -6.397896513911476,
             },
         );
 
@@ -669,11 +669,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "tuk".to_string(),
             MultilingualParameters {
-                char_coef: 0.4605319483710732,
-                word_coef: -0.47477828327295185,
-                avg_word_length_coef: 0.1401728463885321,
-                space_coef: -0.2837843458376758,
-                intercept: 0.8152012703994789,
+                char_coef: 0.4605658953745427,
+                word_coef: -0.4750062562283548,
+                avg_word_length_coef: 0.1400736882727119,
+                space_coef: -0.28378978190390125,
+                intercept: 0.8159035787470046,
             },
         );
 
@@ -681,11 +681,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "pes".to_string(),
             MultilingualParameters {
-                char_coef: 0.6070785853095381,
-                word_coef: -0.6119854037956498,
-                avg_word_length_coef: 0.010797893099027608,
-                space_coef: -0.6119854036619811,
-                intercept: 0.3257634407577257,
+                char_coef: 0.6070787706869065,
+                word_coef: -0.6119858863321161,
+                avg_word_length_coef: 0.010796540462907489,
+                space_coef: -0.6119858868808072,
+                intercept: 0.32576914380694433,
             },
         );
 
@@ -693,11 +693,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "tel".to_string(),
             MultilingualParameters {
-                char_coef: 0.3957394665485416,
-                word_coef: -1.0975426234577683,
-                avg_word_length_coef: 0.1118865557220728,
-                space_coef: 1.0066676921313509,
-                intercept: 2.915025235190541,
+                char_coef: 0.39574110882952507,
+                word_coef: -1.7990041443407216,
+                avg_word_length_coef: 0.11190671366518141,
+                space_coef: 1.7081182724544473,
+                intercept: 3.6162105455993867,
             },
         );
 
@@ -705,11 +705,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "uzb".to_string(),
             MultilingualParameters {
-                char_coef: 0.28681054944388995,
-                word_coef: 0.4460795011958774,
-                avg_word_length_coef: 0.7754185532328617,
-                space_coef: -0.14812706092158512,
-                intercept: -3.4831147864560634,
+                char_coef: 0.2868086900215845,
+                word_coef: 0.4461375130186268,
+                avg_word_length_coef: 0.775441126607956,
+                space_coef: -0.14816977926204605,
+                intercept: -3.4833190686188615,
             },
         );
 
@@ -717,11 +717,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "zul".to_string(),
             MultilingualParameters {
-                char_coef: 0.2897388759283011,
-                word_coef: 0.20641079229856657,
-                avg_word_length_coef: 0.3828685922120578,
-                space_coef: -0.026557099630664466,
-                intercept: -1.1115020606095882,
+                char_coef: 0.28973871900540854,
+                word_coef: 0.20643529746018757,
+                avg_word_length_coef: 0.38287335109774945,
+                space_coef: -0.026580462937346314,
+                intercept: -1.1115560814115142,
             },
         );
 
@@ -729,11 +729,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "ukr".to_string(),
             MultilingualParameters {
-                char_coef: 0.24584595025893888,
-                word_coef: 0.7241094475616364,
-                avg_word_length_coef: 0.28435824368031726,
-                space_coef: -0.10182201355495121,
-                intercept: -0.11412122569964822,
+                char_coef: 0.24584382517512468,
+                word_coef: 0.7242026917438468,
+                avg_word_length_coef: 0.28439773465355883,
+                space_coef: -0.10189998135109683,
+                intercept: -0.11444320642682015,
             },
         );
 
@@ -741,11 +741,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "kor".to_string(),
             MultilingualParameters {
-                char_coef: 0.7103872868731044,
-                word_coef: -0.26340416931210164,
-                avg_word_length_coef: 0.2457938033585411,
-                space_coef: -0.2719383606759918,
-                intercept: 1.0307639768389762,
+                char_coef: 0.7103889270864719,
+                word_coef: -0.2633801082236818,
+                avg_word_length_coef: 0.2457979940622727,
+                space_coef: -0.27196949734726356,
+                intercept: 1.0307168628604373,
             },
         );
 
@@ -753,11 +753,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "bul".to_string(),
             MultilingualParameters {
-                char_coef: 0.1978106077159651,
-                word_coef: 0.9133446083282273,
-                avg_word_length_coef: 0.57536886890713,
-                space_coef: -0.05907041773828037,
-                intercept: -1.2853426576559883,
+                char_coef: 0.19780598879510816,
+                word_coef: 0.9134701308361612,
+                avg_word_length_coef: 0.5754679703149507,
+                space_coef: -0.059167115284642954,
+                intercept: -1.2859754825008025,
             },
         );
 
@@ -765,11 +765,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "aka".to_string(),
             MultilingualParameters {
-                char_coef: 0.3218720634924224,
-                word_coef: 0.3419556251315057,
-                avg_word_length_coef: 0.38686594756328324,
-                space_coef: -0.16459172089169918,
-                intercept: -0.9322539673311923,
+                char_coef: 0.3218648650819916,
+                word_coef: 0.34199876587973327,
+                avg_word_length_coef: 0.3869142530775766,
+                space_coef: -0.16459474235465021,
+                intercept: -0.9325020266183657,
             },
         );
 
@@ -777,11 +777,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "hun".to_string(),
             MultilingualParameters {
-                char_coef: 0.36817444842649527,
-                word_coef: -0.048640032144083654,
-                avg_word_length_coef: 0.17544190768934964,
-                space_coef: -0.12272442731500127,
-                intercept: 0.9175170281704084,
+                char_coef: 0.36817443587826887,
+                word_coef: -0.048622719888274324,
+                avg_word_length_coef: 0.17544524998894495,
+                space_coef: -0.12274164543498649,
+                intercept: 0.9174791651131713,
             },
         );
 
@@ -789,11 +789,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "lav".to_string(),
             MultilingualParameters {
-                char_coef: 0.31762202656934385,
-                word_coef: -0.4346999673171776,
-                avg_word_length_coef: 0.3075382169297262,
-                space_coef: 0.6927897780214539,
-                intercept: 0.6130546110807344,
+                char_coef: 0.3176229303661853,
+                word_coef: -0.4362151085246064,
+                avg_word_length_coef: 0.3075390457271601,
+                space_coef: 0.6942985689623983,
+                intercept: 0.6145412064183944,
             },
         );
 
@@ -801,11 +801,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "swe".to_string(),
             MultilingualParameters {
-                char_coef: 0.28839790989047914,
-                word_coef: -0.10530956212817366,
-                avg_word_length_coef: 0.31138658431369,
-                space_coef: 0.0776020637600288,
-                intercept: 0.35802129657557913,
+                char_coef: 0.2883977188397274,
+                word_coef: -0.10533538963823742,
+                avg_word_length_coef: 0.3113946738361182,
+                space_coef: 0.0776291340603509,
+                intercept: 0.3580018702339487,
             },
         );
 
@@ -813,11 +813,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "ori".to_string(),
             MultilingualParameters {
-                char_coef: 1.0439492382508784,
-                word_coef: 18.56543096584324,
-                avg_word_length_coef: -0.34672898744006336,
-                space_coef: -18.914978230429824,
-                intercept: -17.82513364910325,
+                char_coef: 1.0438964753605617,
+                word_coef: 20.652451733769315,
+                avg_word_length_coef: -0.3471047122979283,
+                space_coef: -21.001684886151132,
+                intercept: -19.904470694839674,
             },
         );
 
@@ -825,11 +825,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "urd".to_string(),
             MultilingualParameters {
-                char_coef: 0.5260217869866554,
-                word_coef: 0.28037642045986144,
-                avg_word_length_coef: 0.6159336248208801,
-                space_coef: -1.1888948241529904,
-                intercept: -1.6785931400218388,
+                char_coef: 0.5260200912923618,
+                word_coef: 0.7701518847126705,
+                avg_word_length_coef: 0.6160099739394632,
+                space_coef: -1.678662232679409,
+                intercept: -2.1686180269571693,
             },
         );
 
@@ -837,11 +837,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "ell".to_string(),
             MultilingualParameters {
-                char_coef: 0.3444837752964474,
-                word_coef: 0.04447436638881558,
-                avg_word_length_coef: 0.27211696954218,
-                space_coef: 0.04447436639105847,
-                intercept: 1.356178126197804,
+                char_coef: 0.344482080176014,
+                word_coef: 0.0444799412340854,
+                avg_word_length_coef: 0.27216550228791514,
+                space_coef: 0.04447994122047855,
+                intercept: 1.355911194086218,
             },
         );
 
@@ -849,11 +849,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "hye".to_string(),
             MultilingualParameters {
-                char_coef: 0.1672046742260253,
-                word_coef: 0.515362953483478,
-                avg_word_length_coef: 0.7425981159253168,
-                space_coef: 0.5153629534599142,
-                intercept: 0.7945928422724222,
+                char_coef: 0.16720147167253888,
+                word_coef: 0.5153752531236651,
+                avg_word_length_coef: 0.742656992721823,
+                space_coef: 0.5153752531060737,
+                intercept: 0.7942016664529916,
             },
         );
 
@@ -861,11 +861,11 @@ impl Default for MultilingualMethodParameters {
         language_params.insert(
             "aze".to_string(),
             MultilingualParameters {
-                char_coef: 0.1505405783161277,
-                word_coef: 1.2956230727385678,
-                avg_word_length_coef: 0.6245001316677631,
-                space_coef: -0.047826224830722686,
-                intercept: -2.0812491356015386,
+                char_coef: 0.1505348428193723,
+                word_coef: 1.2957249331467364,
+                avg_word_length_coef: 0.6246063179631899,
+                space_coef: -0.04788411831550755,
+                intercept: -2.082014490647552,
             },
         );
 
@@ -932,6 +932,11 @@ impl EstimationMethod for MultilingualMethod {
     fn estimate(&self, text: &str) -> usize {
         let features = self.count(text);
 
+        // Handle empty text
+        if features.basic_features.char_count == 0 {
+            return 0;
+        }
+
         // Select parameters based on language
         let params = self
             .parameters
@@ -940,6 +945,7 @@ impl EstimationMethod for MultilingualMethod {
             .unwrap_or(&self.parameters.default_params);
 
         let bf = &features.basic_features;
+
         let estimate = params.char_coef * bf.char_count as f64
             + params.word_coef * bf.word_count as f64
             + params.avg_word_length_coef * bf.avg_word_length
