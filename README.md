@@ -55,10 +55,12 @@ pip install skimtoken
 
 ## Usage
 
+### Quick Start
+
 ```python
 from skimtoken import estimate_tokens
 
-# Basic usage
+# Basic usage (uses simple method by default)
 text = "Hello, world! How are you today?"
 token_count = estimate_tokens(text)
 print(f"Estimated tokens: {token_count}")
@@ -73,13 +75,59 @@ tokens = estimate_tokens(code)
 print(f"Code tokens: {tokens}")
 ```
 
+### Lightweight Imports
+
+For minimal memory usage, import only the method you need:
+
+```python
+# Import only what you need
+from skimtoken.simple import estimate_tokens    # ~0.43MB memory (simple method)
+from skimtoken.basic import estimate_tokens     # Basic multi-feature estimation
+from skimtoken.language import estimate_tokens  # Language detection included
+
+# Example usage
+text = "def factorial(n): return 1 if n <= 1 else n * factorial(n-1)"
+tokens = estimate_tokens(text)
+```
+
+### CLI Usage
+
+```bash
+# From command line
+echo "Hello, world!" | skimtoken
+
+# From file
+skimtoken -f document.txt
+
+# Direct text
+skimtoken "The quick brown fox jumps over the lazy dog."
+```
+
+## How it Works
+
+skimtoken uses a **simple character-based approach** by default:
+
+- **Approach**: Character count × coefficient (~0.4)
+- **Speed**: Fastest initialization (133x faster than tiktoken)
+- **Memory**: Minimal (~0.43MB vs tiktoken's ~85MB)
+- **Use case**: Quick estimates, memory-constrained environments
+
+Different estimation methods are available through lightweight imports:
+- **Simple method**: `from skimtoken.simple import estimate_tokens`
+- **Basic method**: `from skimtoken.basic import estimate_tokens` (multi-feature regression)
+- **Language method**: `from skimtoken.language import estimate_tokens` (language detection + specific parameters)
+
 ## Language Support
 
-skimtoken uses **language-specific parameters** tailored for different language families to improve estimation accuracy. Each language family has its own optimized coefficients based on tokenization patterns.
+The language method detects text language and applies optimized parameters for:
 
-**Supported languages**: English, French, Spanish, German, Russian, Hindi, Arabic, Chinese, Japanese, Korean, etc.
+- **Latin scripts**: English, Spanish, French, German, etc.
+- **Asian languages**: Chinese, Japanese, Korean
+- **RTL languages**: Arabic, Hebrew
+- **Cyrillic scripts**: Russian, Ukrainian, Bulgarian
+- **Indic scripts**: Hindi, Bengali, Tamil
 
-**Current Accuracy**: RMSE of 12.55 across 146 samples (11,745 characters) with testing across multiple language families and text types
+**Current Accuracy**: RMSE of 12.55 tokens across diverse multilingual test data
 
 ## When to Use skimtoken vs tiktoken
 
@@ -99,11 +147,48 @@ skimtoken uses **language-specific parameters** tailored for different language 
 
 **Key Trade-off**: While tiktoken is faster for individual tokenization operations and more accurate, skimtoken excels in environments where you **can't afford to keep encoders loaded in memory** or where **cold start performance matters more than raw throughput**.
 
-## Roadmap
+## Architecture
 
-**Automated Parameter Optimization**: Plans to implement hyperparameter tuning using large-scale datasets like CC100 samples to minimize RMSE scores across language families.
+skimtoken is built with a modular architecture in Rust with Python bindings:
 
-The goal is to achieve sub-10 RMSE for major language families while preserving skimtoken's core advantages of minimal initialization overhead and memory usage.
+```
+skimtoken/
+├── src/
+│   ├── lib.rs                 # Core library and Python bindings
+│   ├── method.rs             # Trait definition for estimation methods
+│   ├── method_simple.rs      # Simple character-based estimation
+│   ├── method_basic.rs       # Multi-feature regression
+│   ├── method_language.rs    # Language-aware estimation
+│   └── skimtoken/            # Python module
+│       ├── __init__.py       # Main API and CLI
+│       ├── simple.py         # Simple method exports
+│       ├── basic.py          # Basic method exports
+│       └── language.py       # Language method exports
+├── params/                   # Optimized parameters
+│   └── simple.toml          # Simple method coefficient
+└── scripts/
+    ├── optimize/            # Parameter optimization tools
+    └── benchmark.py         # Performance benchmarking
+```
+
+## Parameter Optimization
+
+skimtoken includes tools to optimize parameters using your own data:
+
+```bash
+# Prepare dataset with token counts
+uv run python scripts/prepare_cc100_dataset.py
+
+# Optimize all methods
+uv run python scripts/optimize_all.py
+
+# Or optimize individual methods
+uv run python scripts/optimize/optimize_simple.py
+uv run python scripts/optimize/optimize_basic.py
+uv run python scripts/optimize/optimize_language.py
+```
+
+Parameters are stored in TOML files and automatically loaded at runtime.
 
 ## Testing & Development
 
@@ -118,48 +203,31 @@ uv run maturin dev --features python
 cargo test
 uv run pytest
 
-# Run specific test with verbose output
-uv run pytest tests/test_skimtoken_simple.py -s
+# Code quality checks
+uv run ruff format && uv run ruff check --fix && uv run pyright
+cargo fmt && cargo clippy -- -D warnings
 
 # Run performance benchmarks
 uv run scripts/benchmark.py
+
+# Run multiple benchmarks
+./scripts/run_benchmark_multiple.sh
 ```
 
-### Test Results
+## Examples
 
-Run accuracy testing:
+Check out the examples directory:
+
+- **`examples/example.py`** - Basic usage demonstration
+- **`examples/lightweight_imports.py`** - Comparing all three methods with tiktoken ground truth
+
+Run examples:
 ```bash
-uv run pytest tests/test_skimtoken_simple.py -s
-```
+# Basic example
+uv run python examples/example.py
 
-```
-RMSE by Category:
-╭───────────────────────┬───────┬─────────┬────────╮
-│ Category              │  RMSE │ Samples │ Status │
-├───────────────────────┼───────┼─────────┼────────┤
-│ ambiguous_punctuation │  2.88 │       7 │ ✓ PASS │
-│ code                  │ 10.15 │      14 │ ✓ PASS │
-│ edge                  │  0.00 │       2 │ ✓ PASS │
-│ json                  │  8.54 │       3 │ ✓ PASS │
-│ jsonl                 │ 15.51 │       2 │ ✓ PASS │
-│ mixed                 │  4.12 │       3 │ ✓ PASS │
-│ noisy_text            │  4.04 │       7 │ ✓ PASS │
-│ repetitive            │  7.25 │       4 │ ✓ PASS │
-│ rtl                   │  3.71 │       4 │ ✓ PASS │
-│ special               │  4.69 │       3 │ ✓ PASS │
-│ special_encoding      │ 10.65 │       8 │ ✓ PASS │
-│ structured_format     │  3.82 │       8 │ ✓ PASS │
-│ unknown               │ 15.43 │      81 │ ✓ PASS │
-╰───────────────────────┴───────┴─────────┴────────╯
-
-Summary Statistics:
-Overall RMSE: 12.55 tokens
-Total samples processed: 146
-Total characters: 12,377
-Execution time: 0.121 seconds
-Processing speed: 1204 samples/second
-Character throughput: 102,110 chars/second
-Average per character: 9.793μs
+# Compare methods
+uv run python examples/lightweight_imports.py
 ```
 
 ## Contributing

@@ -1,7 +1,9 @@
+#!/usr/bin/env python3
+
 import argparse
 import json
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any
 
 import tiktoken
 
@@ -26,7 +28,7 @@ def update_token_counts(
     # Load encoder
     encoder = tiktoken.get_encoding(encode_model)
 
-    updated_data: List[Dict[str, Any]] = []
+    updated_data: list[dict[str, Any]] = []
     updated_count = 0
 
     for line in lines:
