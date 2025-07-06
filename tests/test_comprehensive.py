@@ -7,6 +7,7 @@ from skimtoken import (
     estimate_tokens_basic,
     estimate_tokens_simple,
     estimate_tokens_multilingual,
+    estimate_tokens_multilingual_simple,
 )
 
 
@@ -21,18 +22,21 @@ class TestNormalCases:
         basic = estimate_tokens_basic(text)
         simple = estimate_tokens_simple(text)
         multi = estimate_tokens_multilingual(text)
+        multi_simple = estimate_tokens_multilingual_simple(text)
 
         # All methods should return positive values
         assert default > 0
         assert basic > 0
         assert simple > 0
         assert multi > 0
+        assert multi_simple > 0
 
         # Values should be reasonable (roughly 1 token per word)
         assert 5 <= default <= 15
         assert 5 <= basic <= 15
         assert 5 <= simple <= 15
         assert 5 <= multi <= 15
+        assert 5 <= multi_simple <= 15
 
     def test_numbers(self):
         """Test numeric content."""
@@ -42,6 +46,7 @@ class TestNormalCases:
         assert estimate_tokens_basic(text) > 0
         assert estimate_tokens_simple(text) > 0
         assert estimate_tokens_multilingual(text) > 0
+        assert estimate_tokens_multilingual_simple(text) > 0
 
     def test_code_snippet(self):
         """Test programming code."""
@@ -60,6 +65,7 @@ class TestNormalCases:
         assert estimate_tokens_basic(text) > 0
         assert estimate_tokens_simple(text) > 0
         assert estimate_tokens_multilingual(text) > 0
+        assert estimate_tokens_multilingual_simple(text) > 0
 
     def test_mixed_content(self):
         """Test mixed content types."""
@@ -69,6 +75,7 @@ class TestNormalCases:
         assert estimate_tokens_basic(text) > 0
         assert estimate_tokens_simple(text) > 0
         assert estimate_tokens_multilingual(text) > 0
+        assert estimate_tokens_multilingual_simple(text) > 0
 
 
 class TestMultilingualCases:
@@ -78,27 +85,36 @@ class TestMultilingualCases:
         """Test Chinese text."""
         text = "你好，世界！这是一个测试。"
         result = estimate_tokens_multilingual(text)
+        result_simple = estimate_tokens_multilingual_simple(text)
         assert result > 0
+        assert result_simple > 0
         # Chinese typically has more tokens due to character-based tokenization
         assert result >= 6
+        assert result_simple >= 3
 
     def test_japanese(self):
         """Test Japanese text."""
         text = "こんにちは、世界！これはテストです。"
         result = estimate_tokens_multilingual(text)
+        result_simple = estimate_tokens_multilingual_simple(text)
         assert result > 0
+        assert result_simple > 0
 
     def test_arabic(self):
         """Test Arabic text."""
         text = "مرحبا بالعالم! هذا اختبار."
         result = estimate_tokens_multilingual(text)
+        result_simple = estimate_tokens_multilingual_simple(text)
         assert result > 0
+        assert result_simple > 0
 
     def test_cyrillic(self):
         """Test Cyrillic text."""
         text = "Привет, мир! Это тест."
         result = estimate_tokens_multilingual(text)
+        result_simple = estimate_tokens_multilingual_simple(text)
         assert result > 0
+        assert result_simple > 0
 
     def test_mixed_languages(self):
         """Test mixed language text."""
@@ -106,11 +122,14 @@ class TestMultilingualCases:
 
         default = estimate_tokens(text)
         multi = estimate_tokens_multilingual(text)
+        multi_simple = estimate_tokens_multilingual_simple(text)
 
         assert default > 0
         assert multi > 0
+        assert multi_simple > 0
         # Multilingual should handle this well
         assert multi >= 5
+        assert multi_simple >= 5
 
 
 class TestEdgeCases:
@@ -159,6 +178,7 @@ class TestEdgeCases:
             assert estimate_tokens_basic(text) >= 0
             assert estimate_tokens_simple(text) >= 0
             assert estimate_tokens_multilingual(text) >= 0
+            assert estimate_tokens_multilingual_simple(text) >= 0
 
     def test_very_long_text(self):
         """Test very long text."""
@@ -237,6 +257,7 @@ class TestConsistency:
             estimate_tokens_basic,
             estimate_tokens_simple,
             estimate_tokens_multilingual,
+            estimate_tokens_multilingual_simple,
         ]:
             single = method(base)
             double = method(base * 2)
@@ -259,6 +280,7 @@ class TestConsistency:
             estimate_tokens_basic,
             estimate_tokens_simple,
             estimate_tokens_multilingual,
+            estimate_tokens_multilingual_simple,
         ]:
             results = [method(text) for _ in range(5)]
             # All results should be identical

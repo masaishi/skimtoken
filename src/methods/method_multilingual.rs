@@ -28,11 +28,11 @@ pub struct MultilingualMethodParameters {
 impl Default for MultilingualParameters {
     fn default() -> Self {
         Self {
-            char_coef: 0.32180722194872413,
-            word_coef: 0.14000829322945874,
-            avg_word_length_coef: 0.5089246172388747,
-            space_coef: -0.22833568099621965,
-            intercept: 1.523645960367098,
+            char_coef: 0.32177453541634105,
+            word_coef: 0.07022836962899155,
+            avg_word_length_coef: 0.5090982385406467,
+            space_coef: -0.15831046972709562,
+            intercept: 1.591021522171296,
         }
     }
 }
@@ -41,261 +41,261 @@ impl Default for MultilingualMethodParameters {
     fn default() -> Self {
         let mut language_params = HashMap::new();
 
-        // Ara
+        // ara
         language_params.insert(
-            "Ara".to_string(),
+            "ara".to_string(),
             MultilingualParameters {
-                char_coef: 0.4489517902904245,
-                word_coef: -0.5348165257580506,
-                avg_word_length_coef: 1.7963490564468942,
-                space_coef: 0.03796899891041773,
-                intercept: -7.481054644431325,
+                char_coef: 0.4488587936443334,
+                word_coef: -11.128746221512401,
+                avg_word_length_coef: 1.7969351965530163,
+                space_coef: 10.63237039204418,
+                intercept: 3.110992999426415,
             },
         );
 
-        // Ita
+        // ita
         language_params.insert(
-            "Ita".to_string(),
+            "ita".to_string(),
             MultilingualParameters {
-                char_coef: 0.12915668052218623,
-                word_coef: 1.0863455753534303,
-                avg_word_length_coef: 0.9287645274129221,
-                space_coef: -0.1259048925945162,
-                intercept: -3.0044184405485908,
+                char_coef: 0.12687531071112212,
+                word_coef: 0.7920024614656423,
+                avg_word_length_coef: 0.9794664784298375,
+                space_coef: 0.18309917224492475,
+                intercept: -2.9934338436426486,
             },
         );
 
-        // Fin
+        // fin
         language_params.insert(
-            "Fin".to_string(),
+            "fin".to_string(),
             MultilingualParameters {
-                char_coef: 0.2976193485393542,
-                word_coef: 0.11825654353480729,
-                avg_word_length_coef: 0.16149040743426094,
-                space_coef: -0.15100832557663063,
-                intercept: 1.4584106047996457,
+                char_coef: 0.29760321223261826,
+                word_coef: 0.11043313476583758,
+                avg_word_length_coef: 0.1615598849465239,
+                space_coef: -0.14304826426291262,
+                intercept: 1.4656358349658731,
             },
         );
 
-        // Nep
+        // nep
         language_params.insert(
-            "Nep".to_string(),
+            "nep".to_string(),
             MultilingualParameters {
-                char_coef: 0.34238997940017374,
-                word_coef: 0.6301674543044935,
-                avg_word_length_coef: 0.40272882433354734,
-                space_coef: -0.7774614070861645,
-                intercept: 1.3284146635226932,
+                char_coef: 0.3420206361747524,
+                word_coef: -5.265968510739185,
+                avg_word_length_coef: 0.4030225718351054,
+                space_coef: 5.121999216610801,
+                intercept: 7.197349734901991,
             },
         );
 
-        // Ind
+        // ind
         language_params.insert(
-            "Ind".to_string(),
+            "ind".to_string(),
             MultilingualParameters {
-                char_coef: 0.26699771462127964,
-                word_coef: 0.00872492998198966,
-                avg_word_length_coef: 0.15539103582948802,
-                space_coef: -0.09243440359654641,
-                intercept: 2.05728312826448,
+                char_coef: 0.2669793844265559,
+                word_coef: -0.00900735652655739,
+                avg_word_length_coef: 0.15546132020234502,
+                space_coef: -0.07456672578707284,
+                intercept: 2.074461420751895,
             },
         );
 
-        // Fra
+        // fra
         language_params.insert(
-            "Fra".to_string(),
+            "fra".to_string(),
             MultilingualParameters {
-                char_coef: 0.18184136983909963,
-                word_coef: 0.5844140684643012,
-                avg_word_length_coef: 0.6199515252044037,
-                space_coef: 0.04778065587017218,
-                intercept: -1.591360576323055,
+                char_coef: 0.1818146809793093,
+                word_coef: 0.5482884403297904,
+                avg_word_length_coef: 0.6200135506074049,
+                space_coef: 0.08407146741755407,
+                intercept: -1.556032821151824,
             },
         );
 
-        // Nld
+        // nld
         language_params.insert(
-            "Nld".to_string(),
+            "nld".to_string(),
             MultilingualParameters {
-                char_coef: 0.1305686027494848,
-                word_coef: 0.42006733639670985,
-                avg_word_length_coef: 1.2314695291171138,
-                space_coef: 0.3974934464308953,
-                intercept: -4.542935241775886,
+                char_coef: 0.13053506409396853,
+                word_coef: 0.39206592052465855,
+                avg_word_length_coef: 1.231959234970758,
+                space_coef: 0.42572100696865317,
+                intercept: -4.518586934148914,
             },
         );
 
-        // Eng
+        // eng
         language_params.insert(
-            "Eng".to_string(),
+            "eng".to_string(),
             MultilingualParameters {
-                char_coef: 0.34794096093051735,
-                word_coef: -0.5427642998380915,
-                avg_word_length_coef: 0.07924010836821016,
-                space_coef: -0.05134346816243043,
-                intercept: 2.846585958883164,
+                char_coef: 0.3479306852654666,
+                word_coef: -0.5504839958241448,
+                avg_word_length_coef: 0.07929143363027032,
+                space_coef: -0.04355860594387149,
+                intercept: 2.8538649706092016,
             },
         );
 
-        // Tgl
+        // tgl
         language_params.insert(
-            "Tgl".to_string(),
+            "tgl".to_string(),
             MultilingualParameters {
-                char_coef: 0.3682661500096258,
-                word_coef: -0.4113369910327406,
-                avg_word_length_coef: 0.11659546549993971,
-                space_coef: -0.08285826260928329,
-                intercept: 1.6723334721949996,
+                char_coef: 0.3681513662406056,
+                word_coef: -0.5009701675718307,
+                avg_word_length_coef: 0.11735088811721912,
+                space_coef: 0.007571498864309207,
+                intercept: 1.7558498325058522,
             },
         );
 
-        // Ben
+        // ben
         language_params.insert(
-            "Ben".to_string(),
+            "ben".to_string(),
             MultilingualParameters {
-                char_coef: 0.38109691637881826,
-                word_coef: 2.4979104248910295,
-                avg_word_length_coef: 0.07566671739200109,
-                space_coef: -2.467325159953596,
-                intercept: -1.4818706057080782,
+                char_coef: 0.38105769897606,
+                word_coef: 0.015434349916307466,
+                avg_word_length_coef: 0.07576940776902599,
+                space_coef: 0.0154343499162484,
+                intercept: 1.0002972203074343,
             },
         );
 
-        // Sin
+        // sin
         language_params.insert(
-            "Sin".to_string(),
+            "sin".to_string(),
             MultilingualParameters {
-                char_coef: 0.5210550306852654,
-                word_coef: 0.048316936845774726,
-                avg_word_length_coef: 0.24782097162748584,
-                space_coef: 0.04831693684251858,
-                intercept: -0.6020805383800649,
+                char_coef: 0.5210555744898475,
+                word_coef: 0.47656734304085224,
+                avg_word_length_coef: 0.24788485686328654,
+                space_coef: -0.37994045281486233,
+                intercept: -1.030494114080767,
             },
         );
 
-        // Sna
+        // sna
         language_params.insert(
-            "Sna".to_string(),
+            "sna".to_string(),
             MultilingualParameters {
-                char_coef: 0.30920302503240105,
-                word_coef: -0.033129426490317,
-                avg_word_length_coef: 0.26848297347511013,
-                space_coef: -0.13454559749762535,
-                intercept: 1.7308658603455065,
+                char_coef: 0.3091882692097963,
+                word_coef: -0.037245447390079234,
+                avg_word_length_coef: 0.2685244004350339,
+                space_coef: -0.13033269524869473,
+                intercept: 1.7349042175265588,
             },
         );
 
-        // Jav
+        // jav
         language_params.insert(
-            "Jav".to_string(),
+            "jav".to_string(),
             MultilingualParameters {
-                char_coef: 0.265739992368337,
-                word_coef: 0.3842240768493444,
-                avg_word_length_coef: 0.6646478357009543,
-                space_coef: -0.18125960800933189,
-                intercept: -1.8753583538376972,
+                char_coef: 0.26558447055639667,
+                word_coef: 0.2124916726017557,
+                avg_word_length_coef: 0.6666178155888702,
+                space_coef: -0.008382928327216349,
+                intercept: -1.71967398827573,
             },
         );
 
-        // Est
+        // est
         language_params.insert(
-            "Est".to_string(),
+            "est".to_string(),
             MultilingualParameters {
-                char_coef: 0.2867849353837958,
-                word_coef: 0.17818601093961448,
-                avg_word_length_coef: 0.30847339314681527,
-                space_coef: -0.07414330061944695,
-                intercept: 0.5681131326821145,
+                char_coef: 0.28697234077283884,
+                word_coef: 0.21741201248410108,
+                avg_word_length_coef: 0.3075018493009933,
+                space_coef: -0.11496296437984535,
+                intercept: 0.54128936730514,
             },
         );
 
-        // Guj
+        // guj
         language_params.insert(
-            "Guj".to_string(),
+            "guj".to_string(),
             MultilingualParameters {
-                char_coef: 0.4030879402121555,
-                word_coef: -0.027772186092496844,
-                avg_word_length_coef: 0.039507893020558085,
-                space_coef: -0.15039709202001944,
-                intercept: 1.668836837440253,
+                char_coef: 0.4030512468418479,
+                word_coef: -1.6616870436732392,
+                avg_word_length_coef: 0.03961922560301181,
+                space_coef: 1.4838871239911475,
+                intercept: 3.2959094705945837,
             },
         );
 
-        // Por
+        // por
         language_params.insert(
-            "Por".to_string(),
+            "por".to_string(),
             MultilingualParameters {
-                char_coef: 0.39394217973877277,
-                word_coef: -0.5591723804295806,
-                avg_word_length_coef: 0.027602540255544115,
-                space_coef: -0.21329795095033288,
-                intercept: 2.01997355781279,
+                char_coef: 0.39399542919575165,
+                word_coef: -0.5704369307743838,
+                avg_word_length_coef: 0.02772049108409235,
+                space_coef: -0.20235504830988313,
+                intercept: 2.0296305539804678,
             },
         );
 
-        // Lat
+        // lat
         language_params.insert(
-            "Lat".to_string(),
+            "lat".to_string(),
             MultilingualParameters {
-                char_coef: 0.28491307199131405,
-                word_coef: -0.017981090754277777,
-                avg_word_length_coef: 0.6435726095800065,
-                space_coef: -0.1659264299946576,
-                intercept: 1.0913711096732683,
+                char_coef: 0.2848763185506887,
+                word_coef: -0.05989422396931303,
+                avg_word_length_coef: 0.6439055258460389,
+                space_coef: -0.1237302445075798,
+                intercept: 1.1303318507468845,
             },
         );
 
-        // Lit
+        // lit
         language_params.insert(
-            "Lit".to_string(),
+            "lit".to_string(),
             MultilingualParameters {
-                char_coef: 0.290015929360577,
-                word_coef: 0.46179084022048333,
-                avg_word_length_coef: 0.5245380940226348,
-                space_coef: -0.10147774867868146,
-                intercept: -1.1202853051721817,
+                char_coef: 0.2900156022857179,
+                word_coef: 0.4617689372730568,
+                avg_word_length_coef: 0.5245359876039349,
+                space_coef: -0.10145378441405833,
+                intercept: -1.1202316941508172,
             },
         );
 
-        // Tha
+        // tha
         language_params.insert(
-            "Tha".to_string(),
+            "tha".to_string(),
             MultilingualParameters {
-                char_coef: 0.40103041289312835,
-                word_coef: 1.870284436832706,
-                avg_word_length_coef: 0.013664356961895661,
-                space_coef: -1.599099814001211,
-                intercept: -0.8146666569739693,
+                char_coef: 0.40115905914079836,
+                word_coef: 0.03345797911109814,
+                avg_word_length_coef: 0.013625128265443966,
+                space_coef: 0.2361000905860627,
+                intercept: 1.0227969116144564,
             },
         );
 
-        // Vie
+        // vie
         language_params.insert(
-            "Vie".to_string(),
+            "vie".to_string(),
             MultilingualParameters {
-                char_coef: 0.44736187930002136,
-                word_coef: -0.23442394376782635,
-                avg_word_length_coef: -0.1753780325446561,
-                space_coef: -0.4032859743336601,
-                intercept: 3.928208894288055,
+                char_coef: 0.44733817655438773,
+                word_coef: -0.4827999776329544,
+                avg_word_length_coef: -0.17509120711115594,
+                space_coef: -0.15478921492511197,
+                intercept: 4.175004053364127,
             },
         );
 
-        // Hin
+        // hin
         language_params.insert(
-            "Hin".to_string(),
+            "hin".to_string(),
             MultilingualParameters {
-                char_coef: 0.5057492935452412,
-                word_coef: -4.371087647636833,
-                avg_word_length_coef: 0.06517253619745014,
-                space_coef: 3.4052749375480658,
-                intercept: 5.798711157449148,
+                char_coef: 0.5058701647607271,
+                word_coef: -2.239956487354784,
+                avg_word_length_coef: 0.06599412162328347,
+                space_coef: 1.2735003068053388,
+                intercept: 3.6651478106776167,
             },
         );
 
-        // Tam
+        // tam
         language_params.insert(
-            "Tam".to_string(),
+            "tam".to_string(),
             MultilingualParameters {
                 char_coef: 0.29254786483909,
                 word_coef: 0.19298284845071445,
@@ -305,33 +305,33 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Slk
+        // slk
         language_params.insert(
-            "Slk".to_string(),
+            "slk".to_string(),
             MultilingualParameters {
-                char_coef: 0.29414846761857655,
-                word_coef: 0.18848777172243622,
-                avg_word_length_coef: 0.6545934183764769,
-                space_coef: 0.10618949511360945,
-                intercept: -1.977904796186337,
+                char_coef: 0.2941463815879767,
+                word_coef: 0.18527221441477607,
+                avg_word_length_coef: 0.6546485383154237,
+                space_coef: 0.10942051159601164,
+                intercept: -1.9751201400845204,
             },
         );
 
-        // Rus
+        // rus
         language_params.insert(
-            "Rus".to_string(),
+            "rus".to_string(),
             MultilingualParameters {
-                char_coef: 0.20951034514560174,
-                word_coef: 0.681566127420288,
-                avg_word_length_coef: 0.4044341512544039,
-                space_coef: -0.1084751243972746,
-                intercept: 2.173346161737989,
+                char_coef: 0.20948808274038122,
+                word_coef: 0.6864281164414845,
+                avg_word_length_coef: 0.40437535073771846,
+                space_coef: -0.11317451892548515,
+                intercept: 2.1692115106599346,
             },
         );
 
-        // Mal
+        // mal
         language_params.insert(
-            "Mal".to_string(),
+            "mal".to_string(),
             MultilingualParameters {
                 char_coef: 0.2789605167974779,
                 word_coef: 0.5159309741225317,
@@ -341,21 +341,21 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Khm
+        // khm
         language_params.insert(
-            "Khm".to_string(),
+            "khm".to_string(),
             MultilingualParameters {
-                char_coef: 0.5671108414344348,
-                word_coef: 0.09167119942605235,
-                avg_word_length_coef: -0.006501965852451086,
-                space_coef: -0.47785357796043304,
-                intercept: 1.4291427306743643,
+                char_coef: 0.5670629578757737,
+                word_coef: 1.5150161597897804,
+                avg_word_length_coef: -0.00644442135876182,
+                space_coef: -1.9001342265934293,
+                intercept: 0.006301914420312471,
             },
         );
 
-        // Mkd
+        // mkd
         language_params.insert(
-            "Mkd".to_string(),
+            "mkd".to_string(),
             MultilingualParameters {
                 char_coef: 0.26682431944743695,
                 word_coef: 0.8876732906024092,
@@ -365,33 +365,33 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Jpn
+        // jpn
         language_params.insert(
-            "Jpn".to_string(),
+            "jpn".to_string(),
             MultilingualParameters {
-                char_coef: 0.7262105470760017,
-                word_coef: 1.6219284677655668,
-                avg_word_length_coef: 0.037694008323224816,
-                space_coef: -1.3968058491956772,
-                intercept: -2.105511887291513,
+                char_coef: 0.7312918795661565,
+                word_coef: -0.3260831211813962,
+                avg_word_length_coef: 0.03244492289219215,
+                space_coef: 0.6745737363782689,
+                intercept: -0.14650433098280757,
             },
         );
 
-        // Dan
+        // dan
         language_params.insert(
-            "Dan".to_string(),
+            "dan".to_string(),
             MultilingualParameters {
-                char_coef: 0.2646024835227419,
-                word_coef: 0.12090349476472527,
-                avg_word_length_coef: 0.3779372122048349,
-                space_coef: -0.06610741859279971,
-                intercept: -0.013374035450741673,
+                char_coef: 0.2643901613105418,
+                word_coef: 0.026693059706355663,
+                avg_word_length_coef: 0.37878955736654607,
+                space_coef: 0.029458361600404888,
+                intercept: 0.07351183277064877,
             },
         );
 
-        // Yid
+        // yid
         language_params.insert(
-            "Yid".to_string(),
+            "yid".to_string(),
             MultilingualParameters {
                 char_coef: 0.4110855962747689,
                 word_coef: -1.1811235779407048,
@@ -401,117 +401,117 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Afr
+        // afr
         language_params.insert(
-            "Afr".to_string(),
+            "afr".to_string(),
             MultilingualParameters {
-                char_coef: 0.2984717903564894,
-                word_coef: 0.39043881025638105,
-                avg_word_length_coef: 0.4630853859090543,
-                space_coef: -0.0870184513794742,
-                intercept: -0.8366675517089703,
+                char_coef: 0.298431423018136,
+                word_coef: 0.3468816406077974,
+                avg_word_length_coef: 0.46335046011864506,
+                space_coef: -0.043205195690729975,
+                intercept: -0.7952794171745126,
             },
         );
 
-        // Epo
+        // epo
         language_params.insert(
-            "Epo".to_string(),
+            "epo".to_string(),
             MultilingualParameters {
-                char_coef: 0.2949706195633288,
-                word_coef: 0.15069698505674184,
-                avg_word_length_coef: 0.6567045180981311,
-                space_coef: -0.061197843794602906,
-                intercept: -1.69630826827445,
+                char_coef: 0.29487105765273364,
+                word_coef: 0.10935683476979403,
+                avg_word_length_coef: 0.6577627357324314,
+                space_coef: -0.019205725932512012,
+                intercept: -1.6615397881415959,
             },
         );
 
-        // Cat
+        // cat
         language_params.insert(
-            "Cat".to_string(),
+            "cat".to_string(),
             MultilingualParameters {
-                char_coef: 0.23148614967246667,
-                word_coef: 0.3760225923701342,
-                avg_word_length_coef: 0.5573614563849949,
-                space_coef: -0.10980945440153264,
-                intercept: -0.2804791150708823,
+                char_coef: 0.2314619500979602,
+                word_coef: 0.364757491942888,
+                avg_word_length_coef: 0.5575986936174028,
+                space_coef: -0.09839149897737445,
+                intercept: -0.27066160548931606,
             },
         );
 
-        // Slv
+        // slv
         language_params.insert(
-            "Slv".to_string(),
+            "slv".to_string(),
             MultilingualParameters {
-                char_coef: 0.2595371755924374,
-                word_coef: 0.2119468378982711,
-                avg_word_length_coef: 0.27299624777451137,
-                space_coef: 0.0988742784994839,
-                intercept: 0.061793034569710414,
+                char_coef: 0.259538262262407,
+                word_coef: 0.12439061700839696,
+                avg_word_length_coef: 0.27313249996326533,
+                space_coef: 0.18642950798309424,
+                intercept: 0.14818910966108945,
             },
         );
 
-        // Ron
+        // ron
         language_params.insert(
-            "Ron".to_string(),
+            "ron".to_string(),
             MultilingualParameters {
-                char_coef: 0.18552795033444947,
-                word_coef: 0.5381740301613079,
-                avg_word_length_coef: 0.7332506813043093,
-                space_coef: 0.08286273674386783,
-                intercept: -1.09395742429394,
+                char_coef: 0.18552449493635878,
+                word_coef: 0.5372822721570621,
+                avg_word_length_coef: 0.7333091212232731,
+                space_coef: 0.08377928516245481,
+                intercept: -1.0935356188665821,
             },
         );
 
-        // Spa
+        // spa
         language_params.insert(
-            "Spa".to_string(),
+            "spa".to_string(),
             MultilingualParameters {
-                char_coef: 0.2782168228332222,
-                word_coef: -0.11631376798675855,
-                avg_word_length_coef: 0.9898457737647731,
-                space_coef: -0.009481546696791089,
-                intercept: -3.0685681407127063,
+                char_coef: 0.27815566182613666,
+                word_coef: -0.12155608230954557,
+                avg_word_length_coef: 0.991267009399482,
+                space_coef: -0.003840385947973741,
+                intercept: -3.071574232499124,
             },
         );
 
-        // Kan
+        // kan
         language_params.insert(
-            "Kan".to_string(),
+            "kan".to_string(),
             MultilingualParameters {
-                char_coef: 0.26521405886715027,
-                word_coef: 2.2907288564005728,
-                avg_word_length_coef: 0.4014119662886503,
-                space_coef: -1.4279574522261076,
-                intercept: -2.4062480350569615,
+                char_coef: 0.26512396461516424,
+                word_coef: 0.43182204242051153,
+                avg_word_length_coef: 0.4018814634491915,
+                space_coef: 0.43182204244306704,
+                intercept: -0.5503201974008647,
             },
         );
 
-        // Bel
+        // bel
         language_params.insert(
-            "Bel".to_string(),
+            "bel".to_string(),
             MultilingualParameters {
-                char_coef: 0.16897899381218381,
-                word_coef: 1.2385614048974807,
-                avg_word_length_coef: 0.6118707755443012,
-                space_coef: 0.001344537306719022,
-                intercept: -1.8810225246761902,
+                char_coef: 0.1689766355881563,
+                word_coef: 1.2312124737996586,
+                avg_word_length_coef: 0.6119074163450874,
+                space_coef: 0.008711515807648245,
+                intercept: -1.8739252733745602,
             },
         );
 
-        // Kat
+        // kat
         language_params.insert(
-            "Kat".to_string(),
+            "kat".to_string(),
             MultilingualParameters {
-                char_coef: 0.21973757052176138,
-                word_coef: -3.1621336915309173,
-                avg_word_length_coef: 0.4174105533708153,
-                space_coef: 3.985248693915196,
-                intercept: 4.024715778006147,
+                char_coef: 0.2196724681412917,
+                word_coef: -3.4055358253273877,
+                avg_word_length_coef: 0.4176040747621137,
+                space_coef: 4.229165735323491,
+                intercept: 4.2663134317092,
             },
         );
 
-        // Heb
+        // heb
         language_params.insert(
-            "Heb".to_string(),
+            "heb".to_string(),
             MultilingualParameters {
                 char_coef: 0.4481860140099636,
                 word_coef: -0.7248619988417391,
@@ -521,21 +521,21 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Hrv
+        // hrv
         language_params.insert(
-            "Hrv".to_string(),
+            "hrv".to_string(),
             MultilingualParameters {
-                char_coef: 0.2266826439156682,
-                word_coef: 0.5609797671434241,
-                avg_word_length_coef: 0.2305417442744601,
-                space_coef: -0.06662503469548993,
-                intercept: 0.6501027669968025,
+                char_coef: 0.2266750460687974,
+                word_coef: 0.5585752643849258,
+                avg_word_length_coef: 0.23060827018398214,
+                space_coef: -0.06417137728399833,
+                intercept: 0.652169440791873,
             },
         );
 
-        // Mya
+        // mya
         language_params.insert(
-            "Mya".to_string(),
+            "mya".to_string(),
             MultilingualParameters {
                 char_coef: 0.5504528579411492,
                 word_coef: -4.362024125497104,
@@ -545,33 +545,33 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Tur
+        // tur
         language_params.insert(
-            "Tur".to_string(),
+            "tur".to_string(),
             MultilingualParameters {
-                char_coef: 0.13141484139581816,
-                word_coef: 1.1154956052649132,
-                avg_word_length_coef: 1.0419610417713725,
-                space_coef: 0.00791540843910715,
-                intercept: -3.3476513173756217,
+                char_coef: 0.13133513336644795,
+                word_coef: 1.0924177083446005,
+                avg_word_length_coef: 1.0427673914499125,
+                space_coef: 0.03161929924568073,
+                intercept: -3.330747646084731,
             },
         );
 
-        // Cmn
+        // cmn
         language_params.insert(
-            "Cmn".to_string(),
+            "cmn".to_string(),
             MultilingualParameters {
-                char_coef: 0.7789858977206273,
-                word_coef: -0.7223268306000218,
-                avg_word_length_coef: 0.015416762157169321,
-                space_coef: -0.13472471423148935,
-                intercept: 4.86372547066334,
+                char_coef: 0.7791383800715864,
+                word_coef: 1.785025983882802,
+                avg_word_length_coef: 0.015222139800415434,
+                space_coef: -2.6438100859617677,
+                intercept: 2.3631111392667776,
             },
         );
 
-        // Amh
+        // amh
         language_params.insert(
-            "Amh".to_string(),
+            "amh".to_string(),
             MultilingualParameters {
                 char_coef: 1.6585699891453178,
                 word_coef: 0.28469555138578945,
@@ -581,57 +581,57 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Srp
+        // srp
         language_params.insert(
-            "Srp".to_string(),
+            "srp".to_string(),
             MultilingualParameters {
-                char_coef: 0.3320580995603634,
-                word_coef: -3.4891819747891546,
-                avg_word_length_coef: 0.18962659412316554,
-                space_coef: 3.6828604701186176,
-                intercept: 4.827053580757244,
+                char_coef: 0.3320619551913391,
+                word_coef: -3.1783631530731107,
+                avg_word_length_coef: 0.18947509104653407,
+                space_coef: 3.37201054663827,
+                intercept: 4.5173059038245285,
             },
         );
 
-        // Ces
+        // ces
         language_params.insert(
-            "Ces".to_string(),
+            "ces".to_string(),
             MultilingualParameters {
-                char_coef: 0.26564736829446023,
-                word_coef: 0.5769147105576441,
-                avg_word_length_coef: 0.5537596867956732,
-                space_coef: -0.1399440202045154,
-                intercept: -1.2117707808221923,
+                char_coef: 0.26477443892413105,
+                word_coef: 0.5119634232452072,
+                avg_word_length_coef: 0.5780949241454006,
+                space_coef: -0.06940188573322713,
+                intercept: -1.2767324022383661,
             },
         );
 
-        // Nob
+        // nob
         language_params.insert(
-            "Nob".to_string(),
+            "nob".to_string(),
             MultilingualParameters {
-                char_coef: 0.2636354892212806,
-                word_coef: 0.08490124873765849,
-                avg_word_length_coef: 0.38520782381791446,
-                space_coef: -0.008363599597556755,
-                intercept: 0.1278796273630718,
+                char_coef: 0.2636123673955089,
+                word_coef: 0.027838992821428613,
+                avg_word_length_coef: 0.38551800793598945,
+                space_coef: 0.04886253007332106,
+                intercept: 0.18213411087106124,
             },
         );
 
-        // Pol
+        // pol
         language_params.insert(
-            "Pol".to_string(),
+            "pol".to_string(),
             MultilingualParameters {
-                char_coef: 0.23533665666219675,
-                word_coef: 0.5627655291172652,
-                avg_word_length_coef: 0.7433486374076463,
-                space_coef: -0.09309825979216961,
-                intercept: -1.397406125997641,
+                char_coef: 0.23547672296316677,
+                word_coef: 0.5525262802926011,
+                avg_word_length_coef: 0.7436627057565299,
+                space_coef: -0.08380633472707769,
+                intercept: -1.3899684962542338,
             },
         );
 
-        // Pan
+        // pan
         language_params.insert(
-            "Pan".to_string(),
+            "pan".to_string(),
             MultilingualParameters {
                 char_coef: 0.720789380582767,
                 word_coef: -0.4953254914887084,
@@ -641,117 +641,117 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Mar
+        // mar
         language_params.insert(
-            "Mar".to_string(),
+            "mar".to_string(),
             MultilingualParameters {
-                char_coef: 0.33569533307671573,
-                word_coef: -3.356625868205123,
-                avg_word_length_coef: 0.39470542680458987,
-                space_coef: 3.5204536641049016,
-                intercept: 4.439645487554493,
+                char_coef: 0.33563090002157436,
+                word_coef: -3.799242981883867,
+                avg_word_length_coef: 0.3945447447780706,
+                space_coef: 3.9635806391588724,
+                intercept: 4.880068482467905,
             },
         );
 
-        // Deu
+        // deu
         language_params.insert(
-            "Deu".to_string(),
+            "deu".to_string(),
             MultilingualParameters {
-                char_coef: 0.052462519372940615,
-                word_coef: 1.049888224787395,
-                avg_word_length_coef: 1.736765497549089,
-                space_coef: 0.11515089672218608,
-                intercept: -6.480230484835545,
+                char_coef: 0.05285209788837475,
+                word_coef: 1.0291432515094272,
+                avg_word_length_coef: 1.7250939850873723,
+                space_coef: 0.13332003015376834,
+                intercept: -6.397015123445179,
             },
         );
 
-        // Tuk
+        // tuk
         language_params.insert(
-            "Tuk".to_string(),
+            "tuk".to_string(),
             MultilingualParameters {
-                char_coef: 0.46064274278795436,
-                word_coef: -0.4741729743920428,
-                avg_word_length_coef: 0.1400116808340529,
-                space_coef: -0.2850756894150074,
-                intercept: 0.8146447693519114,
+                char_coef: 0.4605319483710732,
+                word_coef: -0.47477828327295185,
+                avg_word_length_coef: 0.1401728463885321,
+                space_coef: -0.2837843458376758,
+                intercept: 0.8152012703994789,
             },
         );
 
-        // Pes
+        // pes
         language_params.insert(
-            "Pes".to_string(),
+            "pes".to_string(),
             MultilingualParameters {
-                char_coef: 0.6070711053761995,
-                word_coef: 2.4339476094299277,
-                avg_word_length_coef: 0.010493363598046607,
-                space_coef: -3.6578731249431162,
-                intercept: -2.7198752750327415,
+                char_coef: 0.6070785853095381,
+                word_coef: -0.6119854037956498,
+                avg_word_length_coef: 0.010797893099027608,
+                space_coef: -0.6119854036619811,
+                intercept: 0.3257634407577257,
             },
         );
 
-        // Tel
+        // tel
         language_params.insert(
-            "Tel".to_string(),
+            "tel".to_string(),
             MultilingualParameters {
-                char_coef: 0.3957425419250069,
-                word_coef: -1.483090028742508,
-                avg_word_length_coef: 0.11190074912729651,
-                space_coef: 1.3922065072729741,
-                intercept: 3.3004046282261044,
+                char_coef: 0.3957394665485416,
+                word_coef: -1.0975426234577683,
+                avg_word_length_coef: 0.1118865557220728,
+                space_coef: 1.0066676921313509,
+                intercept: 2.915025235190541,
             },
         );
 
-        // Uzb
+        // uzb
         language_params.insert(
-            "Uzb".to_string(),
+            "uzb".to_string(),
             MultilingualParameters {
-                char_coef: 0.2869198490831655,
-                word_coef: 0.47593046196977545,
-                avg_word_length_coef: 0.7749681354127103,
-                space_coef: -0.1788978319183927,
-                intercept: -3.509703934908572,
+                char_coef: 0.28681054944388995,
+                word_coef: 0.4460795011958774,
+                avg_word_length_coef: 0.7754185532328617,
+                space_coef: -0.14812706092158512,
+                intercept: -3.4831147864560634,
             },
         );
 
-        // Zul
+        // zul
         language_params.insert(
-            "Zul".to_string(),
+            "zul".to_string(),
             MultilingualParameters {
-                char_coef: 0.2897482282610496,
-                word_coef: 0.23785369050902963,
-                avg_word_length_coef: 0.38259613632516054,
-                space_coef: -0.05808106064535399,
-                intercept: -1.1406204673102351,
+                char_coef: 0.2897388759283011,
+                word_coef: 0.20641079229856657,
+                avg_word_length_coef: 0.3828685922120578,
+                space_coef: -0.026557099630664466,
+                intercept: -1.1115020606095882,
             },
         );
 
-        // Ukr
+        // ukr
         language_params.insert(
-            "Ukr".to_string(),
+            "ukr".to_string(),
             MultilingualParameters {
-                char_coef: 0.24593753698020412,
-                word_coef: 0.7819415366892607,
-                avg_word_length_coef: 0.2803201713568763,
-                space_coef: -0.16025347362500747,
-                intercept: -0.15116381857311012,
+                char_coef: 0.24584595025893888,
+                word_coef: 0.7241094475616364,
+                avg_word_length_coef: 0.28435824368031726,
+                space_coef: -0.10182201355495121,
+                intercept: -0.11412122569964822,
             },
         );
 
-        // Kor
+        // kor
         language_params.insert(
-            "Kor".to_string(),
+            "kor".to_string(),
             MultilingualParameters {
-                char_coef: 0.7105375227576862,
-                word_coef: -0.12655494069566567,
-                avg_word_length_coef: 0.24556543712620946,
-                space_coef: -0.40944024497266657,
-                intercept: 0.8939994850945467,
+                char_coef: 0.7103872868731044,
+                word_coef: -0.26340416931210164,
+                avg_word_length_coef: 0.2457938033585411,
+                space_coef: -0.2719383606759918,
+                intercept: 1.0307639768389762,
             },
         );
 
-        // Bul
+        // bul
         language_params.insert(
-            "Bul".to_string(),
+            "bul".to_string(),
             MultilingualParameters {
                 char_coef: 0.1978106077159651,
                 word_coef: 0.9133446083282273,
@@ -761,57 +761,57 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Aka
+        // aka
         language_params.insert(
-            "Aka".to_string(),
+            "aka".to_string(),
             MultilingualParameters {
-                char_coef: 0.3218727043632269,
-                word_coef: 0.3430592757275351,
-                avg_word_length_coef: 0.38651056519023713,
-                space_coef: -0.16567535756936555,
-                intercept: -0.9318833181650028,
+                char_coef: 0.3218720634924224,
+                word_coef: 0.3419556251315057,
+                avg_word_length_coef: 0.38686594756328324,
+                space_coef: -0.16459172089169918,
+                intercept: -0.9322539673311923,
             },
         );
 
-        // Hun
+        // hun
         language_params.insert(
-            "Hun".to_string(),
+            "hun".to_string(),
             MultilingualParameters {
-                char_coef: 0.3694500820833435,
-                word_coef: 0.012182804312283484,
-                avg_word_length_coef: 0.13500732558733686,
-                space_coef: -0.19268347055407936,
-                intercept: 1.1064567269166403,
+                char_coef: 0.36817444842649527,
+                word_coef: -0.048640032144083654,
+                avg_word_length_coef: 0.17544190768934964,
+                space_coef: -0.12272442731500127,
+                intercept: 0.9175170281704084,
             },
         );
 
-        // Lav
+        // lav
         language_params.insert(
-            "Lav".to_string(),
+            "lav".to_string(),
             MultilingualParameters {
-                char_coef: 0.3176361510912947,
-                word_coef: -0.4156651847767781,
-                avg_word_length_coef: 0.30710569211010674,
-                space_coef: 0.6736352281181303,
-                intercept: 0.5975359650387944,
+                char_coef: 0.31762202656934385,
+                word_coef: -0.4346999673171776,
+                avg_word_length_coef: 0.3075382169297262,
+                space_coef: 0.6927897780214539,
+                intercept: 0.6130546110807344,
             },
         );
 
-        // Swe
+        // swe
         language_params.insert(
-            "Swe".to_string(),
+            "swe".to_string(),
             MultilingualParameters {
-                char_coef: 0.2883965674464913,
-                word_coef: -0.10549257546209627,
-                avg_word_length_coef: 0.3115528323842523,
-                space_coef: 0.07779297587035676,
-                intercept: 0.35738006649609844,
+                char_coef: 0.28839790989047914,
+                word_coef: -0.10530956212817366,
+                avg_word_length_coef: 0.31138658431369,
+                space_coef: 0.0776020637600288,
+                intercept: 0.35802129657557913,
             },
         );
 
-        // Ori
+        // ori
         language_params.insert(
-            "Ori".to_string(),
+            "ori".to_string(),
             MultilingualParameters {
                 char_coef: 1.0439492382508784,
                 word_coef: 18.56543096584324,
@@ -821,9 +821,9 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Urd
+        // urd
         language_params.insert(
-            "Urd".to_string(),
+            "urd".to_string(),
             MultilingualParameters {
                 char_coef: 0.5260217869866554,
                 word_coef: 0.28037642045986144,
@@ -833,9 +833,9 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Ell
+        // ell
         language_params.insert(
-            "Ell".to_string(),
+            "ell".to_string(),
             MultilingualParameters {
                 char_coef: 0.3444837752964474,
                 word_coef: 0.04447436638881558,
@@ -845,9 +845,9 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Hye
+        // hye
         language_params.insert(
-            "Hye".to_string(),
+            "hye".to_string(),
             MultilingualParameters {
                 char_coef: 0.1672046742260253,
                 word_coef: 0.515362953483478,
@@ -857,15 +857,15 @@ impl Default for MultilingualMethodParameters {
             },
         );
 
-        // Aze
+        // aze
         language_params.insert(
-            "Aze".to_string(),
+            "aze".to_string(),
             MultilingualParameters {
-                char_coef: 0.15054996518067584,
-                word_coef: 1.2966992775535442,
-                avg_word_length_coef: 0.6243652121283592,
-                space_coef: -0.048975428203563626,
-                intercept: -2.0814220114345474,
+                char_coef: 0.1505405783161277,
+                word_coef: 1.2956230727385678,
+                avg_word_length_coef: 0.6245001316677631,
+                space_coef: -0.047826224830722686,
+                intercept: -2.0812491356015386,
             },
         );
 

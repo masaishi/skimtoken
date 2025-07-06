@@ -1,0 +1,209 @@
+[default_params]
+coefficient = 0.32926829331569196
+
+[language_params.Ara]
+coefficient = 0.3478260881025884
+
+[language_params.Ita]
+coefficient = 0.2921348311548165
+
+[language_params.Fin]
+coefficient = 0.31578947671545804
+
+[language_params.Nep]
+coefficient = 0.35356200463057796
+
+[language_params.Ind]
+coefficient = 0.2794117669100515
+
+[language_params.Fra]
+coefficient = 0.29933110199265395
+
+[language_params.Nld]
+coefficient = 0.2585365870617235
+
+[language_params.Eng]
+coefficient = 0.2542372931307417
+
+[language_params.Tgl]
+coefficient = 0.3103448252138147
+
+[language_params.Ben]
+coefficient = 0.399999998688826
+
+[language_params.Sin]
+coefficient = 0.5435435362784797
+
+[language_params.Sna]
+coefficient = 0.3181818165263794
+
+[language_params.Jav]
+coefficient = 0.31249999555432356
+
+[language_params.Est]
+coefficient = 0.32000000028635944
+
+[language_params.Guj]
+coefficient = 0.3951612821613528
+
+[language_params.Por]
+coefficient = 0.26666666434813796
+
+[language_params.Lat]
+coefficient = 0.30569947664440206
+
+[language_params.Lit]
+coefficient = 0.35416667555738257
+
+[language_params.Tha]
+coefficient = 0.41935484064361017
+
+[language_params.Vie]
+coefficient = 0.33333333346997535
+
+[language_params.Hin]
+coefficient = 0.342281884428011
+
+[language_params.Tam]
+coefficient = 0.37096773906181607
+
+[language_params.Slk]
+coefficient = 0.3523809598212874
+
+[language_params.Rus]
+coefficient = 0.31722054375687125
+
+[language_params.Mal]
+coefficient = 0.36764704995286007
+
+[language_params.Khm]
+coefficient = 0.5609756177225682
+
+[language_params.Mkd]
+coefficient = 0.34883720970986887
+
+[language_params.Jpn]
+coefficient = 0.7446808590747476
+
+[language_params.Dan]
+coefficient = 0.2861356945460705
+
+[language_params.Yid]
+coefficient = 0.3793103456013193
+
+[language_params.Afr]
+coefficient = 0.3549783589889431
+
+[language_params.Epo]
+coefficient = 0.32075472552246104
+
+[language_params.Cat]
+coefficient = 0.2901234580742282
+
+[language_params.Slv]
+coefficient = 0.32258064644706685
+
+[language_params.Ron]
+coefficient = 0.3115577912011593
+
+[language_params.Spa]
+coefficient = 0.25619834560831817
+
+[language_params.Kan]
+coefficient = 0.39169138704673045
+
+[language_params.Bel]
+coefficient = 0.35714286438515264
+
+[language_params.Kat]
+coefficient = 0.35353534973491235
+
+[language_params.Heb]
+coefficient = 0.39170506353200235
+
+[language_params.Hrv]
+coefficient = 0.3169014105934709
+
+[language_params.Mya]
+coefficient = 0.545454547771305
+
+[language_params.Tur]
+coefficient = 0.30833333166331983
+
+[language_params.Cmn]
+coefficient = 0.8271604929439658
+
+[language_params.Amh]
+coefficient = 1.7637362770584277
+
+[language_params.Srp]
+coefficient = 0.37267080602549646
+
+[language_params.Ces]
+coefficient = 0.350253812410004
+
+[language_params.Nob]
+coefficient = 0.2888888903351371
+
+[language_params.Pol]
+coefficient = 0.32061068757150607
+
+[language_params.Pan]
+coefficient = 0.5500000010516604
+
+[language_params.Mar]
+coefficient = 0.39405204923261894
+
+[language_params.Deu]
+coefficient = 0.2374245520996768
+
+[language_params.Tuk]
+coefficient = 0.34751773050525164
+
+[language_params.Pes]
+coefficient = 0.35999999440904334
+
+[language_params.Tel]
+coefficient = 0.416666662013471
+
+[language_params.Uzb]
+coefficient = 0.3366336601517637
+
+[language_params.Zul]
+coefficient = 0.32240437273228195
+
+[language_params.Ukr]
+coefficient = 0.3453125011371133
+
+[language_params.Kor]
+coefficient = 0.6181818176863859
+
+[language_params.Bul]
+coefficient = 0.3461538407603729
+
+[language_params.Aka]
+coefficient = 0.3599999951229915
+
+[language_params.Hun]
+coefficient = 0.35897435616504425
+
+[language_params.Lav]
+coefficient = 0.3673469372197678
+
+[language_params.Swe]
+coefficient = 0.2981366410041522
+
+[language_params.Ori]
+coefficient = 0.9924999872204857
+
+[language_params.Urd]
+coefficient = 0.3475935855530559
+
+[language_params.Ell]
+coefficient = 0.3793103496681776
+
+[language_params.Hye]
+coefficient = 0.3333333323585104
+
+[language_params.Aze]
+coefficient = 0.32450331123755793

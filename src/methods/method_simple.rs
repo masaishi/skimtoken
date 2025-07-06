@@ -9,7 +9,7 @@ pub struct SimpleParameters {
 impl Default for SimpleParameters {
     fn default() -> Self {
         Self {
-            coefficient: 0.39999999847206413,
+            coefficient: 0.32926829331569196,
         }
     }
 }

@@ -8,9 +8,13 @@ import numpy.typing as npt
 import toml
 from sklearn.linear_model import Ridge  # type: ignore[import-untyped]
 
+from scripts.optimize.utils import (
+    calculate_metrics,
+    filter_outliers,
+    load_dataset_with_texts,
+    print_metrics,
+)
 from skimtoken.basic import count
-
-from .utils import calculate_metrics, filter_outliers, load_dataset_with_texts, print_metrics
 
 
 def extract_features(texts: list[str]) -> npt.NDArray[np.float64]:

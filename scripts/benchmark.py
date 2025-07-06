@@ -35,10 +35,10 @@ def parse_args() -> argparse.Namespace:
         help="Path to the dataset JSONL file. If not specified, uses default test.jsonl",
     )
     parser.add_argument(
-        "-s",
-        "--skimtoken-type",
+        "-m",
+        "--method",
         type=str,
-        choices=["simple", "basic", "multilingual"],
+        choices=["simple", "basic", "multilingual", "multilingual_simple"],
         default="basic",
         help="Type of skimtoken import to use",
     )
@@ -104,20 +104,22 @@ def benchmark_tiktoken_init() -> dict[str, Any]:
     }
 
 
-def benchmark_skimtoken_init(skimtoken_type: str = "basic") -> dict[str, Any]:
+def benchmark_skimtoken_init(method: str = "basic") -> dict[str, Any]:
     """Benchmark skimtoken import."""
     tracemalloc.start()
     start_time = time.perf_counter()
 
-    # Import skimtoken based on type
-    if skimtoken_type == "simple":
+    # Import skimtoken based on method
+    if method == "simple":
         from skimtoken.simple import estimate_tokens
-    elif skimtoken_type == "basic":
+    elif method == "basic":
         from skimtoken.basic import estimate_tokens
-    elif skimtoken_type == "multilingual":
+    elif method == "multilingual":
         from skimtoken.multilingual import estimate_tokens
+    elif method == "multilingual_simple":
+        from skimtoken.multilingual_simple import estimate_tokens
     else:
-        raise ValueError(f"Unknown skimtoken type: {skimtoken_type}")
+        raise ValueError(f"Unknown skimtoken method: {method}")
 
     end_time = time.perf_counter()
     _, peak = tracemalloc.get_traced_memory()
@@ -274,15 +276,15 @@ def main() -> None:
     console.print("[cyan]Benchmarking tiktoken initialization...[/cyan]")
     tiktoken_init = benchmark_tiktoken_init()
 
-    console.print(f"[cyan]Benchmarking skimtoken.{args.skimtoken_type} initialization...[/cyan]")
-    skimtoken_init = benchmark_skimtoken_init(args.skimtoken_type)
+    console.print(f"[cyan]Benchmarking skimtoken.{args.method} initialization...[/cyan]")
+    skimtoken_init = benchmark_skimtoken_init(args.method)
 
     # Benchmark execution
     console.print("\n[bold cyan]Execution Benchmark[/bold cyan]")
     console.print("[cyan]Benchmarking tiktoken execution...[/cyan]")
     tiktoken_exec = benchmark_tiktoken_execution(texts, tiktoken_init["encoder"])
 
-    console.print(f"[cyan]Benchmarking skimtoken.{args.skimtoken_type} execution...[/cyan]")
+    console.print(f"[cyan]Benchmarking skimtoken.{args.method} execution...[/cyan]")
     skimtoken_exec = benchmark_skimtoken_execution(texts, skimtoken_init["estimate_func"])
 
     # Display results

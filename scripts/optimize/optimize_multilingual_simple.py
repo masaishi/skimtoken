@@ -8,114 +8,54 @@ from typing import Any
 import numpy as np
 import numpy.typing as npt
 import toml
-from sklearn.linear_model import Ridge  # type: ignore[import-untyped]
+from scipy.optimize import minimize_scalar  # type: ignore[import-untyped]
 
 from scripts.optimize.utils import calculate_metrics, filter_outliers, load_dataset
-from skimtoken.multilingual import count
-
-# Mapping from whatlang detected languages to CC100 language codes
-# Based on ISO 639-3 codes from whatlang documentation
-WHATLANG_TO_CC100 = {
-    "Esperanto": "eo",
-    "English": "en",
-    "Russian": "ru",
-    "Mandarin": "zh-Hans",  # Simplified Chinese
-    "Spanish": "es",
-    "Portuguese": "pt",
-    "Italian": "it",
-    "Bengali": "bn",
-    "French": "fr",
-    "German": "de",
-    "Ukrainian": "uk",
-    "Georgian": "ka",
-    "Arabic": "ar",
-    "Hindi": "hi",
-    "Japanese": "ja",
-    "Hebrew": "he",
-    "Yiddish": "yi",
-    "Polish": "pl",
-    "Amharic": "am",
-    "Javanese": "jv",
-    "Korean": "ko",
-    "Bokmal": "no",  # Norwegian
-    "Danish": "da",
-    "Swedish": "sv",
-    "Finnish": "fi",
-    "Turkish": "tr",
-    "Dutch": "nl",
-    "Hungarian": "hu",
-    "Czech": "cs",
-    "Greek": "el",
-    "Bulgarian": "bg",
-    "Belarusian": "be",
-    "Marathi": "mr",
-    "Kannada": "kn",
-    "Romanian": "ro",
-    "Slovene": "sl",
-    "Croatian": "hr",
-    "Serbian": "sr",
-    "Macedonian": "mk",
-    "Lithuanian": "lt",
-    "Latvian": "lv",
-    "Estonian": "et",
-    "Tamil": "ta",
-    "Vietnamese": "vi",
-    "Urdu": "ur",
-    "Thai": "th",
-    "Gujarati": "gu",
-    "Uzbek": "uz",
-    "Punjabi": "pa",
-    "Azerbaijani": "az",
-    "Indonesian": "id",
-    "Telugu": "te",
-    "Persian": "fa",  # Note: whatlang uses "pes" but CC100 uses "fa"
-    "Malayalam": "ml",
-    "Oriya": "or",
-    "Burmese": "my",
-    "Nepali": "ne",
-    "Sinhalese": "si",
-    "Khmer": "km",
-    "Turkmen": "tk",
-    "Akan": "ak",
-    "Zulu": "zu",
-    "Shona": "sn",
-    "Afrikaans": "af",
-    "Latin": "la",
-    "Slovak": "sk",
-    "Catalan": "ca",
-    "Tagalog": "tl",
-    "Armenian": "hy",
-}
+from skimtoken import count_multilingual_simple
 
 
 def extract_features(texts: list[str]) -> tuple[npt.NDArray[np.float64], list[str]]:
-    """Extract features and detect languages."""
-    features: list[list[float]] = []
+    """Extract character count and detect languages."""
+    char_counts: list[float] = []
     languages: list[str] = []
 
     for text in texts:
-        # count returns (char_count, word_count, avg_word_length, space_count, language)
-        char_count, word_count, avg_word_length, space_count, language = count(text)
-
-        features.append([char_count, word_count, avg_word_length, space_count])
+        # count_multilingual_simple returns (char_count, language)
+        char_count, language = count_multilingual_simple(text)
+        char_counts.append(char_count)
         languages.append(language)
 
-    return np.array(features), languages
+    return np.array(char_counts), languages
 
 
-def optimize_language_params(
-    X: npt.NDArray[np.float64], y: npt.NDArray[np.float64]
-) -> npt.NDArray[np.float64]:
-    """Optimize parameters for a specific language using Ridge regression."""
+def compute_error_rate(coefficient: float, char_counts: np.ndarray, y_true: np.ndarray) -> float:
+    """Compute error rate for given coefficient."""
+    y_pred = coefficient * char_counts
+    relative_errors = np.abs(y_true - y_pred) / y_true
+    error_rate = np.mean(relative_errors)  # Full error rate, not threshold
+    return float(error_rate)
+
+
+def optimize_language_coefficient(
+    char_counts: npt.NDArray[np.float64], y: npt.NDArray[np.float64]
+) -> float:
+    """Optimize coefficient for a specific language using minimize_scalar."""
     # Remove outliers (top/bottom 1%)
-    X_filtered, y_filtered = filter_outliers(X, y, percentile=1.0)
+    char_counts_filtered, y_filtered = filter_outliers(
+        char_counts.reshape(-1, 1), y, percentile=1.0
+    )
+    char_counts_filtered = char_counts_filtered.flatten()
 
-    # Fit Ridge regression model
-    model = Ridge(alpha=1.0, fit_intercept=True, max_iter=10000)
-    model.fit(X_filtered, y_filtered)  # type: ignore[arg-type]
+    # Optimize for minimum error rate using fixed bounds
+    result = minimize_scalar(
+        compute_error_rate,
+        args=(char_counts_filtered, y_filtered),
+        bounds=(-2.0, 2.0),  # Wide bounds to explore all possibilities
+        method="bounded",
+        options={"xatol": 1e-8},
+    )
 
-    # Return coefficients: [token_count_coef, char_coef, word_coef, avg_word_length_coef, space_coef, intercept]
-    return np.append(model.coef_, model.intercept_)  # type: ignore[attr-defined]
+    return float(result.x)  # type: ignore[attr-defined]
 
 
 def optimize_parameters(
@@ -124,7 +64,7 @@ def optimize_parameters(
     max_samples: int | None = None,
     min_samples_per_lang: int = 10,
 ) -> dict[str, Any]:
-    """Optimize language-specific parameters to minimize error rate."""
+    """Optimize language-specific coefficients to minimize error rate."""
     print(f"Loading training dataset from {dataset_path}...")
     data = load_dataset(dataset_path, max_samples)
 
@@ -157,76 +97,53 @@ def optimize_parameters(
         # Extract texts for this language
         texts = [item["text"] for item in lang_samples]
 
-        # Extract features (we already know the language, but extract for consistency)
-        X_lang, _ = extract_features(texts)
+        # Extract features (character counts)
+        char_counts, _ = extract_features(texts)
 
         # Get true token counts
         y_lang = np.array([item["token_len"] for item in lang_samples])
 
-        # Convert to numpy arrays
-        X_lang = np.array(X_lang)
-
-        # Optimize parameters for this specific language
-        optimized_params = optimize_language_params(X_lang, y_lang)
-        char_coef, word_coef, avg_word_length_coef, space_coef, intercept = optimized_params
+        # Optimize coefficient for this specific language
+        optimized_coef = optimize_language_coefficient(char_counts, y_lang)
 
         # Calculate metrics
-        y_pred = (
-            char_coef * X_lang[:, 0]
-            + word_coef * X_lang[:, 1]
-            + avg_word_length_coef * X_lang[:, 2]
-            + space_coef * X_lang[:, 3]
-            + intercept
-        )
+        y_pred = optimized_coef * char_counts
 
         lang_metrics = calculate_metrics(y_lang, y_pred)
+        print(f"  Optimized coefficient: {optimized_coef:.6f}")
         print(f"  R²: {lang_metrics['r2']:.4f}")
         print(f"  RMSE: {lang_metrics['rmse']:.2f}")
         print(f"  Error rate (full): {lang_metrics['error_rate']:.1f}%")
         print(f"  Error rate (>5%): {lang_metrics['error_rate_5pct']:.1f}%")
 
-        # Store parameters for this detected language
-        language_params[detected_lang] = {
-            "char_coef": float(char_coef),
-            "word_coef": float(word_coef),
-            "avg_word_length_coef": float(avg_word_length_coef),
-            "space_coef": float(space_coef),
-            "intercept": float(intercept),
+        # Store parameters for this detected language (using 3-letter codes)
+        # Convert full language names to 3-letter codes
+        lang_code = detected_lang.lower()[:3].title()  # Simple conversion
+        language_params[lang_code] = {
+            "coefficient": float(optimized_coef),
         }
 
     # Fit default model on all data
     print("\nOptimizing default parameters (all languages)...")
     all_texts = [item["text"] for item in data]
-    X_train_all, _ = extract_features(all_texts)
+    char_counts_all, _ = extract_features(all_texts)
     y_train_all = np.array([item["token_len"] for item in data])
 
-    X_train_all = np.array(X_train_all)
-
-    # Optimize default parameters for minimum error rate
-    optimized_default = optimize_language_params(X_train_all, y_train_all)
-    char_coef, word_coef, avg_word_length_coef, space_coef, intercept = optimized_default
+    # Optimize default coefficient for minimum error rate
+    optimized_default_coef = optimize_language_coefficient(char_counts_all, y_train_all)
 
     # Calculate metrics for default model
-    y_pred = (
-        char_coef * X_train_all[:, 0]
-        + word_coef * X_train_all[:, 1]
-        + avg_word_length_coef * X_train_all[:, 2]
-        + space_coef * X_train_all[:, 3]
-        + intercept
-    )
+    y_pred = optimized_default_coef * char_counts_all
 
     default_metrics = calculate_metrics(y_train_all, y_pred)
+    print(f"  Optimized coefficient: {optimized_default_coef:.6f}")
     print(f"  R²: {default_metrics['r2']:.4f}")
     print(f"  RMSE: {default_metrics['rmse']:.2f}")
     print(f"  Error rate (full): {default_metrics['error_rate']:.1f}%")
     print(f"  Error rate (>5%): {default_metrics['error_rate_5pct']:.1f}%")
 
     default_params = {
-        "char_coef": float(char_coef),
-        "word_coef": float(word_coef),
-        "avg_word_length_coef": float(avg_word_length_coef),
-        "space_coef": float(space_coef),
-        "intercept": float(intercept),
+        "coefficient": float(optimized_default_coef),
     }
 
     # Evaluate on validation set if provided
@@ -249,29 +166,25 @@ def optimize_parameters(
             if detected_lang == "unknown" or len(val_lang_samples) < 5:  # Skip if too few samples
                 continue
 
+            # Convert to 3-letter code
+            lang_code = detected_lang.lower()[:3].title()
+
             # Use language-specific params if available
-            if detected_lang in language_params:
+            if lang_code in language_params:
                 val_texts = [item["text"] for item in val_lang_samples]
-                X_val_lang, _ = extract_features(val_texts)
+                char_counts_val, _ = extract_features(val_texts)
                 y_val_lang = np.array([item["token_len"] for item in val_lang_samples])
 
-                X_val_lang = np.array(X_val_lang)
-
-                params = language_params[detected_lang]
+                params = language_params[lang_code]
 
                 # Make predictions
-                y_pred = (
-                    params["char_coef"] * X_val_lang[:, 0]
-                    + params["word_coef"] * X_val_lang[:, 1]
-                    + params["avg_word_length_coef"] * X_val_lang[:, 2]
-                    + params["space_coef"] * X_val_lang[:, 3]
-                    + params["intercept"]
-                )
+                y_pred = params["coefficient"] * char_counts_val
 
                 # Calculate metrics
                 val_lang_metrics = calculate_metrics(y_val_lang, y_pred)
 
                 print(f"\nValidation metrics for {detected_lang} ({len(y_val_lang)} samples):")
+                print(f"  Coefficient: {params['coefficient']:.6f}")
                 print(f"  R²: {val_lang_metrics['r2']:.4f}")
                 print(f"  RMSE: {val_lang_metrics['rmse']:.2f}")
                 print(f"  Error rate (full): {val_lang_metrics['error_rate']:.1f}%")
@@ -279,22 +192,15 @@ def optimize_parameters(
 
         # Evaluate default model on all validation data
         all_val_texts = [item["text"] for item in val_data]
-        X_val_all, _ = extract_features(all_val_texts)
+        char_counts_val_all, _ = extract_features(all_val_texts)
         y_val_all = np.array([item["token_len"] for item in val_data])
 
-        X_val_all = np.array(X_val_all)
-
-        y_pred = (
-            default_params["char_coef"] * X_val_all[:, 0]
-            + default_params["word_coef"] * X_val_all[:, 1]
-            + default_params["avg_word_length_coef"] * X_val_all[:, 2]
-            + default_params["space_coef"] * X_val_all[:, 3]
-            + default_params["intercept"]
-        )
+        y_pred = default_params["coefficient"] * char_counts_val_all
 
         val_all_metrics = calculate_metrics(y_val_all, y_pred)
 
         print("\nValidation metrics for default model (all languages):")
+        print(f"  Coefficient: {default_params['coefficient']:.6f}")
         print(f"  R²: {val_all_metrics['r2']:.4f}")
         print(f"  RMSE: {val_all_metrics['rmse']:.2f}")
         print(f"  Error rate (full): {val_all_metrics['error_rate']:.1f}%")
@@ -304,7 +210,7 @@ def optimize_parameters(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Optimize MultilingualMethod parameters")
+    parser = argparse.ArgumentParser(description="Optimize MultilingualSimpleMethod parameters")
     parser.add_argument(
         "--dataset",
         type=Path,
@@ -329,7 +235,7 @@ def main() -> None:
     parser.add_argument(
         "--output",
         type=Path,
-        default=Path("params/multilingual.toml"),
+        default=Path("params/multilingual_simple.toml"),
         help="Output path for parameters",
     )
 

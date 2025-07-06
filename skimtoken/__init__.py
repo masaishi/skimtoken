@@ -16,9 +16,11 @@ from ._skimtoken_core import (
     estimate_tokens_simple,
     estimate_tokens_basic,
     estimate_tokens_multilingual,
+    estimate_tokens_multilingual_simple,
     count_simple,
     count_basic,
     count_multilingual,
+    count_multilingual_simple,
     detect_language,
 )
 
@@ -29,17 +31,20 @@ __all__ = [
     "estimate_tokens_simple",
     "estimate_tokens_basic",
     "estimate_tokens_multilingual",
+    "estimate_tokens_multilingual_simple",
     "count_simple",
     "count_basic",
     "count_multilingual",
+    "count_multilingual_simple",
     "detect_language",
     "simple",
     "basic",
     "multilingual",
+    "multilingual_simple",
 ]
 
 # Submodules for lightweight imports
-from . import simple, basic, multilingual
+from . import simple, basic, multilingual, multilingual_simple
 
 
 # CLI entry point

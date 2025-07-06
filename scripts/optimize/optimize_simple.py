@@ -7,9 +7,8 @@ import numpy as np
 import toml
 from scipy.optimize import minimize_scalar  # type: ignore[import-untyped]
 
+from scripts.optimize.utils import calculate_metrics, filter_outliers, load_dataset, print_metrics
 from skimtoken.simple import count
-
-from .utils import calculate_metrics, filter_outliers, load_dataset, print_metrics
 
 
 def extract_features(texts: list[str]) -> np.ndarray:

@@ -52,7 +52,7 @@ def main() -> None:
     parser.add_argument(
         "--methods",
         nargs="+",
-        choices=["simple", "basic", "language", "all"],
+        choices=["simple", "basic", "multilingual", "multilingual_simple", "all"],
         default=["all"],
         help="Methods to optimize (default: all)",
     )
@@ -72,6 +72,7 @@ def main() -> None:
         "simple": optimize_dir / "optimize_simple.py",
         "basic": optimize_dir / "optimize_basic.py",
         "multilingual": optimize_dir / "optimize_multilingual.py",
+        "multilingual_simple": optimize_dir / "optimize_multilingual_simple.py",
     }
 
     # Determine which scripts to run
