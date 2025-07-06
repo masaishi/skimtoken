@@ -6,7 +6,14 @@ Handles all parameter types: simple, basic, multilingual, and multilingual_simpl
 
 import toml
 from pathlib import Path
-from typing import Any
+from typing import Any, Callable, TypedDict
+
+
+class ParamConfig(TypedDict):
+    name: str
+    toml_path: Path
+    rust_path: Path
+    generator: Callable[[dict[str, Any]], str]
 
 
 def load_params_from_toml(toml_path: str) -> dict[str, Any]:
@@ -227,7 +234,7 @@ def main() -> None:
     project_root = Path(__file__).parent.parent
 
     # Define parameter configurations
-    param_configs = [
+    param_configs: list[ParamConfig] = [
         {
             "name": "simple",
             "toml_path": project_root / "params" / "simple.toml",
