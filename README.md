@@ -8,23 +8,16 @@ A lightweight, fast token count estimation library written in Rust with Python b
 [![Crates.io](https://img.shields.io/crates/v/skimtoken)](https://crates.io/crates/skimtoken)
 [![License](https://img.shields.io/github/license/masaishi/skimtoken)](https://github.com/masaishi/skimtoken/blob/main/LICENSE)
 
-## ⚠️ Current Limitations
-
-**This library is currently in early beta and has significant accuracy issues:**
-
-- **Multilingual method**: Takes 1.13x longer than tiktoken due to inefficient implementation
-- **Overall accuracy**: 15.11% error rate, which is too high for most use cases
-
 
 ## Why skimtoken?
 
-**The Problem**: [tiktoken](https://github.com/openai/tiktoken) is great for precise tokenization, but requires ~60MB of memory just to count tokens - problematic for memory-constrained environments.
+**The Problem**: [tiktoken](https://github.com/openai/tiktoken) is great for precise tokenization, but requires ~59.6MB of memory just to count tokens - problematic for memory-constrained environments.
 
 **The Solution**: skimtoken estimates token counts using statistical patterns instead of loading entire vocabularies, achieving:
 
-- ✅ **64x less memory** (0.92MB vs 60MB)
-- ✅ **128x faster startup** (4ms vs 485ms) 
-- ❌ **1.13x slower execution** (5.51s vs 4.59s) for multilingual method
+- ✅ **65x less memory** (0.92MB vs 59.6MB)
+- ✅ **421x faster startup** (2.389ms vs 1,005ms)
+- ❌ **1.03 slowwer execute time** (6.689s vs 6.912s) for Multilingual single method
 - ❌ Trade-off: ~15.11% error rate vs exact counts
 
 ## Installation
@@ -87,32 +80,7 @@ print(f"Estimated tokens (multilingual): {token_count}")
 
 ### Large-Scale Benchmark (100k samples)
 
-Simple method (Just char length x coefficient):
-```
-Results:
-Total Samples: 100,726
-Total Characters: 13,062,391
-Mean RMSE: 38.4863 tokens
-Mean Error Rate: 21.63%
-
-┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┓
-┃ Metric       ┃   tiktoken ┃  skimtoken ┃  Ratio ┃
-┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━┩
-│ Init Time    │ 0.481672 s │ 0.182308 s │ 0.378x │
-├──────────────┼────────────┼────────────┼────────┤
-│ Init Memory  │ 42.2386 MB │  0.0291 MB │ 0.001x │
-├──────────────┼────────────┼────────────┼────────┤
-│ Exec Time    │ 4.710224 s │ 0.805272 s │ 0.171x │
-├──────────────┼────────────┼────────────┼────────┤
-│ Exec Memory  │ 17.3251 MB │  0.8849 MB │ 0.051x │
-├──────────────┼────────────┼────────────┼────────┤
-│ Total Time   │ 5.191896 s │ 0.928758 s │ 0.190x │
-├──────────────┼────────────┼────────────┼────────┤
-│ Total Memory │ 59.5637 MB │  0.9214 MB │ 0.015x │
-└──────────────┴────────────┴────────────┴────────┘
-```
-
-Multilingual simple method:
+Multilingual single method:
 ```
 Results:
 Total Samples: 100,726
@@ -123,27 +91,35 @@ Mean Error Rate: 15.11%
 ┏━━━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━━━━━┳━━━━━━━━┓
 ┃ Metric       ┃   tiktoken ┃  skimtoken ┃  Ratio ┃
 ┡━━━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━━━━━╇━━━━━━━━┩
-│ Init Time    │ 0.815441 s │ 0.138714 s │ 0.170x │
+│ Init Time    │ 1.005490 s │ 0.002389 s │ 0.002x │
 ├──────────────┼────────────┼────────────┼────────┤
-│ Init Memory  │ 42.4791 MB │  0.1613 MB │ 0.004x │
+│ Init Memory  │ 42.2310 MB │  0.0265 MB │ 0.001x │
 ├──────────────┼────────────┼────────────┼────────┤
-│ Exec Time    │ 4.041857 s │ 5.380782 s │ 1.331x │
+│ Exec Time    │ 6.689203 s │ 6.911931 s │ 1.033x │
 ├──────────────┼────────────┼────────────┼────────┤
-│ Exec Memory  │ 17.3227 MB │  0.8950 MB │ 0.052x │
+│ Exec Memory  │ 17.3251 MB │  0.8950 MB │ 0.052x │
 ├──────────────┼────────────┼────────────┼────────┤
-│ Total Time   │ 4.857297 s │ 5.519496 s │ 1.136x │
+│ Total Time   │ 7.694694 s │ 6.914320 s │ 0.899x │
 ├──────────────┼────────────┼────────────┼────────┤
-│ Total Memory │ 59.8018 MB │  1.0563 MB │ 0.018x │
+│ Total Memory │ 59.5561 MB │  0.9215 MB │ 0.015x │
 └──────────────┴────────────┴────────────┴────────┘
 ```
+
+### Automated Benchmarks
+
+For up-to-date performance comparisons and detailed accuracy metrics across all methods, visit the [skimtoken_benchmark](https://github.com/masaishi/skimtoken_benchmark) repository. This automated benchmark suite:
+
+- Uses the CC-100 multilingual dataset (100k+ samples)
+- Provides language-specific accuracy breakdowns
 
 ## Available Methods
 
 | Method | Import | Memory | Error | Best For |
 |--------|---------|--------|-------|----------|
-| **Simple** | `from skimtoken.simple import estimate_tokens` | 0.8MB | ~21% | English text, minimum memory |
-| **Basic** | `from skimtoken.basic import estimate_tokens` | 0.8MB | ~27% | General use |
-| **Multilingual** | `from skimtoken.multilingual import estimate_tokens` | 0.9MB | ~15% | Non-English, mixed languages |
+| **Simple** | `from skimtoken.simple import estimate_tokens` | 1.0MB | ~21.63% | English text, minimum memory |
+| **Basic** | `from skimtoken.basic import estimate_tokens` | 0.9MB | ~27.05% | General use |
+| **Multilingual** | `from skimtoken.multilingual import estimate_tokens` | 0.9MB | ~15.93% | Non-English, mixed languages |
+| **Multilingual Simple** | `from skimtoken.multilingual_simple import estimate_tokens` | 0.9MB | ~15.11% | Fast multilingual estimation |
 
 ```python
 # Example: Choose method based on your needs
@@ -259,7 +235,7 @@ A: Beta = breaking changes possible.
 We are actively working to improve skimtoken's accuracy and performance:
 
 1. **Better estimation algorithms**: Moving beyond simple character multiplication to more sophisticated statistical models
-2. **Performance optimization**: Fixing the 60x slowdown in multilingual method
+2. **Performance optimization**: Further improving execution speed
 3. **Improved language support**: Better handling of non-English languages
 4. **Higher accuracy**: Targeting <10% error rate while maintaining low memory footprint
 
