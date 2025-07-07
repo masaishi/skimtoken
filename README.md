@@ -17,7 +17,7 @@ A lightweight, fast token count estimation library written in Rust with Python b
 
 - ✅ **65x less memory** (0.92MB vs 59.6MB)
 - ✅ **421x faster startup** (2.389ms vs 1,005ms)
-- ❌ **1.03 slowwer execute time** (6.689s vs 6.912s) for Multilingual single method
+- ❌ **1.03x slowwer execute time** (6.689s vs 6.912s) for Multilingual single method
 - ❌ Trade-off: ~15.11% error rate vs exact counts
 
 ## Installation
