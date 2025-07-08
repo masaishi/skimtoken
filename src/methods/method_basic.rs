@@ -5,27 +5,27 @@ use serde::{Deserialize, Serialize};
 pub struct BasicFeatures {
     pub char_count: usize,
     pub word_count: usize,
-    pub avg_word_length: f64,
+    pub avg_word_length: f32,
     pub space_count: usize,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct BasicParameters {
-    pub char_coef: f64,
-    pub word_coef: f64,
-    pub avg_word_length_coef: f64,
-    pub space_coef: f64,
-    pub intercept: f64,
+    pub char_coef: f32,
+    pub word_coef: f32,
+    pub avg_word_length_coef: f32,
+    pub space_coef: f32,
+    pub intercept: f32,
 }
 
 impl Default for BasicParameters {
     fn default() -> Self {
         Self {
-            char_coef: 0.3217745347518016,
-            word_coef: 0.07022881669049061,
-            avg_word_length_coef: 0.5090982427870748,
-            space_coef: -0.15831091236345404,
-            intercept: 1.591021053665763,
+            char_coef: 0.321_774_5,
+            word_coef: 0.070_228_82,
+            avg_word_length_coef: 0.509_098_2,
+            space_coef: -0.158_310_9,
+            intercept: 1.591_021,
         }
     }
 }
@@ -60,7 +60,7 @@ impl EstimationMethod for BasicMethod {
 
         let avg_word_length = if word_count > 0 {
             let total_word_chars: usize = words.iter().map(|w| w.chars().count()).sum();
-            total_word_chars as f64 / word_count as f64
+            total_word_chars as f32 / word_count as f32
         } else {
             0.0
         };
@@ -75,10 +75,10 @@ impl EstimationMethod for BasicMethod {
 
     fn estimate(&self, text: &str) -> usize {
         let features = self.count(text);
-        let estimate = self.parameters.char_coef * features.char_count as f64
-            + self.parameters.word_coef * features.word_count as f64
+        let estimate = self.parameters.char_coef * features.char_count as f32
+            + self.parameters.word_coef * features.word_count as f32
             + self.parameters.avg_word_length_coef * features.avg_word_length
-            + self.parameters.space_coef * features.space_count as f64
+            + self.parameters.space_coef * features.space_count as f32
             + self.parameters.intercept;
 
         estimate.round().max(0.0) as usize

@@ -4,9 +4,10 @@ Script to load parameters from TOML files and update the Rust parameter files.
 Handles all parameter types: simple, basic, multilingual, and multilingual_simple.
 """
 
-import toml
 from pathlib import Path
 from typing import Any, Callable, TypedDict
+
+import toml
 
 
 class ParamConfig(TypedDict):
@@ -23,6 +24,29 @@ def load_params_from_toml(toml_path: str) -> dict[str, Any]:
     return data
 
 
+def format_f32(value: float) -> str:
+    """Format a float value for f32 with underscores for readability."""
+    str_val = f"{value:.7g}"  # Use 7 significant digits for f32 precision
+
+    if "e" in str_val.lower():
+        return str_val
+
+    if "." in str_val:
+        integer_part, decimal_part = str_val.split(".")
+
+        if len(decimal_part) > 3:
+            formatted_decimal = ""
+            for i, digit in enumerate(decimal_part):
+                if i > 0 and i % 3 == 0:
+                    formatted_decimal += "_"
+                formatted_decimal += digit
+            return f"{integer_part}.{formatted_decimal}"
+        else:
+            return str_val
+    else:
+        return str_val
+
+
 def generate_simple_params_rust(params_data: dict[str, Any]) -> str:
     """Generate Rust code for simple parameters."""
     rust_code: list[str] = []
@@ -30,7 +54,7 @@ def generate_simple_params_rust(params_data: dict[str, Any]) -> str:
     rust_code.append("impl Default for SimpleParameters {")
     rust_code.append("    fn default() -> Self {")
     rust_code.append("        Self {")
-    rust_code.append(f"            coefficient: {params_data['coefficient']},")
+    rust_code.append(f"            coefficient: {format_f32(params_data['coefficient'])},")
     rust_code.append("        }")
     rust_code.append("    }")
     rust_code.append("}")
@@ -45,11 +69,13 @@ def generate_basic_params_rust(params_data: dict[str, Any]) -> str:
     rust_code.append("impl Default for BasicParameters {")
     rust_code.append("    fn default() -> Self {")
     rust_code.append("        Self {")
-    rust_code.append(f"            char_coef: {params_data['char_coef']},")
-    rust_code.append(f"            word_coef: {params_data['word_coef']},")
-    rust_code.append(f"            avg_word_length_coef: {params_data['avg_word_length_coef']},")
-    rust_code.append(f"            space_coef: {params_data['space_coef']},")
-    rust_code.append(f"            intercept: {params_data['intercept']},")
+    rust_code.append(f"            char_coef: {format_f32(params_data['char_coef'])},")
+    rust_code.append(f"            word_coef: {format_f32(params_data['word_coef'])},")
+    rust_code.append(
+        f"            avg_word_length_coef: {format_f32(params_data['avg_word_length_coef'])},"
+    )
+    rust_code.append(f"            space_coef: {format_f32(params_data['space_coef'])},")
+    rust_code.append(f"            intercept: {format_f32(params_data['intercept'])},")
     rust_code.append("        }")
     rust_code.append("    }")
     rust_code.append("}")
@@ -66,11 +92,13 @@ def generate_multilingual_params_rust(params_data: dict[str, Any]) -> str:
     rust_code.append("impl Default for MultilingualParameters {")
     rust_code.append("    fn default() -> Self {")
     rust_code.append("        Self {")
-    rust_code.append(f"            char_coef: {default_params['char_coef']},")
-    rust_code.append(f"            word_coef: {default_params['word_coef']},")
-    rust_code.append(f"            avg_word_length_coef: {default_params['avg_word_length_coef']},")
-    rust_code.append(f"            space_coef: {default_params['space_coef']},")
-    rust_code.append(f"            intercept: {default_params['intercept']},")
+    rust_code.append(f"            char_coef: {format_f32(default_params['char_coef'])},")
+    rust_code.append(f"            word_coef: {format_f32(default_params['word_coef'])},")
+    rust_code.append(
+        f"            avg_word_length_coef: {format_f32(default_params['avg_word_length_coef'])},"
+    )
+    rust_code.append(f"            space_coef: {format_f32(default_params['space_coef'])},")
+    rust_code.append(f"            intercept: {format_f32(default_params['intercept'])},")
     rust_code.append("        }")
     rust_code.append("    }")
     rust_code.append("}")
@@ -89,13 +117,13 @@ def generate_multilingual_params_rust(params_data: dict[str, Any]) -> str:
         rust_code.append("        language_params.insert(")
         rust_code.append(f'            "{lang_key}".to_string(),')
         rust_code.append("            MultilingualParameters {")
-        rust_code.append(f"                char_coef: {lang_params['char_coef']},")
-        rust_code.append(f"                word_coef: {lang_params['word_coef']},")
+        rust_code.append(f"                char_coef: {format_f32(lang_params['char_coef'])},")
+        rust_code.append(f"                word_coef: {format_f32(lang_params['word_coef'])},")
         rust_code.append(
-            f"                avg_word_length_coef: {lang_params['avg_word_length_coef']},"
+            f"                avg_word_length_coef: {format_f32(lang_params['avg_word_length_coef'])},"
         )
-        rust_code.append(f"                space_coef: {lang_params['space_coef']},")
-        rust_code.append(f"                intercept: {lang_params['intercept']},")
+        rust_code.append(f"                space_coef: {format_f32(lang_params['space_coef'])},")
+        rust_code.append(f"                intercept: {format_f32(lang_params['intercept'])},")
         rust_code.append("            },")
         rust_code.append("        );")
         rust_code.append("")
@@ -119,7 +147,7 @@ def generate_multilingual_simple_params_rust(params_data: dict[str, Any]) -> str
     rust_code.append("impl Default for MultilingualSimpleParameters {")
     rust_code.append("    fn default() -> Self {")
     rust_code.append("        Self {")
-    rust_code.append(f"            coefficient: {default_params['coefficient']},")
+    rust_code.append(f"            coefficient: {format_f32(default_params['coefficient'])},")
     rust_code.append("        }")
     rust_code.append("    }")
     rust_code.append("}")
@@ -137,7 +165,7 @@ def generate_multilingual_simple_params_rust(params_data: dict[str, Any]) -> str
         rust_code.append("        language_params.insert(")
         rust_code.append(f'            "{lang_key}".to_string(),')
         rust_code.append("            MultilingualSimpleParameters {")
-        rust_code.append(f"                coefficient: {lang_params['coefficient']},")
+        rust_code.append(f"                coefficient: {format_f32(lang_params['coefficient'])},")
         rust_code.append("            },")
         rust_code.append("        );")
         rust_code.append("")

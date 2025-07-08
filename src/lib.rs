@@ -133,7 +133,7 @@ fn _skimtoken_core(m: &Bound<'_, PyModule>) -> PyResult<()> {
 
     #[pyfn(m)]
     #[pyo3(name = "count_basic")]
-    fn count_basic_py(text: &Bound<'_, PyAny>) -> PyResult<(usize, usize, f64, usize)> {
+    fn count_basic_py(text: &Bound<'_, PyAny>) -> PyResult<(usize, usize, f32, usize)> {
         let text_str = if let Ok(s) = text.extract::<String>() {
             s
         } else {
@@ -153,7 +153,7 @@ fn _skimtoken_core(m: &Bound<'_, PyModule>) -> PyResult<()> {
     #[pyo3(name = "count_multilingual")]
     fn count_multilingual_py(
         text: &Bound<'_, PyAny>,
-    ) -> PyResult<(usize, usize, f64, usize, String)> {
+    ) -> PyResult<(usize, usize, f32, usize, String)> {
         let text_str = if let Ok(s) = text.extract::<String>() {
             s
         } else {
