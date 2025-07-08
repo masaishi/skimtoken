@@ -21,11 +21,11 @@ pub struct BasicParameters {
 impl Default for BasicParameters {
     fn default() -> Self {
         Self {
-            char_coef: 0.3217745347518016,
-            word_coef: 0.07022881669049061,
-            avg_word_length_coef: 0.5090982427870748,
-            space_coef: -0.15831091236345404,
-            intercept: 1.591021053665763,
+            char_coef: 0.321_774_5,
+            word_coef: 0.070_228_82,
+            avg_word_length_coef: 0.509_098_2,
+            space_coef: -0.158_310_9,
+            intercept: 1.591_021,
         }
     }
 }

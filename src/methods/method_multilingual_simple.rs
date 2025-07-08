@@ -23,7 +23,7 @@ pub struct MultilingualSimpleMethodParameters {
 impl Default for MultilingualSimpleParameters {
     fn default() -> Self {
         Self {
-            coefficient: 0.32926829331569196,
+            coefficient: 0.329_268_3,
         }
     }
 }
@@ -36,7 +36,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "ara".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3478260881025884,
+                coefficient: 0.347_826_1,
             },
         );
 
@@ -44,7 +44,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "ita".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.2921348311548165,
+                coefficient: 0.292_134_8,
             },
         );
 
@@ -52,7 +52,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "fin".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.31578947671545804,
+                coefficient: 0.315_789_5,
             },
         );
 
@@ -60,7 +60,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "nep".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.35356200463057796,
+                coefficient: 0.353_562,
             },
         );
 
@@ -68,7 +68,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "ind".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.2794117669100515,
+                coefficient: 0.279_411_8,
             },
         );
 
@@ -76,7 +76,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "fra".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.29933110199265395,
+                coefficient: 0.299_331_1,
             },
         );
 
@@ -84,7 +84,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "nld".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.2585365870617235,
+                coefficient: 0.258_536_6,
             },
         );
 
@@ -92,7 +92,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "eng".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.2542372931307417,
+                coefficient: 0.254_237_3,
             },
         );
 
@@ -100,23 +100,21 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "tgl".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3103448252138147,
+                coefficient: 0.310_344_8,
             },
         );
 
         // ben
         language_params.insert(
             "ben".to_string(),
-            MultilingualSimpleParameters {
-                coefficient: 0.399999998688826,
-            },
+            MultilingualSimpleParameters { coefficient: 0.4 },
         );
 
         // sin
         language_params.insert(
             "sin".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.5435435362784797,
+                coefficient: 0.543_543_5,
             },
         );
 
@@ -124,7 +122,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "sna".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3181818165263794,
+                coefficient: 0.318_181_8,
             },
         );
 
@@ -132,23 +130,21 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "jav".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.31249999555432356,
+                coefficient: 0.312_5,
             },
         );
 
         // est
         language_params.insert(
             "est".to_string(),
-            MultilingualSimpleParameters {
-                coefficient: 0.32000000028635944,
-            },
+            MultilingualSimpleParameters { coefficient: 0.32 },
         );
 
         // guj
         language_params.insert(
             "guj".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3951612821613528,
+                coefficient: 0.395_161_3,
             },
         );
 
@@ -156,7 +152,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "por".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.26666666434813796,
+                coefficient: 0.266_666_7,
             },
         );
 
@@ -164,7 +160,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "lat".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.30569947664440206,
+                coefficient: 0.305_699_5,
             },
         );
 
@@ -172,7 +168,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "lit".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.35416667555738257,
+                coefficient: 0.354_166_7,
             },
         );
 
@@ -180,7 +176,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "tha".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.41935484064361017,
+                coefficient: 0.419_354_8,
             },
         );
 
@@ -188,7 +184,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "vie".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.33333333346997535,
+                coefficient: 0.333_333_3,
             },
         );
 
@@ -196,7 +192,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "hin".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.342281884428011,
+                coefficient: 0.342_281_9,
             },
         );
 
@@ -204,7 +200,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "tam".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.37096773906181607,
+                coefficient: 0.370_967_7,
             },
         );
 
@@ -212,7 +208,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "slk".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3523809598212874,
+                coefficient: 0.352_381,
             },
         );
 
@@ -220,7 +216,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "rus".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.31722054375687125,
+                coefficient: 0.317_220_5,
             },
         );
 
@@ -228,7 +224,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "mal".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.36764704995286007,
+                coefficient: 0.367_647,
             },
         );
 
@@ -236,7 +232,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "khm".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.5609756177225682,
+                coefficient: 0.560_975_6,
             },
         );
 
@@ -244,7 +240,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "mkd".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.34883720970986887,
+                coefficient: 0.348_837_2,
             },
         );
 
@@ -252,7 +248,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "jpn".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.7446808590747476,
+                coefficient: 0.744_680_9,
             },
         );
 
@@ -260,7 +256,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "dan".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.2861356945460705,
+                coefficient: 0.286_135_7,
             },
         );
 
@@ -268,7 +264,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "yid".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3793103456013193,
+                coefficient: 0.379_310_3,
             },
         );
 
@@ -276,7 +272,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "afr".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3549783589889431,
+                coefficient: 0.354_978_4,
             },
         );
 
@@ -284,7 +280,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "epo".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.32075472552246104,
+                coefficient: 0.320_754_7,
             },
         );
 
@@ -292,7 +288,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "cat".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.2901234580742282,
+                coefficient: 0.290_123_5,
             },
         );
 
@@ -300,7 +296,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "slv".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.32258064644706685,
+                coefficient: 0.322_580_6,
             },
         );
 
@@ -308,7 +304,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "ron".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3115577912011593,
+                coefficient: 0.311_557_8,
             },
         );
 
@@ -316,7 +312,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "spa".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.25619834560831817,
+                coefficient: 0.256_198_3,
             },
         );
 
@@ -324,7 +320,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "kan".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.39169138704673045,
+                coefficient: 0.391_691_4,
             },
         );
 
@@ -332,7 +328,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "bel".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.35714286438515264,
+                coefficient: 0.357_142_9,
             },
         );
 
@@ -340,7 +336,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "kat".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.35353534973491235,
+                coefficient: 0.353_535_3,
             },
         );
 
@@ -348,7 +344,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "heb".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.39170506353200235,
+                coefficient: 0.391_705_1,
             },
         );
 
@@ -356,7 +352,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "hrv".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3169014105934709,
+                coefficient: 0.316_901_4,
             },
         );
 
@@ -364,7 +360,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "mya".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.545454547771305,
+                coefficient: 0.545_454_5,
             },
         );
 
@@ -372,7 +368,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "tur".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.30833333166331983,
+                coefficient: 0.308_333_3,
             },
         );
 
@@ -380,7 +376,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "cmn".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.8271604929439658,
+                coefficient: 0.827_160_5,
             },
         );
 
@@ -388,7 +384,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "amh".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 1.7637362770584277,
+                coefficient: 1.763_736,
             },
         );
 
@@ -396,7 +392,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "srp".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.37267080602549646,
+                coefficient: 0.372_670_8,
             },
         );
 
@@ -404,7 +400,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "ces".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.350253812410004,
+                coefficient: 0.350_253_8,
             },
         );
 
@@ -412,7 +408,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "nob".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.2888888903351371,
+                coefficient: 0.288_888_9,
             },
         );
 
@@ -420,23 +416,21 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "pol".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.32061068757150607,
+                coefficient: 0.320_610_7,
             },
         );
 
         // pan
         language_params.insert(
             "pan".to_string(),
-            MultilingualSimpleParameters {
-                coefficient: 0.5500000010516604,
-            },
+            MultilingualSimpleParameters { coefficient: 0.55 },
         );
 
         // mar
         language_params.insert(
             "mar".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.39405204923261894,
+                coefficient: 0.394_052,
             },
         );
 
@@ -444,7 +438,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "deu".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.2374245520996768,
+                coefficient: 0.237_424_6,
             },
         );
 
@@ -452,23 +446,21 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "tuk".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.34751773050525164,
+                coefficient: 0.347_517_7,
             },
         );
 
         // pes
         language_params.insert(
             "pes".to_string(),
-            MultilingualSimpleParameters {
-                coefficient: 0.35999999440904334,
-            },
+            MultilingualSimpleParameters { coefficient: 0.36 },
         );
 
         // tel
         language_params.insert(
             "tel".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.416666662013471,
+                coefficient: 0.416_666_7,
             },
         );
 
@@ -476,7 +468,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "uzb".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3366336601517637,
+                coefficient: 0.336_633_7,
             },
         );
 
@@ -484,7 +476,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "zul".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.32240437273228195,
+                coefficient: 0.322_404_4,
             },
         );
 
@@ -492,7 +484,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "ukr".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3453125011371133,
+                coefficient: 0.345_312_5,
             },
         );
 
@@ -500,7 +492,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "kor".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.6181818176863859,
+                coefficient: 0.618_181_8,
             },
         );
 
@@ -508,23 +500,21 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "bul".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3461538407603729,
+                coefficient: 0.346_153_8,
             },
         );
 
         // aka
         language_params.insert(
             "aka".to_string(),
-            MultilingualSimpleParameters {
-                coefficient: 0.3599999951229915,
-            },
+            MultilingualSimpleParameters { coefficient: 0.36 },
         );
 
         // hun
         language_params.insert(
             "hun".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.35897435616504425,
+                coefficient: 0.358_974_4,
             },
         );
 
@@ -532,7 +522,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "lav".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3673469372197678,
+                coefficient: 0.367_346_9,
             },
         );
 
@@ -540,7 +530,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "swe".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.2981366410041522,
+                coefficient: 0.298_136_6,
             },
         );
 
@@ -548,7 +538,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "ori".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.9924999872204857,
+                coefficient: 0.992_5,
             },
         );
 
@@ -556,7 +546,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "urd".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3475935855530559,
+                coefficient: 0.347_593_6,
             },
         );
 
@@ -564,7 +554,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "ell".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3793103496681776,
+                coefficient: 0.379_310_3,
             },
         );
 
@@ -572,7 +562,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "hye".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.3333333323585104,
+                coefficient: 0.333_333_3,
             },
         );
 
@@ -580,7 +570,7 @@ impl Default for MultilingualSimpleMethodParameters {
         language_params.insert(
             "aze".to_string(),
             MultilingualSimpleParameters {
-                coefficient: 0.32450331123755793,
+                coefficient: 0.324_503_3,
             },
         );
 
