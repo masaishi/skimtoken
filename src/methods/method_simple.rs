@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct SimpleParameters {
-    pub coefficient: f64,
+    pub coefficient: f32,
 }
 
 impl Default for SimpleParameters {
@@ -42,7 +42,7 @@ impl EstimationMethod for SimpleMethod {
 
     fn estimate(&self, text: &str) -> usize {
         let char_count = self.count(text);
-        (char_count as f64 * self.parameters.coefficient).round() as usize
+        (char_count as f32 * self.parameters.coefficient).round() as usize
     }
 
     fn parameters(&self) -> Self::Parameters {

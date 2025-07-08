@@ -11,7 +11,7 @@ pub struct MultilingualSimpleFeatures {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MultilingualSimpleParameters {
-    pub coefficient: f64,
+    pub coefficient: f32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -643,7 +643,7 @@ impl EstimationMethod for MultilingualSimpleMethod {
             .get(&features.language)
             .unwrap_or(&self.parameters.default_params);
 
-        (features.char_count as f64 * params.coefficient).round() as usize
+        (features.char_count as f32 * params.coefficient).round() as usize
     }
 
     fn parameters(&self) -> Self::Parameters {

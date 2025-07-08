@@ -12,11 +12,11 @@ pub struct MultilingualFeatures {
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct MultilingualParameters {
-    pub char_coef: f64,
-    pub word_coef: f64,
-    pub avg_word_length_coef: f64,
-    pub space_coef: f64,
-    pub intercept: f64,
+    pub char_coef: f32,
+    pub word_coef: f32,
+    pub avg_word_length_coef: f32,
+    pub space_coef: f32,
+    pub intercept: f32,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -907,7 +907,7 @@ impl EstimationMethod for MultilingualMethod {
 
         let avg_word_length = if word_count > 0 {
             let total_word_chars: usize = words.iter().map(|w| w.chars().count()).sum();
-            total_word_chars as f64 / word_count as f64
+            total_word_chars as f32 / word_count as f32
         } else {
             0.0
         };
@@ -946,10 +946,10 @@ impl EstimationMethod for MultilingualMethod {
 
         let bf = &features.basic_features;
 
-        let estimate = params.char_coef * bf.char_count as f64
-            + params.word_coef * bf.word_count as f64
+        let estimate = params.char_coef * bf.char_count as f32
+            + params.word_coef * bf.word_count as f32
             + params.avg_word_length_coef * bf.avg_word_length
-            + params.space_coef * bf.space_count as f64
+            + params.space_coef * bf.space_count as f32
             + params.intercept;
 
         estimate.round().max(0.0) as usize
